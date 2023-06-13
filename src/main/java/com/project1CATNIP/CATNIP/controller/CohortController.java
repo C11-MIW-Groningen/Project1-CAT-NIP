@@ -8,7 +8,7 @@ package com.project1CATNIP.CATNIP.controller;
 
 import com.project1CATNIP.CATNIP.model.Cohort;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
-import com.project1CATNIP.CATNIP.repository.CourseRepository;
+import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class CohortController {
 
         private final CohortRepository cohortRepository;
-        private final CourseRepository courseRepository;
+        private final ProgramRepository programRepository;
 
         @GetMapping({"", "/", "/all"})
         private String showAllCohorts(Model model) {
@@ -35,7 +35,7 @@ public class CohortController {
         @GetMapping("/add")
         private String addCohortForm(Model model) {
             model.addAttribute("cohort", new Cohort());
-            model.addAttribute("course", courseRepository.findAll());
+            model.addAttribute("program", programRepository.findAll());
 
             return "cohortAddForm";
         }

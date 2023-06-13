@@ -22,7 +22,7 @@
       <th></th>
     </tr>
     <tr th:each="cohort : ${allCohorts}">
-      <td th:text="${cohort.getCourse().getNameCourse()}"></td>
+      <td th:text="${cohort.getProgram().getNameProgram()}"></td>
       <td th:text="${cohort.getNumber()}"></td>
       <td th:text="${cohort.getStartDate()}"></td>
       <td><a th:href="@{/cohort/edit/{cohortId}(cohortId=${cohort.cohortId})}">Edit</a></td>

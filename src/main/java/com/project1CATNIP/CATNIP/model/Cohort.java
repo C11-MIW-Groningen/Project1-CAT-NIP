@@ -21,7 +21,7 @@ public class Cohort {
     @Column (nullable = false)
     private Integer number;
     @ManyToOne
-    private Course course;
+    private Program program;
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;

@@ -12,10 +12,10 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class Course {
+public class Program {
     @Id @GeneratedValue
-    private Long courseId;
+    private Long programId;
 
-    private String nameCourse;
+    private String nameProgram;
 
 }
