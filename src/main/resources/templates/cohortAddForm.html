@@ -9,14 +9,14 @@
 
 
 <div class="container w-25">
-  <h1>Add a Teacher</h1>
+  <h1>Add or edit a Cohort</h1>
 
-  <a th:href="@{/teacher/}">Back to Teacher Overview</a>
+  <a th:href="@{/cohort/}">Back to Cohort Overview</a>
 
-  <form th:action="@{/teacher/add}" method="post" th:object="${teacher}">
-    <input type="hidden" th:field="*{teacherId}" />
-    <div th:replace="fragments/general :: teacherForm"></div>
-  </form>
+<!--  <form th:action="@{/cohort/add}" method="post" th:object="${cohort}">-->
+<!--    <input type="hidden" th:field="*{cohortId}" />-->
+<!--    <div th:replace="fragments/general :: teacherForm"></div>-->
+<!--  </form>-->
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

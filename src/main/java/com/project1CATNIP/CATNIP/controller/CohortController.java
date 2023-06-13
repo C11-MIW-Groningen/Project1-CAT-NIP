@@ -1,14 +1,14 @@
-package com.project1CATNIP.CATNIP.controller;/*
+package com.project1CATNIP.CATNIP.controller;
+
+/*
  *@Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
  *
  *The Purpose
  */
 
 import com.project1CATNIP.CATNIP.model.Cohort;
-import com.project1CATNIP.CATNIP.model.Teacher;
-import com.project1CATNIP.CATNIP.model.compositeKey.CohortId;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
-import com.project1CATNIP.CATNIP.repository.TeacherRepository;
+import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +23,7 @@ import java.util.Optional;
 public class CohortController {
 
         private final CohortRepository cohortRepository;
+        private final ProgramRepository programRepository;
 
         @GetMapping({"", "/", "/all"})
         private String showAllCohorts(Model model) {
@@ -34,6 +35,7 @@ public class CohortController {
         @GetMapping("/add")
         private String addCohortForm(Model model) {
             model.addAttribute("cohort", new Cohort());
+            model.addAttribute("program", programRepository.findAll());
 
             return "cohortAddForm";
         }
@@ -50,7 +52,7 @@ public class CohortController {
         }
 
         @GetMapping("/delete/{cohortId}")
-        private String deleteTeacher(@PathVariable("cohortId") CohortId cohortId) {
+        private String deleteCohort(@PathVariable("cohortId") Long cohortId) {
             Optional<Cohort> cohortToDelete = cohortRepository.findById(cohortId);
 
             if (cohortToDelete.isPresent()) {
@@ -62,7 +64,7 @@ public class CohortController {
         //TODO Delete validatie
 
         @GetMapping("/edit/{cohortId}")
-        private String showEditTeacherForm(@PathVariable("teacherId") CohortId cohortId, Model model) {
+        private String showEditCohortForm(@PathVariable("cohortId") Long cohortId, Model model) {
             Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
 
             if (optionalCohort.isPresent()) {
