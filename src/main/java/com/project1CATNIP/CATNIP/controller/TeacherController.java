@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TeacherController {
     private final TeacherRepository teacherRepository;
 
-    @GetMapping ("/all")
+    @GetMapping ({"", "/", "/all"})
     private String showAllTeachers(Model model) {
         model.addAttribute("allTeachers", teacherRepository.findAll());
 
