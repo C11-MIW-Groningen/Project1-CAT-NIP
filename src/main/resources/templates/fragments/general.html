@@ -14,10 +14,22 @@
 <div th:fragment="navbar">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="nav-link">Start</a>
+            <a class="nav-link" th:href="@{/teacher/all}">Teachers</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link">Courses</a>
+            <a class="nav-link" th:href="@{/course/all}">Courses</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/cohort/all}">Cohorts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">Subjects</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">Students</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-danger" th:href="@{/seed}">Seed</a>
         </li>
     </ul>
 </div>

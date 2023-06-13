@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Teacher Add Form</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+
+<div class="container w-25">
+  <h1>Add a Teacher</h1>
+
+  <a th:href="@{/teacher/}">Back to Teacher Overview</a>
+
+  <form th:action="@{/teacher/add}" method="post" th:object="${teacher}">
+    <input type="hidden" th:field="*{teacherId}" />
+    <div th:replace="fragments/general :: teacherForm"></div>
+  </form>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>

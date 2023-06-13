@@ -1,0 +1,75 @@
+package com.project1CATNIP.CATNIP.controller;/*
+ *@Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
+ *
+ *The Purpose
+ */
+
+import com.project1CATNIP.CATNIP.model.Cohort;
+import com.project1CATNIP.CATNIP.model.Teacher;
+import com.project1CATNIP.CATNIP.model.compositeKey.CohortId;
+import com.project1CATNIP.CATNIP.repository.CohortRepository;
+import com.project1CATNIP.CATNIP.repository.TeacherRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/cohort")
+public class CohortController {
+
+        private final CohortRepository cohortRepository;
+
+        @GetMapping({"", "/", "/all"})
+        private String showAllCohorts(Model model) {
+            model.addAttribute("allCohorts", cohortRepository.findAll());
+
+            return "cohortOverview";
+        }
+
+        @GetMapping("/add")
+        private String addCohortForm(Model model) {
+            model.addAttribute("cohort", new Cohort());
+
+            return "cohortAddForm";
+        }
+
+        @PostMapping("/add")
+        private String saveCohort(@ModelAttribute("cohort") Cohort cohortToAdd, BindingResult result) {
+
+            if (!result.hasErrors()) {
+                cohortRepository.save(cohortToAdd);
+            }
+
+            return "redirect:/cohort/add";
+            //TODO vinkje om keuze te geven om direct naar overview te gaan
+        }
+
+        @GetMapping("/delete/{cohortId}")
+        private String deleteTeacher(@PathVariable("cohortId") CohortId cohortId) {
+            Optional<Cohort> cohortToDelete = cohortRepository.findById(cohortId);
+
+            if (cohortToDelete.isPresent()) {
+                cohortRepository.delete(cohortToDelete.get());
+            }
+
+            return "redirect:/cohort/all";
+        }
+        //TODO Delete validatie
+
+        @GetMapping("/edit/{cohortId}")
+        private String showEditTeacherForm(@PathVariable("teacherId") CohortId cohortId, Model model) {
+            Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
+
+            if (optionalCohort.isPresent()) {
+                model.addAttribute("cohort", optionalCohort.get());
+                return "cohortAddForm";
+            }
+
+            return "redirect:/cohort/all";
+        }
+}
