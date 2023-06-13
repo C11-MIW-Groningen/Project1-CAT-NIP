@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>All teachers</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+
+<div class="container">
+  <h1>An overview of all teachers</h1>
+
+  <a>Add a new teacher</a>
+
+  <table class="table">
+    <tr>
+      <th>First name</th>
+      <th>Infix</th>
+      <th>Last name</th>
+      <th>Email address</th>
+    </tr>
+    <tr th:each="teacher : ${allTeachers}">
+      <td th:text="${teacher.getFirstName()}"></td>
+      <td th:text="${teacher.getInfixName()}"></td>
+      <td th:text="${teacher.getLastName()}"></td>
+      <td th:text="${teacher.getEmailAddress()}"></td>
+    </tr>
+  </table>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>
