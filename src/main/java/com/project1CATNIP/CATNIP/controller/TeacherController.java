@@ -30,13 +30,13 @@ public class TeacherController {
 
     @GetMapping("/add")
     private String addTeacherForm(Model model) {
-        model.addAttribute("newTeacher", new Teacher());
+        model.addAttribute("teacher", new Teacher());
 
         return "teacherAddForm";
     }
 
     @PostMapping("/add")
-    private String saveTeacher(@ModelAttribute("newTeacher") Teacher teacherToAdd, BindingResult result) {
+    private String saveTeacher(@ModelAttribute("teacher") Teacher teacherToAdd, BindingResult result) {
 
         if (!result.hasErrors()) {
             teacherRepository.save(teacherToAdd);
@@ -52,6 +52,19 @@ public class TeacherController {
 
         if (teacherToDelete.isPresent()) {
             teacherRepository.delete(teacherToDelete.get());
+        }
+
+        return "redirect:/teacher/all";
+    }
+    //TODO Delete validatie
+
+    @GetMapping("/edit/{teacherId}")
+    private String showEditTeacherForm(@PathVariable("teacherId") Long teacherId, Model model) {
+        Optional<Teacher> optionalTeacher = teacherRepository.findById(teacherId);
+
+        if (optionalTeacher.isPresent()) {
+            model.addAttribute("teacher", optionalTeacher.get());
+            return "teacherAddForm";
         }
 
         return "redirect:/teacher/all";
