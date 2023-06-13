@@ -11,6 +11,7 @@ import com.project1CATNIP.CATNIP.model.Course;
 import com.project1CATNIP.CATNIP.model.Teacher;
 import com.project1CATNIP.CATNIP.model.compositeKey.CohortId;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
+import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,7 @@ public class SeedController {
         teacherRepository.save(piet);
 
         Course softwareEngineering = new Course();
-        course.setNameCourse("Software Engineering");
+        softwareEngineering.setNameCourse("Software Engineering");
         courseRepository.save(softwareEngineering);
 
         Cohort se11 = new Cohort();
