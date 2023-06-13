@@ -6,10 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * Author: Saskia Tadema <s.tadema@st.hanze.nl, Marcel Tubben <mhg.tubben@st.hanze.nl>>
@@ -45,5 +44,16 @@ public class TeacherController {
 
         return "redirect:/teacher/add";
         //TODO vinkje om keuze te geven om direct naar overview te gaan
+    }
+
+    @GetMapping("/delete/{teacherId}")
+    private String deleteTeacher(@PathVariable("teacherId") Long teacherId) {
+        Optional<Teacher> teacherToDelete = teacherRepository.findById(teacherId);
+
+        if (teacherToDelete.isPresent()) {
+            teacherRepository.delete(teacherToDelete.get());
+        }
+
+        return "redirect:/teacher/all";
     }
 }

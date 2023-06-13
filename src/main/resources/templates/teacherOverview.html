@@ -19,12 +19,14 @@
       <th>Infix</th>
       <th>Last name</th>
       <th>Email address</th>
+      <th></th>
     </tr>
     <tr th:each="teacher : ${allTeachers}">
       <td th:text="${teacher.getFirstName()}"></td>
       <td th:text="${teacher.getInfixName()}"></td>
       <td th:text="${teacher.getLastName()}"></td>
       <td th:text="${teacher.getEmailAddress()}"></td>
+      <td><a th:href="@{/teacher/delete/{teacherId}(teacherId=${teacher.teacherId})}">Delete</a></td>
     </tr>
   </table>
 </div>
