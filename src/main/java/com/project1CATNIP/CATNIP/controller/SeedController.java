@@ -29,10 +29,10 @@ public class SeedController {
         teacherRepository.save(wally);
 
         Teacher piet = new Teacher();
-        wally.setFirstName("Pieter");
-        wally.setInfixName("Van de");
-        wally.setLastName("Breedband");
-        wally.setEmailAddress("p.vd.breedband@cat-nip.nl");
+        piet.setFirstName("Pieter");
+        piet.setInfixName("Van de");
+        piet.setLastName("Breedband");
+        piet.setEmailAddress("p.vd.breedband@cat-nip.nl");
         teacherRepository.save(piet);
 
         return "redirect:/teacher";
