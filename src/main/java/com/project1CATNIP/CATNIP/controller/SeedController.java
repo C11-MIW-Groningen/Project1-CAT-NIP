@@ -9,12 +9,14 @@ package com.project1CATNIP.CATNIP.controller;
 import com.project1CATNIP.CATNIP.model.Cohort;
 import com.project1CATNIP.CATNIP.model.Course;
 import com.project1CATNIP.CATNIP.model.Teacher;
-import com.project1CATNIP.CATNIP.model.compositeKey.CohortId;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
+import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.time.LocalDate;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,14 +44,13 @@ public class SeedController {
         teacherRepository.save(piet);
 
         Course softwareEngineering = new Course();
-        course.setNameCourse("Software Engineering");
+        softwareEngineering.setNameCourse("Software Engineering");
         courseRepository.save(softwareEngineering);
 
         Cohort se11 = new Cohort();
-        CohortId se11Id = new CohortId();
-        se11Id.setNumber(11);
-        se11Id.setCourse(softwareEngineering);
-        se11.setCohortId(se11Id);
+        se11.setNumber(11);
+        se11.setCourse(softwareEngineering);
+        se11.setStartDate(LocalDate.of(2023, 4, 5));
         cohortRepository.save(se11);
 
         return "redirect:/cohort";

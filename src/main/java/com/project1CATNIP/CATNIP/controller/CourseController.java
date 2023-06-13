@@ -1,7 +1,6 @@
 package com.project1CATNIP.CATNIP.controller;
 
 import com.project1CATNIP.CATNIP.model.Course;
-import com.project1CATNIP.CATNIP.model.Teacher;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

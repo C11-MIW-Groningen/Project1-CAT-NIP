@@ -5,19 +5,25 @@ package com.project1CATNIP.CATNIP.model;
  * A Cohort is an instance of a Course; it is defined by a number and a Course
  */
 
-import com.project1CATNIP.CATNIP.model.compositeKey.CohortId;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
 public class Cohort {
 
-    @EmbeddedId
-    CohortId cohortId;
+    @Id @GeneratedValue
+    Long cohortId;
+    @Column (nullable = false)
+    private Integer number;
+    @ManyToOne
+    private Course course;
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
 
 }
