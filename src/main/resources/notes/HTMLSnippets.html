@@ -1,0 +1,17 @@
+<form th:action="@{/brekr/add}" method="post" th:object="${addBrekr}">
+    <div class="form-group">
+        <label for="numberPlate">Number plate</label>
+        <input id="numberPlate" class="form-control" type="text" placeholder="Number plate" th:field="*{numberPlate}">
+    </div>
+    <div class="form-group">
+        <label for="initialMilage">Initial milage</label>
+        <input id="initialMilage" class="form-control" type="text" placeholder="Initial milage on purchase" th:field="*{odoInitial}">
+    </div>
+    <div class="form-group">
+        <label for="dateOfPurchase">Date of purchase</label>
+        <input id="dateOfPurchase" class="form-control" type="date" placeholder="Date of purchase" th:field="*{purchaseDate}">
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input id="price" class="form-control" type="text" placeholder="price" th:field="*{price}">
+    </div>
