@@ -7,9 +7,11 @@ package com.project1CATNIP.CATNIP.controller;
  */
 
 import com.project1CATNIP.CATNIP.model.Cohort;
+import com.project1CATNIP.CATNIP.model.Course;
 import com.project1CATNIP.CATNIP.model.Program;
 import com.project1CATNIP.CATNIP.model.Teacher;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
+import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import com.project1CATNIP.CATNIP.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class SeedController {
     private final TeacherRepository teacherRepository;
     private final ProgramRepository programRepository;
     private final CohortRepository cohortRepository;
+    private final CourseRepository courseRepository;
 
     @GetMapping("/seed")
     private String seedDatabase() {
@@ -52,6 +55,12 @@ public class SeedController {
         se11.setProgram(softwareEngineering);
         se11.setStartDate(LocalDate.of(2023, 4, 5));
         cohortRepository.save(se11);
+
+        Course databases = new Course();
+        databases.setCourseName("Databases");
+        databases.setProgram(softwareEngineering);
+        databases.setTeacher(wally);
+        courseRepository.save(databases);
 
         return "redirect:/program";
     }

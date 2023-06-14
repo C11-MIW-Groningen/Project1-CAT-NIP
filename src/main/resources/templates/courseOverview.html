@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Course overview</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+  <h1>An overview of all courses</h1>
+
+  <a th:href="@{/course/add}">Add a new course</a>
+
+  <table class="table">
+    <tr>
+      <th>Course</th>
+      <th>Part of program</th>
+      <th>Teacher</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr th:each="course : ${allCourses}">
+      <td th:text="${course.getCourseName()}"></td>
+      <td th:text="${course.getProgram().getNameProgram()}"></td>
+      <td th:text="${course.teacher.getFullName()}"></td>
+      <td><a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">Edit</a></td>
+      <td><a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">Delete</a></td>
+    </tr>
+  </table>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>
