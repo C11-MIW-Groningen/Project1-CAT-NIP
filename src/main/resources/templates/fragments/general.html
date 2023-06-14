@@ -22,8 +22,19 @@
         <li class="nav-item">
             <a class="nav-link" th:href="@{/cohort/all}">Cohorts</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/course/all}">Course</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Course</a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" th:href="@{/course/all}">Course overview</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" th:href="@{/test/all}">Overview tests</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" th:href="@{/assignment/all}">Overview assignments</a>
+                </li>
+            </ul>
         </li>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/student/all}">Students</a>

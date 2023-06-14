@@ -66,7 +66,7 @@ public class SeedController {
         cohortRepository.save(ds1);
 
         Course programming = new Course();
-        programming.setCourseName("Progamming");
+        programming.setCourseName("Programming");
         programming.setProgram(softwareEngineering);
         programming.setTeacher(piet);
         courseRepository.save(programming);
