@@ -1,6 +1,7 @@
 package com.project1CATNIP.CATNIP.controller;
 
 import com.project1CATNIP.CATNIP.model.Student;
+import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @RequestMapping("/student")
 public class StudentController {
     private final StudentRepository studentRepository;
+    private final CohortRepository cohortRepository;
 
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {
@@ -31,6 +33,7 @@ public class StudentController {
     @GetMapping("/add")
     private String addStudentForm(Model model) {
         model.addAttribute("student", new Student());
+        model.addAttribute("allCohorts", cohortRepository.findAll());
 
         return "studentAddForm";
     }
