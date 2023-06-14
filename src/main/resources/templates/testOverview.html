@@ -11,7 +11,7 @@
 <div class="container">
   <h1>An overview of all tests of all programs and courses</h1>
 
-<!--  <a th:href="@{/test/add}">Add a new test</a>-->
+  <a th:href="@{/test/add}">Add a new test</a>
 
   <table class="table">
     <tr>
@@ -24,7 +24,7 @@
     <tr th:each="test : ${allTests}">
       <td th:text="${test.getCourse().getProgram().getNameProgram()}"></td>
       <td th:text="${test.getCourse().getCourseName()}"></td>
-      <td th:text="${test.getTestName()}"></td>
+      <td th:text="${test.getNameTest()}"></td>
       <td>Edit</td>
       <td>Delete</td>
     </tr>

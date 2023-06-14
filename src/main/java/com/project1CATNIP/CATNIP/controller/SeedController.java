@@ -6,16 +6,8 @@ package com.project1CATNIP.CATNIP.controller;
  *The Purpose
  */
 
-import com.project1CATNIP.CATNIP.model.Cohort;
-import com.project1CATNIP.CATNIP.model.Course;
-import com.project1CATNIP.CATNIP.model.Program;
-import com.project1CATNIP.CATNIP.model.Student;
-import com.project1CATNIP.CATNIP.model.Teacher;
-import com.project1CATNIP.CATNIP.repository.CohortRepository;
-import com.project1CATNIP.CATNIP.repository.CourseRepository;
-import com.project1CATNIP.CATNIP.repository.ProgramRepository;
-import com.project1CATNIP.CATNIP.repository.StudentRepository;
-import com.project1CATNIP.CATNIP.repository.TeacherRepository;
+import com.project1CATNIP.CATNIP.model.*;
+import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +23,7 @@ public class SeedController {
     private final CohortRepository cohortRepository;
     private final CourseRepository courseRepository;
     private final StudentRepository studentRepository;
+    private final TestRepository testRepository;
 
     @GetMapping("/seed")
     private String seedDatabase() {
@@ -97,6 +90,16 @@ public class SeedController {
         student2.setEmailAddressStudent("ajongsma@hmail.com");
         student2.setCohort(se11);
         studentRepository.save(student2);
+
+        Test test1 = new Test();
+        test1.setNameTest("Exam BMI application");
+        test1.setCourse(programming);
+        testRepository.save(test1);
+
+        Test test2 = new Test();
+        test2.setNameTest("Re-exam Dice application");
+        test2.setCourse(programming);
+        testRepository.save(test2);
 
         return "redirect:/program";
     }

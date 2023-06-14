@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Test Add Form</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+
+<div class="container w-25">
+  <h1>Add a Test</h1>
+
+  <a th:href="@{/test/all}">Back to Test Overview</a>
+
+  <form th:action="@{/test/add}" method="post" th:object="${test}">
+    <input type="hidden" th:field="*{testId}" />
+    <div class="form-group">
+      <label for="nameTest">Test name</label>
+      <input id="nameTest" class="form-control" type="text" placeholder="Test name" th:field="*{nameTest}">
+    </div>
+    <div>
+      <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+              th:field="*{course}">
+        <option class="dropdown-item rounded-2"
+                th:each="course: ${allCourses}"
+                th:value="${course.courseId}"
+                th:text="${course.courseName}">
+        </option>
+      </select>
+    </div>
+    <div class="form-group form-button">
+      <button type="submit" class="btn btn-danger" >Save Test</button>
+    </div>
+  </form>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>
