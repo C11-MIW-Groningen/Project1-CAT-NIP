@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Student Add Form</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+
+<div class="container w-25">
+    <h1>Add a Student</h1>
+
+    <a th:href="@{/student/}">Back to Student Overview</a>
+
+    <form th:action="@{/student/add}" method="post" th:object="${student}">
+        <input type="hidden" th:field="*{studentId}" />
+        <div class="form-group">
+            <label for="firstNameStudent">First name</label>
+            <input id="firstNameStudent" class="form-control" type="text"
+                   placeholder="First name" th:field="*{firstNameStudent}">
+        </div>
+        <div class="form-group">
+            <label for="infixNameStudent">Infix</label>
+            <input id="infixNameStudent" class="form-control" type="text"
+                   placeholder="Infix" th:field="*{infixNameStudent}">
+        </div>
+        <div class="form-group">
+            <label for="lastNameStudent">Last name</label>
+            <input id="lastNameStudent" class="form-control" type="text"
+                   placeholder="Last name" th:field="*{lastNameStudent}">
+        </div>
+        <div class="form-group">
+            <label for="emailAddressStudent">Email address</label>
+            <input id="emailAddressStudent" class="form-control" type="text"
+                   placeholder="Email address" th:field="*{emailAddressStudent}">
+        </div>
+        <div class="form-group form-button">
+            <button type="submit" class="btn btn-danger" >Save Student</button>
+        </div>
+    </form>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>
