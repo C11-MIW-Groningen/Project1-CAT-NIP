@@ -35,7 +35,7 @@ public class CohortController {
         @GetMapping("/add")
         private String addCohortForm(Model model) {
             model.addAttribute("cohort", new Cohort());
-            model.addAttribute("program", programRepository.findAll());
+            model.addAttribute("allPrograms", programRepository.findAll());
 
             return "cohortAddForm";
         }
@@ -61,7 +61,7 @@ public class CohortController {
 
             return "redirect:/cohort/all";
         }
-        //TODO Delete validatie
+        //TODO Delete validatie (voor alle models)
 
         @GetMapping("/edit/{cohortId}")
         private String showEditCohortForm(@PathVariable("cohortId") Long cohortId, Model model) {

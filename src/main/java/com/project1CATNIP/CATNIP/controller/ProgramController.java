@@ -17,25 +17,24 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/program")
 public class ProgramController {
     private final ProgramRepository programRepository;
 
-    @GetMapping({"/", "", "/all"})
+    @GetMapping({"/", "", "/program", "/program/all"})
     private String showAllPrograms(Model model) {
         model.addAttribute("allPrograms", programRepository.findAll());
 
         return "programOverview";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/program/add")
     private String addProgramForm(Model model) {
         model.addAttribute("program", new Program());
 
         return "programAddForm";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/program/add")
     private String saveProgram(@ModelAttribute("program") Program programToAdd, BindingResult result) {
 
         if (!result.hasErrors()) {
@@ -45,7 +44,7 @@ public class ProgramController {
         return "redirect:/program/all";
     }
 
-    @GetMapping("/delete/{programId}")
+    @GetMapping("/program/delete/{programId}")
     private String deleteProgram(@PathVariable("programId") Long programId) {
         Optional<Program> programToDelete = programRepository.findById(programId);
 
@@ -57,7 +56,7 @@ public class ProgramController {
     }
     //TODO Delete validatie
 
-    @GetMapping("/edit/{programId}")
+    @GetMapping("/program/edit/{programId}")
     private String showEditCourseForm(@PathVariable("programId") Long programId, Model model) {
         Optional<Program> optionalProgram = programRepository.findById(programId);
 

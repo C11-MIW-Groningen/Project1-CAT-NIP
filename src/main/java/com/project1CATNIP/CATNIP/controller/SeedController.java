@@ -53,11 +53,29 @@ public class SeedController {
         softwareEngineering.setNameProgram("Software Engineering");
         programRepository.save(softwareEngineering);
 
+        Program dataScience = new Program();
+        dataScience.setNameProgram("Data Science");
+        programRepository.save(dataScience);
+
         Cohort se11 = new Cohort();
         se11.setNumber(11);
         se11.setProgram(softwareEngineering);
         se11.setStartDate(LocalDate.of(2023, 4, 5));
+        se11.setEndDate(LocalDate.of(2023, 8, 10));
         cohortRepository.save(se11);
+
+        Cohort ds1 = new Cohort();
+        ds1.setNumber(1);
+        ds1.setProgram(dataScience);
+        ds1.setStartDate(LocalDate.of(2024, 2, 3));
+        ds1.setEndDate(LocalDate.of(2024, 7, 2));
+        cohortRepository.save(ds1);
+
+        Course programming = new Course();
+        programming.setCourseName("Progamming");
+        programming.setProgram(softwareEngineering);
+        programming.setTeacher(piet);
+        courseRepository.save(programming);
 
         Course databases = new Course();
         databases.setCourseName("Databases");

@@ -26,6 +26,9 @@ public class Cohort {
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
     @OneToMany(mappedBy = "cohort")
     private List<Student> students;
 

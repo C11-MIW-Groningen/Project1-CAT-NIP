@@ -34,50 +34,6 @@
     </ul>
 </div>
 
-<div th:fragment="teacherForm">
-    <div class="form-group">
-        <label for="courseName">First name</label>
-        <input id="courseName" class="form-control" type="text" placeholder="First name" th:field="*{firstName}">
-    </div>
-    <div class="form-group">
-        <label for="infixName">Infix</label>
-        <input id="infixName" class="form-control" type="text" placeholder="Infix" th:field="*{infixName}">
-    </div>
-    <div class="form-group">
-        <label for="lastName">Last name</label>
-        <input id="lastName" class="form-control" type="text" placeholder="Last name" th:field="*{lastName}">
-    </div>
-    <div class="form-group">
-        <label for="emailAddress">Email address</label>
-        <input id="emailAddress" class="form-control" type="text" placeholder="Email address" th:field="*{emailAddress}">
-    </div>
-    <div class="form-group form-button">
-        <button type="submit" class="btn btn-danger" >Save Teacher</button>
-    </div>
-</div>
-
-<div th:fragment="courseForm">
-    <div class="form-group">
-        <label for="courseName">Course name</label>
-        <input id="courseName" class="form-control" type="text" placeholder="Course name" th:field="*{courseName}">
-    </div>
-    <div class="form-group">
-        <label for="program">Select program</label>
-        <select class="form-control" id="program" th:field="*{program}">
-            <option th:each="program : ${allPrograms}" th:value="${program.getProgramId}" th:text="${program.getNameProgram}"></option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="teacher">Select teacher</label>
-        <select class="form-control" id="teacher" th:field="*{teacher}">
-            <option th:each="teacher : ${allTeachers}" th:value="${teacher.getTeacherId}" th:text="${teacher.getFullName}"></option>
-        </select>
-    </div>
-    <div class="form-group form-button">
-        <button type="submit" class="btn btn-danger" >Save Course</button>
-    </div>
-</div>
-
 <div th:fragment="footer">
     <footer><p class="text-center text text-muted">Copyright Saskia Tadema and Marcel Tubben &copy;2023</p></footer>
 </div>

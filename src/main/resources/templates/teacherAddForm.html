@@ -15,7 +15,27 @@
 
   <form th:action="@{/teacher/add}" method="post" th:object="${teacher}">
     <input type="hidden" th:field="*{teacherId}" />
-    <div th:replace="fragments/general :: teacherForm"></div>
+    <div th:fragment="teacherForm">
+      <div class="form-group">
+        <label for="courseName">First name</label>
+        <input id="courseName" class="form-control" type="text" placeholder="First name" th:field="*{firstName}">
+      </div>
+      <div class="form-group">
+        <label for="infixName">Infix</label>
+        <input id="infixName" class="form-control" type="text" placeholder="Infix" th:field="*{infixName}">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input id="lastName" class="form-control" type="text" placeholder="Last name" th:field="*{lastName}">
+      </div>
+      <div class="form-group">
+        <label for="emailAddress">Email address</label>
+        <input id="emailAddress" class="form-control" type="text" placeholder="Email address" th:field="*{emailAddress}">
+      </div>
+      <div class="form-group form-button">
+        <button type="submit" class="btn btn-danger" >Save Teacher</button>
+      </div>
+    </div>
   </form>
 </div>
 
