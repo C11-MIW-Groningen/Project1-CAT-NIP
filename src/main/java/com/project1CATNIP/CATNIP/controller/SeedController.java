@@ -61,12 +61,14 @@ public class SeedController {
         student1.setInfixNameStudent("de");
         student1.setLastNameStudent("Vries");
         student1.setEmailAddressStudent("h.de.vries@hmail.com");
+        student1.setCohort(se11);
         studentRepository.save(student1);
 
         Student student2 = new Student();
         student2.setFirstNameStudent("Angela");
         student2.setLastNameStudent("Jongsma");
         student2.setEmailAddressStudent("ajongsma@hmail.com");
+        student2.setCohort(se11);
         studentRepository.save(student2);
 
         return "redirect:/program";

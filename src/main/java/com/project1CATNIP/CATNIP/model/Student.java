@@ -3,10 +3,7 @@ package com.project1CATNIP.CATNIP.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Author: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
@@ -26,4 +23,18 @@ public class Student {
     private String lastNameStudent;
     @Column (nullable = false)
     private String emailAddressStudent;
+
+    @ManyToOne
+    private Cohort cohort;
+
+    public String getDisplayStudent() {
+        String displayStudent = firstNameStudent;
+
+        if (!infixNameStudent.equals("")) {
+            displayStudent += " " + infixNameStudent;
+        }
+
+        displayStudent += " "+ lastNameStudent;
+        return displayStudent;
+    }
 }
