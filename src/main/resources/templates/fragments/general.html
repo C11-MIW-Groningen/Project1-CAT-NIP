@@ -23,7 +23,7 @@
             <a class="nav-link" th:href="@{/cohort/all}">Cohorts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link">Subjects</a>
+            <a class="nav-link" th:href="@{/course/all}">Course</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/student/all}">Students</a>
@@ -36,8 +36,8 @@
 
 <div th:fragment="teacherForm">
     <div class="form-group">
-        <label for="firstName">First name</label>
-        <input id="firstName" class="form-control" type="text" placeholder="First name" th:field="*{firstName}">
+        <label for="courseName">First name</label>
+        <input id="courseName" class="form-control" type="text" placeholder="First name" th:field="*{firstName}">
     </div>
     <div class="form-group">
         <label for="infixName">Infix</label>
@@ -53,6 +53,28 @@
     </div>
     <div class="form-group form-button">
         <button type="submit" class="btn btn-danger" >Save Teacher</button>
+    </div>
+</div>
+
+<div th:fragment="courseForm">
+    <div class="form-group">
+        <label for="courseName">Course name</label>
+        <input id="courseName" class="form-control" type="text" placeholder="Course name" th:field="*{courseName}">
+    </div>
+    <div class="form-group">
+        <label for="program">Select program</label>
+        <select class="form-control" id="program" th:field="*{program}">
+            <option th:each="program : ${allPrograms}" th:value="${program.getProgramId}" th:text="${program.getNameProgram}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="teacher">Select teacher</label>
+        <select class="form-control" id="teacher" th:field="*{teacher}">
+            <option th:each="teacher : ${allTeachers}" th:value="${teacher.getTeacherId}" th:text="${teacher.getFullName}"></option>
+        </select>
+    </div>
+    <div class="form-group form-button">
+        <button type="submit" class="btn btn-danger" >Save Course</button>
     </div>
 </div>
 

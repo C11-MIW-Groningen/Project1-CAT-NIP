@@ -25,4 +25,15 @@ public class Teacher {
     private String lastName;
     @Column (nullable = false)
     private String emailAddress;
+
+    public String getFullName() {
+        StringBuilder fullname = new StringBuilder();
+        fullname.append(firstName);
+        if (!infixName.isEmpty()) {
+            fullname.append(" " + infixName + " ");
+        }
+        fullname.append(lastName);
+
+        return fullname.toString();
+    }
 }
