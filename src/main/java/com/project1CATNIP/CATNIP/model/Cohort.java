@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -25,7 +26,10 @@ public class Cohort {
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+    @OneToMany(mappedBy = "cohort")
+    private List<Student> students;
 
-
-
+    public String getDisplayCohort() {
+        return String.format("%s %d", program.getNameProgram(), number);
+    }
 }
