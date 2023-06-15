@@ -19,11 +19,13 @@
     <table class="table">
         <tr>
             <th>Courses</th>
-            <th>Link to results</th>
+            <th>Teacher</th>
+            <th>More information about course</th>
         </tr>
         <tr th:each="course: ${coursesFromProgram}">
             <td th:text="${course.getCourseName()}"></td>
-            <td><a th:href="@{/program/course/{courseId}(courseId=${course.getCourseId()})}"></a>Results</td>
+            <td th:text="${course.getTeacher().getDisplayTeacher()}"></td>
+            <td>Course</td>
         </tr>
     </table>
 </div>

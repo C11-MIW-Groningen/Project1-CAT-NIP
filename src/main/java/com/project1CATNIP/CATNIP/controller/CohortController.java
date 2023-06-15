@@ -69,6 +69,7 @@ public class CohortController {
 
             if (optionalCohort.isPresent()) {
                 model.addAttribute("cohort", optionalCohort.get());
+                model.addAttribute("allPrograms", programRepository.findAll());
                 return "cohortAddForm";
             }
 

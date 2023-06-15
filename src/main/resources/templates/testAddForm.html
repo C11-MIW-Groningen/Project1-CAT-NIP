@@ -24,8 +24,8 @@
               th:field="*{course}">
         <option class="dropdown-item rounded-2"
                 th:each="course: ${allCourses}"
-                th:value="${course.courseId}"
-                th:text="${course.courseName}">
+                th:value="${course.getCourseId()}"
+                th:text="${course.getCourseName()}">
         </option>
       </select>
     </div>
