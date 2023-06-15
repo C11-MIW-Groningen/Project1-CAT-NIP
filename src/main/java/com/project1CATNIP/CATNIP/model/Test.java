@@ -17,7 +17,6 @@ public class Test {
     private Long testId;
     @Column (nullable = false)
     private String nameTest;
-
-    @OneToOne
+    @ManyToOne
     private Course course;
 }

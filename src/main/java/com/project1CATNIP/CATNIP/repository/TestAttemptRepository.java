@@ -6,6 +6,7 @@ package com.project1CATNIP.CATNIP.repository;
  *The Purpose
  */
 
+import com.project1CATNIP.CATNIP.model.Student;
 import com.project1CATNIP.CATNIP.model.Test;
 import com.project1CATNIP.CATNIP.model.TestAttempt;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TestAttemptRepository extends JpaRepository<TestAttempt, Long> {
-    List<TestAttempt> findTestAttemptsByStudentAndTest(Long studentId, Test test);
+    List<TestAttempt> findTestAttemptsByStudentAndTestIn(Student studentId, List<Test> testId);
 }

@@ -25,6 +25,7 @@ public class SeedController {
     private final StudentRepository studentRepository;
     private final TestRepository testRepository;
     private final AssignmentRepository assignmentRepository;
+    private final TestAttemptRepository testAttemptRepository;
 
     @GetMapping("/seed")
     private String seedDatabase() {
@@ -101,6 +102,20 @@ public class SeedController {
         test2.setNameTest("Re-exam Dice application");
         test2.setCourse(programming);
         testRepository.save(test2);
+
+        TestAttempt test1student1attempt1 = new TestAttempt();
+        test1student1attempt1.setAttemptDate(LocalDate.of(2024, 2, 3));
+        test1student1attempt1.setStudent(student1);
+        test1student1attempt1.setTest(test1);
+        test1student1attempt1.setAttemptResult(5.5);
+        testAttemptRepository.save(test1student1attempt1);
+
+        TestAttempt test2student2attempt2 = new TestAttempt();
+        test2student2attempt2.setAttemptDate(LocalDate.of(2024, 2, 3));
+        test2student2attempt2.setStudent(student1);
+        test2student2attempt2.setTest(test2);
+        test2student2attempt2.setAttemptResult(8.7);
+        testAttemptRepository.save(test2student2attempt2);
 
         Assignment assignment1 = new Assignment();
         assignment1.setAssignmentName("Meetkunde");
