@@ -19,4 +19,5 @@ public class Test {
     private String nameTest;
     @ManyToOne
     private Course course;
+
 }

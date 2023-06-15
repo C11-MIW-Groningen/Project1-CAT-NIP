@@ -18,6 +18,7 @@
       <th>Program</th>
       <th>Cohort number</th>
       <th>Start date</th>
+      <th>End date</th>
       <th>Link to details</th>
       <th></th>
       <th></th>
@@ -26,7 +27,8 @@
       <td th:text="${cohort.getProgram().getNameProgram()}"></td>
       <td th:text="${cohort.getNumber()}"></td>
       <td th:text="${cohort.getStartDate()}"></td>
-      <td><a>Details</a></td>
+      <td th:text="${cohort.getEndDate()}"></td>
+      <td><a th:href="@{/cohort/details/{cohortId}(cohortId=${cohort.getCohortId()})}">Details</a></td>
       <td><a th:href="@{/cohort/edit/{cohortId}(cohortId=${cohort.cohortId})}">Edit</a></td>
       <td><a th:href="@{/cohort/delete/{cohortId}(cohortId=${cohort.cohortId})}">Delete</a></td>
     </tr>

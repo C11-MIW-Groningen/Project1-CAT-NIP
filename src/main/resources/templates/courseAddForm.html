@@ -19,13 +19,19 @@
             <div class="form-group">
                 <label for="program">Select program</label>
                 <select class="form-control" id="program" th:field="*{program}">
-                    <option th:each="program : ${allPrograms}" th:value="${program.getProgramId}" th:text="${program.getNameProgram}"></option>
+                    <option th:each="program : ${allPrograms}"
+                            th:value="${program.getProgramId}"
+                            th:text="${program.getNameProgram}">
+                    </option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="teacher">Select teacher</label>
                 <select class="form-control" id="teacher" th:field="*{teacher}">
-                    <option th:each="teacher : ${allTeachers}" th:value="${teacher.getTeacherId}" th:text="${teacher.displayTeacher}"></option>
+                    <option th:each="teacher : ${allTeachers}"
+                            th:value="${teacher.getTeacherId}"
+                            th:text="${teacher.displayTeacher}">
+                    </option>
                 </select>
             </div>
             <div class="form-group form-button">
