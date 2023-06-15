@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,24 +36,15 @@ public class TestAttemptController {
             @PathVariable("studentId") Long studentId, @PathVariable("courseId") Long courseId, Model model) {
 
         Optional<Student> optionalStudent = studentRepository.findById(studentId);
-        if (optionalStudent.isEmpty()) {
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+        if (optionalStudent.isEmpty() || optionalCourse.isEmpty()) {
             return "redirect:/student/all";
         }
         Student student = optionalStudent.get();
-
-        Optional<Course> optionalCourse = courseRepository.findById(courseId);
-        if (optionalCourse.isEmpty()) {
-            return "redirect:/student/all";
-        }
         Course course = optionalCourse.get();
 
-        List<Test> testList = testRepository.findByCourse(course);
-        if (testList.isEmpty()) {
-            return "redirect:/student/all";
-        }
-
         model.addAttribute("allTestAttempts",
-                testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, testList));
+                testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()));
         model.addAttribute("thisStudent", student);
 
         return "testAttemptsOverviewStudent";
