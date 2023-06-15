@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -47,13 +48,13 @@ public class TestAttemptController {
         }
         Course course = optionalCourse.get();
 
-        Optional<Test> optionalTest = testRepository.findByCourse(course);
-        if (optionalTest.isEmpty()) {
+        List<Test> testList = testRepository.findByCourse(course);
+        if (testList.isEmpty()) {
             return "redirect:/student/all";
         }
-        Test test = optionalTest.get();
 
-        model.addAttribute("allTestAttempts", testAttemptRepository.findTestAttemptsByStudentAndTest(student, test));
+        model.addAttribute("allTestAttempts",
+                testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, testList));
         model.addAttribute("thisStudent", student);
 
         return "testAttemptsOverviewStudent";

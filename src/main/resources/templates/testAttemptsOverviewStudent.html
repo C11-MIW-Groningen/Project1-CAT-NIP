@@ -13,13 +13,14 @@
         <tr>
             <th>Attempt date</th>
             <th>Subject</th>
+            <th>Test</th>
             <th>Result</th>
-            <th></th>
             <th></th>
         </tr>
         <tr th:each="attempt : ${allTestAttempts}">
             <td th:text="${attempt.getAttemptDate()}"></td>
             <td th:text="${attempt.getTest().getCourse().getCourseName()}"></td>
+            <td th:text="${attempt.getTest().getNameTest()}"></td>
             <td th:text="${attempt.getAttemptResult()}"></td>
             <td></td>
             <td></td>
