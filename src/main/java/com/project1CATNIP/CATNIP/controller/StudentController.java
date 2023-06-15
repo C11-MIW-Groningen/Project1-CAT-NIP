@@ -1,14 +1,14 @@
 package com.project1CATNIP.CATNIP.controller;
 
-import com.project1CATNIP.CATNIP.model.Student;
-import com.project1CATNIP.CATNIP.repository.CohortRepository;
-import com.project1CATNIP.CATNIP.repository.StudentRepository;
+import com.project1CATNIP.CATNIP.model.*;
+import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -22,6 +22,10 @@ import java.util.Optional;
 public class StudentController {
     private final StudentRepository studentRepository;
     private final CohortRepository cohortRepository;
+    private final CourseRepository courseRepository;
+    private final TestAttemptRepository testAttemptRepository;
+    private final ProgramRepository programRepository;
+    private final TestRepository testRepository;
 
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {
@@ -72,4 +76,25 @@ public class StudentController {
 
         return "redirect:/student/all";
     }
+
+    @GetMapping("/details/{studentId}")
+    private String showStudentDetails(@PathVariable("studentId") Long studentId, Model  model) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            model.addAttribute("thisStudent", student);
+            model.addAttribute("courses", getCoursesForStudent(student));
+            return "studentDetails";
+        }
+
+        return "redirect:/student/all";
+    }
+
+    private List<Course> getCoursesForStudent(Student student) {
+        Cohort cohort = student.getCohort();
+        Program program = cohort.getProgram();
+        return courseRepository.findByProgram(program);
+    }
+
 }

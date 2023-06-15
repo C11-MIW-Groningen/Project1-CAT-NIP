@@ -23,7 +23,6 @@ public class Student {
     private String lastNameStudent;
     @Column (nullable = false)
     private String emailAddressStudent;
-
     @ManyToOne
     private Cohort cohort;
 

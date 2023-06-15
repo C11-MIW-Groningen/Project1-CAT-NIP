@@ -20,6 +20,7 @@
             <th>Last name</th>
             <th>Email address</th>
             <th>Cohort</th>
+            <th>Link to details</th>
             <th></th>
             <th></th>
         </tr>
@@ -29,6 +30,7 @@
             <td th:text="${student.getLastNameStudent()}"></td>
             <td th:text="${student.getEmailAddressStudent()}"></td>
             <td th:text="${student.getCohort().getDisplayCohort()}"></td>
+            <td><a th:href="@{/student/details/{studentId}(studentId=${student.studentId})}">Details</a></td>
             <td><a th:href="@{/student/edit/{studentId}(studentId=${student.studentId})}">Edit</a></td>
             <td><a th:href="@{/student/delete/{studentId}(studentId=${student.studentId})}">Delete</a></td>
         </tr>

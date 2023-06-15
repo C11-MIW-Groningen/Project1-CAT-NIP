@@ -18,7 +18,5 @@ public class TestAttemptController {
 
     private final TestAttemptRepository testAttemptRepository;
 
-    private List<TestAttempt> findAllTestAttemptsByStudent(Long studentId) {
-        return testAttemptRepository.findTestAttemptsByStudent(studentId);
-    }
+
 }

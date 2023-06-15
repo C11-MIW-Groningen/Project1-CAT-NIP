@@ -26,7 +26,7 @@ public class Teacher {
     @Column (nullable = false)
     private String emailAddress;
 
-    public String getFullName() {
+    public String getDisplayTeacher() {
         StringBuilder fullname = new StringBuilder();
         fullname.append(firstName);
         if (!infixName.isEmpty()) {
