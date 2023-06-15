@@ -22,7 +22,7 @@
     </tr>
     <tr th:each="program : ${allPrograms}">
       <td th:text="${program.getNameProgram()}"></td>
-      <td></td>
+      <td th:text="${program.getNumberOfCohorts()}"></td>
       <td><a th:href="@{/program/edit/{programId}(programId=${program.getProgramId()})}">Edit</a></td>
       <td><a th:href="@{/program/delete/{programId}(programId=${program.getProgramId()})}">Delete</a></td>
     </tr>

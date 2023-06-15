@@ -24,6 +24,7 @@ public class SeedController {
     private final CourseRepository courseRepository;
     private final StudentRepository studentRepository;
     private final TestRepository testRepository;
+    private final AssignmentRepository assignmentRepository;
 
     @GetMapping("/seed")
     private String seedDatabase() {
@@ -100,6 +101,20 @@ public class SeedController {
         test2.setNameTest("Re-exam Dice application");
         test2.setCourse(programming);
         testRepository.save(test2);
+
+        Assignment assignment1 = new Assignment();
+        assignment1.setAssignmentName("Meetkunde");
+        assignment1.setDayPart(1);
+        assignment1.setAssignmentNumber(1);
+        assignment1.setCourse(programming);
+        assignmentRepository.save(assignment1);
+
+        Assignment assignment2 = new Assignment();
+        assignment2.setAssignmentName("Top 2000");
+        assignment2.setDayPart(2);
+        assignment2.setAssignmentNumber(1);
+        assignment2.setCourse(databases);
+        assignmentRepository.save(assignment2);
 
         return "redirect:/program";
     }

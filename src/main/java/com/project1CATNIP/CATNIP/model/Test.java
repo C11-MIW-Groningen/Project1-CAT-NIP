@@ -3,10 +3,7 @@ package com.project1CATNIP.CATNIP.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * Author: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
@@ -18,6 +15,7 @@ import javax.persistence.OneToOne;
 public class Test {
     @Id @GeneratedValue
     private Long testId;
+    @Column (nullable = false)
     private String nameTest;
 
     @OneToOne
