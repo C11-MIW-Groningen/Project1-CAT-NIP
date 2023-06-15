@@ -1,6 +1,8 @@
 package com.project1CATNIP.CATNIP.controller;
 
+import com.project1CATNIP.CATNIP.model.Course;
 import com.project1CATNIP.CATNIP.model.Program;
+import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,6 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProgramController {
     private final ProgramRepository programRepository;
+    private final CourseRepository courseRepository;
 
     @GetMapping({"/", "", "/program", "/program/all"})
     private String showAllPrograms(Model model) {
@@ -57,12 +61,26 @@ public class ProgramController {
     //TODO Delete validatie
 
     @GetMapping("/program/edit/{programId}")
-    private String showEditCourseForm(@PathVariable("programId") Long programId, Model model) {
+    private String showEditProgramForm(@PathVariable("programId") Long programId, Model model) {
         Optional<Program> optionalProgram = programRepository.findById(programId);
 
         if (optionalProgram.isPresent()) {
             model.addAttribute("program", optionalProgram.get());
             return "programAddForm";
+        }
+
+        return "redirect:/program/all";
+    }
+
+    @GetMapping("/program/details/{programId}")
+    private String showProgramDetails(@PathVariable("programId") Long programId, Model model) {
+        Optional<Program> optionalProgram = programRepository.findById(programId);
+
+        if (optionalProgram.isPresent()) {
+            Program program = optionalProgram.get();
+            model.addAttribute("program", program);
+            model.addAttribute("coursesFromProgram", courseRepository.findByProgram(program));
+            return "programDetails";
         }
 
         return "redirect:/program/all";

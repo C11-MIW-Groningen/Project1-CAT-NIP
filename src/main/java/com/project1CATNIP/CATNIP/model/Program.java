@@ -23,6 +23,9 @@ public class Program {
 
     @OneToMany (mappedBy = "program")
     private List<Cohort> cohorts;
+    @OneToMany (mappedBy = "program")
+    private List<Course> courses;
+
 
     public int getNumberOfCohorts() {
         return cohorts.size();

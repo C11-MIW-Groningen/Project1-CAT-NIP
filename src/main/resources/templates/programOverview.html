@@ -17,12 +17,14 @@
     <tr>
       <th>Program name</th>
       <th>Number of cohorts</th>
+      <th>Link to details</th>
       <th></th>
       <th></th>
     </tr>
     <tr th:each="program : ${allPrograms}">
       <td th:text="${program.getNameProgram()}"></td>
       <td th:text="${program.getNumberOfCohorts()}"></td>
+      <td><a th:href="@{/program/details/{programId}(programId=${program.getProgramId()})}">Details</a></td>
       <td><a th:href="@{/program/edit/{programId}(programId=${program.getProgramId()})}">Edit</a></td>
       <td><a th:href="@{/program/delete/{programId}(programId=${program.getProgramId()})}">Delete</a></td>
     </tr>
