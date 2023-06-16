@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Course Details</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+  <h1 th:text="${course.getCourseName()}"></h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      Description of course.
+      This course is taught by <span th:text="${course.getTeacher().getDisplayTeacher()}"></span>.
+    </div>
+  </div>
+
+  <a th:href="@{/course/}">Back to Course Overview</a>
+
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <tr>
+          <th>Tests</th>
+        </tr>
+        <tr th:each="test : ${testsFromCourse}">
+          <td th:text="${test.getNameTest()}"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table">
+        <tr>
+          <th>Assignments</th>
+        </tr>
+        <tr th:each="assignment : ${assignmentsFromCourse}">
+          <td th:text="${assignment.getDisplayAssignment()}"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>

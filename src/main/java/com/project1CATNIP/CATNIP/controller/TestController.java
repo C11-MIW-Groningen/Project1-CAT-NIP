@@ -68,7 +68,8 @@ public class TestController {
 
         if (optionalTest.isPresent()) {
             model.addAttribute("test", optionalTest.get());
-            return "testAddform";
+            model.addAttribute("allCourses", courseRepository.findAll());
+            return "testAddForm";
         }
 
         return "redirect:/test/all";

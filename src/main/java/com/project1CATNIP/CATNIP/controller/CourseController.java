@@ -5,10 +5,9 @@ package com.project1CATNIP.CATNIP.controller;/*
  */
 
 import com.project1CATNIP.CATNIP.model.Course;
+import com.project1CATNIP.CATNIP.model.Student;
 import com.project1CATNIP.CATNIP.model.Teacher;
-import com.project1CATNIP.CATNIP.repository.CourseRepository;
-import com.project1CATNIP.CATNIP.repository.ProgramRepository;
-import com.project1CATNIP.CATNIP.repository.TeacherRepository;
+import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,8 @@ public class CourseController {
     private final CourseRepository courseRepository;
     private final ProgramRepository programRepository;
     private final TeacherRepository teacherRepository;
+    private final AssignmentRepository assignmentRepository;
+    private final TestRepository testRepository;
 
     private final String redirectOverview = "redirect:/course/all";
     //Todo: bij alle controllers een redirectOverview maken
@@ -78,7 +79,18 @@ public class CourseController {
         return redirectOverview;
     }
 
-    // Delete
-    // ShowEditForm
+    @GetMapping("/details/{courseId}")
+    private String showCourseDetails(@PathVariable("courseId") Long courseId, Model  model) {
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
 
+        if (optionalCourse.isPresent()) {
+            Course course = optionalCourse.get();
+            model.addAttribute("course", optionalCourse.get());
+            model.addAttribute("testsFromCourse", testRepository.findByCourse(course));
+            model.addAttribute("assignmentsFromCourse", assignmentRepository.findByCourse(course));
+            return "courseDetails";
+        }
+
+        return "redirect:/course/all";
+    }
 }

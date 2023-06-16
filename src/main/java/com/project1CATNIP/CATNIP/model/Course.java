@@ -25,5 +25,6 @@ public class Course {
     private Program program;
     @OneToMany (mappedBy = "course")
     private List<Test> tests;
-
+    @OneToMany (mappedBy = "course")
+    private List<Assignment> assignments;
 }
