@@ -15,6 +15,9 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"number", "program_program_id"})
+})
 public class Cohort {
 
     @Id @GeneratedValue
