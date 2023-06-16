@@ -36,12 +36,13 @@
                    placeholder="Email address" th:field="*{emailAddressStudent}">
         </div>
         <div>
-            <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+            <label for="cohort">Select cohort</label>
+            <select  id="cohort" class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
                     th:field="*{cohort}">
                 <option class="dropdown-item rounded-2"
                         th:each="cohort: ${allCohorts}"
                         th:value="${cohort.cohortId}"
-                        th:text="${cohort.getDisplayCohort}">
+                        th:text="${cohort.getDisplayCohort()}">
                 </option>
             </select>
         </div>

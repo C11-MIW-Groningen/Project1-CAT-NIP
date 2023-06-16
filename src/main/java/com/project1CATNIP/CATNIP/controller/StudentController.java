@@ -71,6 +71,7 @@ public class StudentController {
 
         if (optionalStudent.isPresent()) {
             model.addAttribute("student", optionalStudent.get());
+            model.addAttribute("allCohorts", cohortRepository.findAll());
             return "studentAddForm";
         }
 

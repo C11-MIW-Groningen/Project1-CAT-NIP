@@ -8,13 +8,21 @@
 <div th:replace="fragments/general :: navbar"></div>
 
 <div class="container">
-
-  <h1>Teacher: <span th:text="${teacher.getDisplayTeacher()}"></span></h1>
-
-  <img th:src="@{/images/{image}(image=${teacher.getImage})}" alt="image of teacher">
-
-  <p>Information and specifics about this teacher.</p>
-
+  <div class="row mb-5">
+    <div class="col">
+      <h1>Teacher: <span th:text="${teacher.getDisplayTeacher()}"></span>
+        <a th:href="@{/teacher/}"> (back to teacher overview)</a>
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>Information and specifics about this teacher.</p>
+    </div>
+    <div class="col">
+      <img th:src="@{/images/{image}(image=${teacher.getImage})}" alt="image of teacher">
+    </div>
+  </div>
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

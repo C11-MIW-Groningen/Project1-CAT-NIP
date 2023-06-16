@@ -10,8 +10,10 @@
 <div class="container">
     <h1 th:text="${program.getNameProgram()}"></h1>
 
+    <a th:href="@{/program/all}">Back to program overview</a>
+
     <div class="row">
-        <div class="col-md-8">
+        <div class="col mt-2 mb-2">
             Description of program
         </div>
     </div>
