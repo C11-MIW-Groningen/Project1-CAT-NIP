@@ -15,16 +15,16 @@
 
   <table class="table">
     <tr>
-      <th>Program</th>
-      <th>Course</th>
       <th>Test</th>
+      <th>Course</th>
+      <th>Program</th>
       <th></th>
       <th></th>
     </tr>
     <tr th:each="test : ${allTests}">
-      <td th:text="${test.getCourse().getProgram().getNameProgram()}"></td>
-      <td th:text="${test.getCourse().getCourseName()}"></td>
       <td th:text="${test.getNameTest()}"></td>
+      <td th:text="${test.getCourse().getCourseName()}"></td>
+      <td th:text="${test.getCourse().getProgram().getNameProgram()}"></td>
       <td><a th:href="@{/test/edit/{testId}(testId=${test.testId})}">Edit</a></td>
       <td><a th:href="@{/test/delete/{testId}(testId=${test.testId})}">Delete</a></td>
     </tr>

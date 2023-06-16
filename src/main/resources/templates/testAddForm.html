@@ -20,7 +20,8 @@
       <input id="nameTest" class="form-control" type="text" placeholder="Test name" th:field="*{nameTest}">
     </div>
     <div>
-      <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+      <label for="course">Course name</label>
+      <select id="course" class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
               th:field="*{course}">
         <option class="dropdown-item rounded-2"
                 th:each="course: ${allCourses}"
