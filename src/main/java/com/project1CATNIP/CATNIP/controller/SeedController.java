@@ -81,16 +81,16 @@ public class SeedController {
         courseRepository.save(databases);
 
         Student student1 = new Student();
-        student1.setFirstNameStudent("Henk");
-        student1.setInfixNameStudent("de");
-        student1.setLastNameStudent("Vries");
+        student1.setFirstName("Henk");
+        student1.setInfixName("de");
+        student1.setLastName("Vries");
         student1.setEmailAddressStudent("h.de.vries@hmail.com");
         student1.setCohort(se11);
         studentRepository.save(student1);
 
         Student student2 = new Student();
-        student2.setFirstNameStudent("Angela");
-        student2.setLastNameStudent("Jongsma");
+        student2.setFirstName("Angela");
+        student2.setLastName("Jongsma");
         student2.setEmailAddressStudent("ajongsma@hmail.com");
         student2.setCohort(se11);
         studentRepository.save(student2);

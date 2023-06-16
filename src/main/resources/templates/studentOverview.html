@@ -25,9 +25,9 @@
             <th></th>
         </tr>
         <tr th:each="student : ${allStudents}">
-            <td th:text="${student.getFirstNameStudent()}"></td>
-            <td th:text="${student.getInfixNameStudent()}"></td>
-            <td th:text="${student.getLastNameStudent()}"></td>
+            <td th:text="${student.getFirstName()}"></td>
+            <td th:text="${student.getInfixName()}"></td>
+            <td th:text="${student.getLastName()}"></td>
             <td th:text="${student.getEmailAddressStudent()}"></td>
             <td th:text="${student.getCohort().getDisplayCohort()}"></td>
             <td><a th:href="@{/student/details/{studentId}(studentId=${student.studentId})}">Details</a></td>

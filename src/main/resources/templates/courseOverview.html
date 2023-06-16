@@ -17,6 +17,7 @@
       <th>Course</th>
       <th>Part of program</th>
       <th>Teacher</th>
+      <th>Link to details</th>
       <th></th>
       <th></th>
     </tr>
@@ -24,6 +25,7 @@
       <td th:text="${course.getCourseName()}"></td>
       <td th:text="${course.getProgram().getNameProgram()}"></td>
       <td th:text="${course.teacher.getDisplayTeacher()}"></td>
+      <td><a th:href="@{/course/details/{courseId}(courseId=${course.courseId})}">Details</a></td>
       <td><a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">Edit</a></td>
       <td><a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">Delete</a></td>
     </tr>
