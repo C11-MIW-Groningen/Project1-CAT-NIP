@@ -23,7 +23,11 @@
       <th></th>
     </tr>
     <tr th:each="teacher : ${allTeachers}">
-      <td th:text="${teacher.getFirstName()}"></td>
+      <td>
+        <a th:href="@{/teacher/details/{teacherId}(teacherId=${teacher.teacherId})}"
+             th:text="${teacher.getFirstName()}">
+        </a>
+      </td>
       <td th:text="${teacher.getInfixName()}"></td>
       <td th:text="${teacher.getLastName()}"></td>
       <td th:text="${teacher.getEmailAddress()}"></td>

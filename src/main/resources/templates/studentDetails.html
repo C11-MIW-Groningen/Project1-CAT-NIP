@@ -9,7 +9,7 @@
 
 <div class="container">
 
-  <h1 th:text="${thisStudent.getDisplayStudent()}"></h1>
+  <h1 th:text="${student.getDisplayStudent()}"></h1>
 
   <table class="table">
     <tr>
@@ -19,7 +19,7 @@
     </tr>
     <tr th:each="course : ${courses}">
       <td th:text="${course.getCourseName()}"></td>
-      <td><a th:href="@{/testattempts/{studentId}/{courseId}(courseId=${course.getCourseId()}, studentId=${thisStudent.getStudentId()})}">Results</a></td>
+      <td><a th:href="@{/testattempts/{studentId}/{courseId}(courseId=${course.getCourseId()}, studentId=${student.getStudentId()})}">Results</a></td>
       <td>Grade</td>
     </tr>
   </table>

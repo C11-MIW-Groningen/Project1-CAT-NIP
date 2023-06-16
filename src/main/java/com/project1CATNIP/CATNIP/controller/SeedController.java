@@ -30,19 +30,21 @@ public class SeedController {
     @GetMapping("/seed")
     private String seedDatabase() {
 
-        Teacher wally = new Teacher();
-        wally.setFirstName("Walther");
-        wally.setInfixName("De");
-        wally.setLastName("Wit");
-        wally.setEmailAddress("w.d.wit@cat-nip.nl");
-        teacherRepository.save(wally);
+        Teacher janna = new Teacher();
+        janna.setFirstName("Janna");
+        janna.setInfixName("");
+        janna.setLastName("Scherpenzeel");
+        janna.setEmailAddress("j.scherpenzeel@cat-nip.nl");
+        janna.setImage("teacher1.png");
+        teacherRepository.save(janna);
 
-        Teacher piet = new Teacher();
-        piet.setFirstName("Pieter");
-        piet.setInfixName("Van de");
-        piet.setLastName("Breedband");
-        piet.setEmailAddress("p.vd.breedband@cat-nip.nl");
-        teacherRepository.save(piet);
+        Teacher mark = new Teacher();
+        mark.setFirstName("Mark");
+        mark.setInfixName("Van der");
+        mark.setLastName("Berg");
+        mark.setEmailAddress("m.vd.berg@cat-nip.nl");
+        mark.setImage("mark.jpg");
+        teacherRepository.save(mark);
 
         Program softwareEngineering = new Program();
         softwareEngineering.setNameProgram("Software Engineering");
@@ -69,13 +71,13 @@ public class SeedController {
         Course programming = new Course();
         programming.setCourseName("Programming");
         programming.setProgram(softwareEngineering);
-        programming.setTeacher(piet);
+        programming.setTeacher(mark);
         courseRepository.save(programming);
 
         Course databases = new Course();
         databases.setCourseName("Databases");
         databases.setProgram(softwareEngineering);
-        databases.setTeacher(wally);
+        databases.setTeacher(janna);
         courseRepository.save(databases);
 
         Student student1 = new Student();

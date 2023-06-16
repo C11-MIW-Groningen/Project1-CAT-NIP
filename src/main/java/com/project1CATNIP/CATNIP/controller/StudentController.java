@@ -83,7 +83,7 @@ public class StudentController {
 
         if (studentOptional.isPresent()) {
             Student student = studentOptional.get();
-            model.addAttribute("thisStudent", student);
+            model.addAttribute("student", student);
             model.addAttribute("courses", getCoursesForStudent(student));
             return "studentDetails";
         }
