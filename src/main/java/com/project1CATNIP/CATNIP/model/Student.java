@@ -1,6 +1,8 @@
 package com.project1CATNIP.CATNIP.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,28 +14,23 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class Student {
+public class Student extends Person {
     @Id @GeneratedValue
     private Long studentId;
 
-    @Column(nullable = false)
-    private String firstNameStudent;
-    private String infixNameStudent;
-    @Column (nullable = false)
-    private String lastNameStudent;
     @Column (nullable = false)
     private String emailAddressStudent;
     @ManyToOne
     private Cohort cohort;
 
     public String getDisplayStudent() {
-        String displayStudent = firstNameStudent;
+        String displayStudent = firstName;
 
-        if (!infixNameStudent.equals("")) {
-            displayStudent += " " + infixNameStudent;
+        if (!infixName.equals("")) {
+            displayStudent += " " + infixName;
         }
 
-        displayStudent += " "+ lastNameStudent;
+        displayStudent += " "+ lastName;
         return displayStudent;
     }
 }
