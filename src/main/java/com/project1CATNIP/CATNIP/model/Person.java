@@ -23,4 +23,14 @@ public abstract class Person {
     @Column (nullable = false)
     String lastName;
 
+    public String getDisplayName() {
+        StringBuilder fullName = new StringBuilder();
+        fullName.append(firstName);
+        if (!infixName.isEmpty()) {
+            fullName.append(" ").append(infixName);
+        }
+        fullName.append(" ").append(lastName);
+
+        return fullName.toString();
+    }
 }

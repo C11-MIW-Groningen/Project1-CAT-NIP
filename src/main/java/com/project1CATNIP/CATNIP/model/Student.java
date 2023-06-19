@@ -23,15 +23,4 @@ public class Student extends Person {
 
     @ManyToOne
     private Cohort cohort;
-
-    public String getDisplayStudent() {
-        String displayStudent = firstName;
-
-        if (!infixName.equals("")) {
-            displayStudent += " " + infixName;
-        }
-
-        displayStudent += " "+ lastName;
-        return displayStudent;
-    }
 }
