@@ -14,8 +14,12 @@ import javax.persistence.*;
 @Getter @Setter
 public class Assignment {
 
+<<<<<<< Updated upstream
     @Id
     @GeneratedValue
+=======
+    @Id @GeneratedValue
+>>>>>>> Stashed changes
     private Long assignmentId;
 
     @Column (nullable = false)

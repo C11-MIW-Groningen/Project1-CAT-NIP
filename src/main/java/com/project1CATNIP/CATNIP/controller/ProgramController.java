@@ -40,7 +40,6 @@ public class ProgramController {
 
     @PostMapping("/program/add")
     private String saveProgram(@ModelAttribute("program") Program programToAdd, BindingResult result) {
-
         if (!result.hasErrors()) {
             programRepository.save(programToAdd);
         }

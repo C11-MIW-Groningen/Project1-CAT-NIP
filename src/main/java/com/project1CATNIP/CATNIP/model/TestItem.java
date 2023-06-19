@@ -1,9 +1,32 @@
 package com.project1CATNIP.CATNIP.model;
 
- /**
+
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+/**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
- *The Purpose
+ * Testitems are smaller objects, part of a test
  */
 
+@Entity
+@Getter @Setter
 public class TestItem {
+
+    @Id
+    @GeneratedValue
+    private Long itemId;
+
+    @Column(nullable = false)
+    private Integer itemNumberForTest;
+
+    private String description;
+
+    @Column(nullable = false)
+    private Integer maxPoints;
+
+    @ManyToOne
+    private Test test;
 }
