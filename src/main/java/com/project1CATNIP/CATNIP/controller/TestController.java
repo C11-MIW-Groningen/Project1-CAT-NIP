@@ -29,7 +29,7 @@ public class TestController {
     private String showAllTests(Model model) {
         model.addAttribute("allTests", testRepository.findAll());
 
-        return "testOverview";
+        return "/test/overview";
     }
 
     @GetMapping("/add")
@@ -37,7 +37,7 @@ public class TestController {
         model.addAttribute("test", new Test());
         model.addAttribute("allCourses", courseRepository.findAll());
 
-        return "testAddForm";
+        return "/test/addForm";
     }
 
     @PostMapping("/add")
@@ -69,7 +69,7 @@ public class TestController {
         if (optionalTest.isPresent()) {
             model.addAttribute("test", optionalTest.get());
             model.addAttribute("allCourses", courseRepository.findAll());
-            return "testAddForm";
+            return "/test/addForm";
         }
 
         return "redirect:/test/all";
