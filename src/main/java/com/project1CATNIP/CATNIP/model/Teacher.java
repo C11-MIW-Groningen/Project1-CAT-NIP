@@ -14,33 +14,14 @@ import javax.persistence.Id;
 
 @Entity
 @Getter @Setter
-public class Teacher {
+public class Teacher extends Person {
 
     @Id
     @GeneratedValue
     private Long teacherId;
 
     @Column (nullable = false)
-    private String firstName;
-
-    private String infixName;
-
-    @Column (nullable = false)
-    private String lastName;
-
-    @Column (nullable = false)
     private String emailAddress;
     
     private String image;
-
-    public String getDisplayTeacher() {
-        StringBuilder fullname = new StringBuilder();
-        fullname.append(firstName);
-        if (!infixName.isEmpty()) {
-            fullname.append(" ").append(infixName);
-        }
-        fullname.append(" ").append(lastName);
-
-        return fullname.toString();
-    }
 }

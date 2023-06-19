@@ -39,6 +39,7 @@
             <label for="cohort">Select cohort</label>
             <select  id="cohort" class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
                     th:field="*{cohort}">
+                <option th:value="null">No cohort</option>
                 <option class="dropdown-item rounded-2"
                         th:each="cohort: ${allCohorts}"
                         th:value="${cohort.cohortId}"

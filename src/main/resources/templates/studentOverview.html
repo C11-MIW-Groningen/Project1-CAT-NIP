@@ -29,7 +29,10 @@
             <td th:text="${student.getInfixName()}"></td>
             <td th:text="${student.getLastName()}"></td>
             <td th:text="${student.getEmailAddressStudent()}"></td>
-            <td th:text="${student.getCohort().getDisplayCohort()}"></td>
+            <td>
+                <span th:if="${student.getCohort()}" th:text="${student.getCohort().getDisplayCohort()}"></span>
+                <span th:unless="${student.getCohort()}">No cohort</span>
+            </td>
             <td><a th:href="@{/student/details/{studentId}(studentId=${student.studentId})}">Details</a></td>
             <td><a th:href="@{/student/edit/{studentId}(studentId=${student.studentId})}">Edit</a></td>
             <td><a th:href="@{/student/delete/{studentId}(studentId=${student.studentId})}">Delete</a></td>

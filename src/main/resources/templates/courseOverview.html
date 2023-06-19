@@ -24,7 +24,7 @@
     <tr th:each="course : ${allCourses}">
       <td th:text="${course.getCourseName()}"></td>
       <td th:text="${course.getProgram().getNameProgram()}"></td>
-      <td th:text="${course.teacher.getDisplayTeacher()}"></td>
+      <td th:text="${course.teacher.getDisplayName()}"></td>
       <td><a th:href="@{/course/details/{courseId}(courseId=${course.courseId})}">Details</a></td>
       <td><a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">Edit</a></td>
       <td><a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">Delete</a></td>

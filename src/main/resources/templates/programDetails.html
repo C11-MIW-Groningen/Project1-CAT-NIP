@@ -26,7 +26,7 @@
         </tr>
         <tr th:each="course: ${coursesFromProgram}">
             <td th:text="${course.getCourseName()}"></td>
-            <td th:text="${course.getTeacher().getDisplayTeacher()}"></td>
+            <td th:text="${course.getTeacher().getDisplayName()}"></td>
             <td>Course</td>
         </tr>
     </table>
