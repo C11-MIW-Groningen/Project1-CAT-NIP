@@ -1,7 +1,8 @@
-package com.project1CATNIP.CATNIP.controller;/*
- *@Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
- *
- *The Purpose
+package com.project1CATNIP.CATNIP.controller;
+
+/**
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Handles all interactions of courses.
  */
 
 import com.project1CATNIP.CATNIP.model.Course;
@@ -22,13 +23,17 @@ import java.util.Optional;
 public class CourseController {
 
     private final CourseRepository courseRepository;
+
     private final ProgramRepository programRepository;
+
     private final TeacherRepository teacherRepository;
+
     private final AssignmentRepository assignmentRepository;
+
     private final TestRepository testRepository;
 
     private final String redirectOverview = "redirect:/course/all";
-    //Todo: bij alle controllers een redirectOverview maken
+    //TODO: bij alle controllers een redirectOverview maken
 
     @GetMapping({"", "/","/all"})
     private String showAllCourses(Model model) {

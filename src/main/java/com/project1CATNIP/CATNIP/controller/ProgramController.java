@@ -1,6 +1,5 @@
 package com.project1CATNIP.CATNIP.controller;
 
-import com.project1CATNIP.CATNIP.model.Course;
 import com.project1CATNIP.CATNIP.model.Program;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
@@ -10,18 +9,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
- * Author: Saskia Tadema <s.tadema@st.hanze.nl>
- *
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Handle all program interactions.
  */
 
 @Controller
 @RequiredArgsConstructor
 public class ProgramController {
+
     private final ProgramRepository programRepository;
+
     private final CourseRepository courseRepository;
 
     @GetMapping({"/", "", "/program", "/program/all"})

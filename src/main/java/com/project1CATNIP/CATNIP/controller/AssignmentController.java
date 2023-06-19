@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 /**
- * Author: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
  * Handles all interactions of assignments.
  */
 
@@ -20,7 +20,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/assignment")
 public class AssignmentController {
+
     private final AssignmentRepository assignmentRepository;
+
     private final CourseRepository courseRepository;
 
     @GetMapping({"", "/", "/all"})

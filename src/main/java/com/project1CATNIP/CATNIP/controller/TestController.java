@@ -1,6 +1,5 @@
 package com.project1CATNIP.CATNIP.controller;
 
-import com.project1CATNIP.CATNIP.model.Student;
 import com.project1CATNIP.CATNIP.model.Test;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.TestRepository;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 /**
- * Author: Saskia Tadema <s.tadema@st.hanze.nl>
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
  * Handles all interactions of tests.
  */
 
@@ -21,7 +20,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/test")
 public class TestController {
+
     private final TestRepository testRepository;
+
     private final CourseRepository courseRepository;
 
     @GetMapping({"", "/", "/all"})
@@ -41,7 +42,6 @@ public class TestController {
 
     @PostMapping("/add")
     private String saveTest(@ModelAttribute("test") Test testToAdd, BindingResult result) {
-
         if (!result.hasErrors()) {
             testRepository.save(testToAdd);
         }

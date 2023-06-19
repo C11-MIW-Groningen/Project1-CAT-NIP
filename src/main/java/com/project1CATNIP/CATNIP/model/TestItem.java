@@ -1,6 +1,7 @@
-package com.project1CATNIP.CATNIP.model;/*
- *@Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
- *
+package com.project1CATNIP.CATNIP.model;
+
+ /**
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
  *The Purpose
  */
 

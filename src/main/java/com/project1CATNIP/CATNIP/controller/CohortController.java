@@ -1,9 +1,8 @@
 package com.project1CATNIP.CATNIP.controller;
 
-/*
- *@Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
- *
- *The Purpose
+/**
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Handles all cohort interactions.
  */
 
 import com.project1CATNIP.CATNIP.model.Cohort;
@@ -23,6 +22,7 @@ import java.util.Optional;
 public class CohortController {
 
         private final CohortRepository cohortRepository;
+
         private final ProgramRepository programRepository;
 
         @GetMapping({"", "/", "/all"})

@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 /**
- * Author: Saskia Tadema <s.tadema@st.hanze.nl, Marcel Tubben <mhg.tubben@st.hanze.nl>>
- * Doel van je programma.
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Handles all teacher interactions.
  */
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/teacher")
 public class TeacherController {
+
     private final TeacherRepository teacherRepository;
 
     @GetMapping ({"", "/", "/all"})
@@ -81,5 +82,4 @@ public class TeacherController {
 
         return "redirect:/teacher/all";
     }
-
 }

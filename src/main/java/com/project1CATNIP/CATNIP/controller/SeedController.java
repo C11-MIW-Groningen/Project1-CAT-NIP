@@ -1,9 +1,8 @@
 package com.project1CATNIP.CATNIP.controller;
 
 /*
- *@Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
- *
- *The Purpose
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Seeds the database.
  */
 
 import com.project1CATNIP.CATNIP.model.*;
@@ -19,12 +18,19 @@ import java.time.LocalDate;
 public class SeedController {
 
     private final TeacherRepository teacherRepository;
+
     private final ProgramRepository programRepository;
+
     private final CohortRepository cohortRepository;
+
     private final CourseRepository courseRepository;
+
     private final StudentRepository studentRepository;
+
     private final TestRepository testRepository;
+
     private final AssignmentRepository assignmentRepository;
+
     private final TestAttemptRepository testAttemptRepository;
 
     @GetMapping("/seed")

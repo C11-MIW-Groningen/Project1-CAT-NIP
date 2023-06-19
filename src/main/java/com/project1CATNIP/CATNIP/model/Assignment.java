@@ -6,17 +6,23 @@ import lombok.Setter;
 import javax.persistence.*;
 
 /**
- * Author: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
  * Assignments are part of courses. A student makes them, but they don't get grades.
  */
 
 @Entity
 @Getter @Setter
 public class Assignment {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private Long assignmentId;
+
+    @Column (nullable = false)
     private String assignmentName;
+
     private Integer dayPart;
+
     private Integer assignmentNumber;
 
     @ManyToOne

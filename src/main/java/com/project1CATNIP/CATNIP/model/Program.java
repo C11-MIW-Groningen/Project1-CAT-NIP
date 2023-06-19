@@ -7,14 +7,16 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Author: Saskia Tadema <s.tadema@st.hanze.nl, Marcel Tubben <mhg.tubben@st.hanze.nl>>
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
  * Courses to be followed at Make IT Work
  */
 
 @Entity
 @Getter @Setter
 public class Program {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private Long programId;
 
     @Column (nullable = false)
@@ -22,6 +24,7 @@ public class Program {
 
     @OneToMany (mappedBy = "program")
     private List<Cohort> cohorts;
+
     @OneToMany (mappedBy = "program")
     private List<Course> courses;
 

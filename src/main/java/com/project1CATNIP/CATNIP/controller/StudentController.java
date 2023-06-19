@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Author: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
  * Handles all interactions of students.
  */
 
@@ -20,12 +20,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/student")
 public class StudentController {
+
     private final StudentRepository studentRepository;
+
     private final CohortRepository cohortRepository;
+
     private final CourseRepository courseRepository;
-    private final TestAttemptRepository testAttemptRepository;
-    private final ProgramRepository programRepository;
-    private final TestRepository testRepository;
 
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {
@@ -97,6 +97,4 @@ public class StudentController {
         Program program = cohort.getProgram();
         return courseRepository.findByProgram(program);
     }
-
-
 }

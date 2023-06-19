@@ -1,7 +1,7 @@
 package com.project1CATNIP.CATNIP.model;
 
 /**
- * Authors: Saskia Tadema <s.tadema@st.hanze.nl, Marcel Tubben <mhg.tubben@st.hanze.nl>>
+ * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
  * A Cohort is an instance of a Course; it is defined by a number and a Course
  */
 
@@ -15,23 +15,27 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"number", "program_program_id"})
-})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"number", "program_program_id"})})
 public class Cohort {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     Long cohortId;
+
     @Column (nullable = false)
     private Integer number;
-    @ManyToOne
-    private Program program;
+
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+
+    @ManyToOne
+    private Program program;
+
     @OneToMany(mappedBy = "cohort")
     private List<Student> students;
 
