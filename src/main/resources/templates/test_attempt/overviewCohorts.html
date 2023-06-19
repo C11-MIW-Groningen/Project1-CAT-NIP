@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Put a title here</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+
+  <table class="table">
+    <tr>
+      <th>Cohort number</th>
+      <th>Program</th>
+    </tr>
+    <tr th:each="cohort : ${allCohorts}">
+      <td>
+        <a th:href="@{/grading/{cohortId}(cohortId=${cohort.getCohortId})}">
+          <span th:text="${cohort.getNumber()}"></span>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/cohort/details/{cohortId}(cohortId=${cohort.getCohortId()})}">
+          <span  th:text="${cohort.getProgram().getNameProgram()}"></span>
+        </a>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>
+
+

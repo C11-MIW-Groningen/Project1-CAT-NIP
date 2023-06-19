@@ -14,13 +14,14 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class Course {
-
     @Id
     @GeneratedValue
     private Long courseId;
 
     @Column (nullable = false)
     private String courseName;
+
+    private String description;
 
     @ManyToOne
     private Teacher teacher;
