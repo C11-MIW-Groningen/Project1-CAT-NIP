@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>All cohorts</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+
+<div class="container">
+  <h1>An overview of active cohorts</h1>
+
+  <table class="table">
+    <tr>
+      <th>Cohort</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr th:each="cohort : ${allCohorts}">
+      <td>
+        <a th:href="@{/cohort/details/{cohortId}(cohortId=${cohort.getCohortId()})}"
+           th:text="${cohort.getDisplayCohort()}">
+        </a>
+      </td>
+      <td th:text="${cohort.getStartDate()}"></td>
+      <td th:text="${cohort.getEndDate()}"></td>
+      <td><a th:href="@{/cohort/edit/{cohortId}(cohortId=${cohort.cohortId})}">
+        <img src="/images/file-pen-solid.svg" alt="edit">
+      </a></td>
+      <td><a th:href="@{/cohort/delete/{cohortId}(cohortId=${cohort.cohortId})}">
+        <img src="/images/trash-can-regular.svg" alt="delete">
+      </a></td>
+    </tr>
+  </table>
+
+  <div>
+    <a th:href="@{/cohort/add}"><img src="/images/plus-solid.svg" alt="add" style="width: 20px">
+      <span>Add a new cohort</span></a>
+  </div>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ package com.project1CATNIP.CATNIP.controller;
 import com.project1CATNIP.CATNIP.model.Cohort;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
+import com.project1CATNIP.CATNIP.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +26,13 @@ public class CohortController {
 
         private final ProgramRepository programRepository;
 
+        private final StudentRepository studentRepository;
+
         @GetMapping({"", "/", "/all"})
         private String showAllCohorts(Model model) {
             model.addAttribute("allCohorts", cohortRepository.findAll());
 
-            return "cohortOverview";
+            return "/cohort/cohortOverview";
         }
 
         @GetMapping("/add")
@@ -37,7 +40,7 @@ public class CohortController {
             model.addAttribute("cohort", new Cohort());
             model.addAttribute("allPrograms", programRepository.findAll());
 
-            return "cohortAddForm";
+            return "/cohort/cohortAddForm";
         }
 
         @PostMapping("/add")
@@ -70,7 +73,7 @@ public class CohortController {
             if (optionalCohort.isPresent()) {
                 model.addAttribute("cohort", optionalCohort.get());
                 model.addAttribute("allPrograms", programRepository.findAll());
-                return "cohortAddForm";
+                return "/cohort/cohortAddForm";
             }
 
             return "redirect:/cohort/all";
@@ -82,7 +85,8 @@ public class CohortController {
 
             if (optionalCohort.isPresent()) {
                 model.addAttribute("cohort", optionalCohort.get());
-                return "cohortDetails";
+                model.addAttribute("allStudents", studentRepository.findAll());
+                return "/cohort/cohortDetails";
             }
 
             return "redirect:/cohort/all";

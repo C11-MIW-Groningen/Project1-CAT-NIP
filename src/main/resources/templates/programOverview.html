@@ -25,8 +25,12 @@
       <td th:text="${program.getNameProgram()}"></td>
       <td th:text="${program.getNumberOfCohorts()}"></td>
       <td><a th:href="@{/program/details/{programId}(programId=${program.getProgramId()})}">Details</a></td>
-      <td><a th:href="@{/program/edit/{programId}(programId=${program.getProgramId()})}">Edit</a></td>
-      <td><a th:href="@{/program/delete/{programId}(programId=${program.getProgramId()})}">Delete</a></td>
+      <td><a th:href="@{/program/edit/{programId}(programId=${program.getProgramId()})}">
+        <img src="/images/file-pen-solid.svg" alt="edit">
+      </a></td>
+      <td><a th:href="@{/program/delete/{programId}(programId=${program.getProgramId()})}">
+        <img src="/images/trash-can-regular.svg" alt="delete">
+      </a></td>
     </tr>
   </table>
 </div>
