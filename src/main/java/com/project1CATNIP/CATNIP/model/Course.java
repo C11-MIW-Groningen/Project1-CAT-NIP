@@ -21,6 +21,8 @@ public class Course {
     @Column (nullable = false)
     private String courseName;
 
+    private String description;
+
     @ManyToOne
     private Teacher teacher;
 
