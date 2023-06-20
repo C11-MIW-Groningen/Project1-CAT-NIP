@@ -24,21 +24,48 @@
       <table class="table">
         <tr>
           <th>Tests</th>
+          <th></th>
+          <th></th>
         </tr>
         <tr th:each="test : ${testsFromCourse}">
           <td th:text="${test.getNameTest()}"></td>
+          <td><a th:href="@{/test/edit/{testId}(testId=${test.testId})}">
+            <div th:replace="fragments/icons :: editIcon"></div>
+          </a></td>
+          <td><a th:href="@{/test/delete/{testId}(testId=${test.testId})}">
+            <div th:replace="fragments/icons :: deleteIcon"></div>
+          </a></td>
         </tr>
       </table>
+
+      <div>
+        <a th:href="@{/test/add}"><img src="/images/plus-solid.svg" alt="add" style="width: 20px">
+          <span>Add new Test</span></a>
+      </div>
     </div>
+
     <div class="col-md-6">
       <table class="table">
         <tr>
           <th>Assignments</th>
+          <th></th>
+          <th></th>
         </tr>
         <tr th:each="assignment : ${assignmentsFromCourse}">
           <td th:text="${assignment.getDisplayAssignment()}"></td>
+          <td><a th:href="@{/assignment/edit/{assignmentId}(assignmentId=${assignment.assignmentId})}">
+            <div th:replace="fragments/icons :: editIcon"></div>
+          </a></td>
+          <td><a th:href="@{/assignment/delete/{assignmentId}(assignmentId=${assignment.assignmentId})}">
+            <div th:replace="fragments/icons :: deleteIcon"></div>
+          </a></td>
         </tr>
       </table>
+
+      <div>
+        <a th:href="@{/assignment/add}"><img src="/images/plus-solid.svg" alt="add" style="width: 20px">
+          <span>Add new Assignment</span></a>
+      </div>
     </div>
   </div>
 

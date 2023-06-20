@@ -33,7 +33,7 @@
                 <select class="form-control" id="teacher" th:field="*{teacher}">
                     <option th:each="teacher : ${allTeachers}"
                             th:value="${teacher.getTeacherId}"
-                            th:text="${teacher.displayTeacher}">
+                            th:text="${teacher.getDisplayName()}">
                     </option>
                 </select>
             </div>

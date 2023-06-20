@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-  <title>Put a title here</title>
+  <title>Cohort Details</title>
 </head>
 <body>
 
@@ -38,22 +38,30 @@
           <th>Email</th>
         </tr>
         <tr th:each="student : ${cohort.getStudents()}">
-          <td th:text="${student.getFirstName()}"></td>
+          <td th:text="${student.getDisplayName()}"></td>
           <td th:text="${student.getEmailAddressStudent()}"></td>
         </tr>
         <tr>
           <td><img src="/images/person-circle-plus-solid.svg" alt="add" style="width: 20px">
-            Voeg student toe aan cohort</td>
+            Add student to this cohort</td>
           <td>
-<!--              <label for="student">Select Student(s)</label>-->
-<!--              <select  id="student" class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"-->
-<!--                       th:field="*{cohort.getStudents()}" multiple>-->
-<!--                <option class="dropdown-item rounded-2"-->
-<!--                        th:each="student: ${allStudents}"-->
-<!--                        th:value="${student.getStudentId()}"-->
-<!--                        th:text="${student.getDisplayName()}">-->
-<!--                </option>-->
-<!--              </select>-->
+            <form th:action="@{/cohort/details/{cohortId}/addStudent/{studentId}}" method="post"
+                  th:object="${cohort}">
+              <input type="hidden" th:field="*{cohortId}" />
+              <label>
+                <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+                        th:field="*{students}">
+                  <option class="dropdown-item rounded-2"
+                          th:each="student: ${allStudents}"
+                          th:value="${student.getStudentId()}"
+                          th:text="${student.getDisplayName()}">
+                  </option>
+                </select>
+              </label>
+              <div class="form-group form-button">
+                <button type="submit" class="btn btn-danger">Save</button>
+              </div>
+            </form>
           </td>
         </tr>
       </table>

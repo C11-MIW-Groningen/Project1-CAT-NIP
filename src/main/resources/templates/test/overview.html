@@ -25,8 +25,12 @@
       <td th:text="${test.getNameTest()}"></td>
       <td th:text="${test.getCourse().getCourseName()}"></td>
       <td th:text="${test.getCourse().getProgram().getNameProgram()}"></td>
-      <td><a th:href="@{/test/edit/{testId}(testId=${test.testId})}">Edit</a></td>
-      <td><a th:href="@{/test/delete/{testId}(testId=${test.testId})}">Delete</a></td>
+      <td><a th:href="@{/test/edit/{testId}(testId=${test.testId})}">
+        <img src="/images/file-pen-solid.svg" alt="edit">
+      </a></td>
+      <td><a th:href="@{/test/delete/{testId}(testId=${test.testId})}">
+        <img src="/images/trash-can-regular.svg" alt="delete">
+      </a></td>
     </tr>
   </table>
 </div>

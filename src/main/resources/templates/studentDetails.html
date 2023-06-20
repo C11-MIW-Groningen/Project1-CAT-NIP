@@ -19,7 +19,8 @@
     </tr>
     <tr th:each="course : ${courses}">
       <td th:text="${course.getCourseName()}"></td>
-      <td><a th:href="@{/testattempts/{studentId}/{courseId}(courseId=${course.getCourseId()}, studentId=${student.getStudentId()})}">Results</a></td>
+      <td><a th:href="@{/testattempts/{studentId}/{courseId}(courseId=${course.getCourseId()},
+      studentId=${student.getStudentId()})}">Results</a></td>
       <td>Grade</td>
     </tr>
   </table>

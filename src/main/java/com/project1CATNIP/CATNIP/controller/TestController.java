@@ -1,6 +1,7 @@
 package com.project1CATNIP.CATNIP.controller;
 
 import com.project1CATNIP.CATNIP.model.Test;
+import com.project1CATNIP.CATNIP.model.TestItem;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,7 +36,8 @@ public class TestController {
 
     @GetMapping("/add")
     private String addTestForm(Model model) {
-        model.addAttribute("test", new Test());
+        Test test = new Test();
+        model.addAttribute("test", test);
         model.addAttribute("allCourses", courseRepository.findAll());
 
         return "/test/addForm";

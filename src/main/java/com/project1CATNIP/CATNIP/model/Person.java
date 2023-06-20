@@ -18,19 +18,19 @@ public abstract class Person {
     @Column (nullable = false)
     String firstName;
 
-    String infixName;
+    String infixName = "";
 
     @Column (nullable = false)
     String lastName;
 
     public String getDisplayName() {
-        StringBuilder fullName = new StringBuilder();
-        fullName.append(firstName);
-        if (!infixName.isEmpty()) {
-            fullName.append(" ").append(infixName);
-        }
-        fullName.append(" ").append(lastName);
+        String displayName = firstName;
 
-        return fullName.toString();
+        if (infixName != null && !infixName.equals("")) {
+            displayName += " " + infixName;
+        }
+
+        displayName += " "+ lastName;
+        return displayName;
     }
 }
