@@ -26,14 +26,14 @@ public class TeacherController {
     private String showAllTeachers(Model model) {
         model.addAttribute("allTeachers", teacherRepository.findAll());
 
-        return "teacherOverview";
+        return "/teacher/teacherOverview";
     }
 
     @GetMapping("/add")
     private String addTeacherForm(Model model) {
         model.addAttribute("teacher", new Teacher());
 
-        return "teacherAddForm";
+        return "/teacher/teacherAddForm";
     }
 
     @PostMapping("/add")
@@ -65,7 +65,7 @@ public class TeacherController {
 
         if (optionalTeacher.isPresent()) {
             model.addAttribute("teacher", optionalTeacher.get());
-            return "teacherAddForm";
+            return "/teacher/teacherAddForm";
         }
 
         return "redirect:/teacher/all";
@@ -77,7 +77,7 @@ public class TeacherController {
 
         if (optionalTeacher.isPresent()) {
             model.addAttribute("teacher", optionalTeacher.get());
-            return "teacherDetails";
+            return "/teacher/teacherDetails";
         }
 
         return "redirect:/teacher/all";

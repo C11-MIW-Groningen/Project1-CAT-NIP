@@ -28,14 +28,14 @@ public class ProgramController {
     private String showAllPrograms(Model model) {
         model.addAttribute("allPrograms", programRepository.findAll());
 
-        return "programOverview";
+        return "/program/programOverview";
     }
 
     @GetMapping("/program/add")
     private String addProgramForm(Model model) {
         model.addAttribute("program", new Program());
 
-        return "programAddForm";
+        return "/program/programAddForm";
     }
 
     @PostMapping("/program/add")
@@ -65,7 +65,7 @@ public class ProgramController {
 
         if (optionalProgram.isPresent()) {
             model.addAttribute("program", optionalProgram.get());
-            return "programAddForm";
+            return "/program/programAddForm";
         }
 
         return "redirect:/program/all";
@@ -79,7 +79,7 @@ public class ProgramController {
             Program program = optionalProgram.get();
             model.addAttribute("program", program);
             model.addAttribute("coursesFromProgram", courseRepository.findByProgram(program));
-            return "programDetails";
+            return "/program/programDetails";
         }
 
         return "redirect:/program/all";

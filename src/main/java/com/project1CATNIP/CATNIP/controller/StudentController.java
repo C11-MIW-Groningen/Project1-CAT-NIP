@@ -31,7 +31,7 @@ public class StudentController {
     private String showAllStudents(Model model) {
         model.addAttribute("allStudents", studentRepository.findAll());
 
-        return "studentOverview";
+        return "/student/studentOverview";
     }
 
     @GetMapping("/add")
@@ -39,7 +39,7 @@ public class StudentController {
         model.addAttribute("student", new Student());
         model.addAttribute("allCohorts", cohortRepository.findAll());
 
-        return "studentAddForm";
+        return "/student/studentAddForm";
     }
 
     @PostMapping("/add")

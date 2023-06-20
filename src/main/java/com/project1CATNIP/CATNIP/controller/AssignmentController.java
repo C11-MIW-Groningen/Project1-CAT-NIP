@@ -29,7 +29,7 @@ public class AssignmentController {
     private String showAllAssignments(Model model) {
         model.addAttribute("allAssignments", assignmentRepository.findAll());
 
-        return "assignmentOverview";
+        return "/assignment/assignmentOverview";
     }
 
     @GetMapping("/add")
@@ -37,7 +37,7 @@ public class AssignmentController {
         model.addAttribute("assignment", new Assignment());
         model.addAttribute("allCourses", courseRepository.findAll());
 
-        return "assignmentAddForm";
+        return "/assignment/assignmentAddForm";
     }
 
     @PostMapping("/add")
@@ -70,7 +70,7 @@ public class AssignmentController {
         if (optionalAssignment.isPresent()) {
             model.addAttribute("assignment", optionalAssignment.get());
             model.addAttribute("allCourses", courseRepository.findAll());
-            return "assignmentAddForm";
+            return "/assignment/assignmentAddForm";
         }
 
         return "redirect:/assignment/all";
