@@ -5,6 +5,7 @@ package com.project1CATNIP.CATNIP.controller;
  * Handles all cohort interactions.
  */
 
+import com.project1CATNIP.CATNIP.dto.CohortEnrollmentDTO;
 import com.project1CATNIP.CATNIP.model.Cohort;
 import com.project1CATNIP.CATNIP.model.Student;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
@@ -16,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,43 +87,30 @@ public class CohortController {
 
             if (optionalCohort.isPresent()) {
                 model.addAttribute("cohort", optionalCohort.get());
-                model.addAttribute("allStudents", studentRepository.findAll());
+                List<Student> studentsWithoutCohort = studentRepository.findAll();
+                studentsWithoutCohort.removeAll(optionalCohort.get().getStudents());
+                model.addAttribute("allStudents", studentsWithoutCohort);
+                model.addAttribute("enrollment",
+                        CohortEnrollmentDTO.builder().cohort(optionalCohort.get()).build());
                 return "/cohort/cohortDetails";
             }
 
             return "redirect:/cohort/all";
         }
 
-        //TODO met 1 PathVariable CohortStudent student toevoegen aan cohort
-//        @GetMapping("/details/{cohortId}/addStudent/{studentId}")
-//        private String addStudentToCohort(@PathVariable("studentId") Long studentId,
-//                                          @PathVariable("cohortId") Long cohortId,
-//                                          Model model) {
-//            Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
-//            Optional<Student> optionalStudent = studentRepository.findById(studentId);
-//
-//            if (optionalStudent.isPresent() && optionalCohort.isPresent()) {
-//                Cohort cohort = optionalCohort.get();
-//                Student student = optionalStudent.get();
-//                model.addAttribute("cohort", cohort);
-//                model.addAttribute("student", student);
-//            }
-//
-//            return "redirect:/cohort/all";
-//        }
-//
-//        @PostMapping("/details/{cohortId}/addStudent/{studentId}")
-//        private String addStudentToCohort(@ModelAttribute("cohort") Cohort cohortToBeSaved,
-//                                          @ModelAttribute("student") Student studentToAdd,
-//                                          BindingResult result) {
-//
-//            if (!result.hasErrors()) {
-//                cohortToBeSaved.addStudent(studentToAdd);
-//                studentToAdd.setCohort(cohortToBeSaved);
-//                cohortRepository.save(cohortToBeSaved);
-//                studentRepository.save(studentToAdd);
-//            }
-//
-//            return "redirect:/cohort/all";
-//        }
+        @PostMapping("/addStudent")
+        private String addStudentToCohort(@ModelAttribute("enrollment") CohortEnrollmentDTO cohortEnrollmentDTO,
+                                          BindingResult result) {
+            if (result.hasErrors()) {
+                return "redirect:/cohort/all";
+            }
+
+            cohortEnrollmentDTO.getCohort().addStudent(cohortEnrollmentDTO.getStudent());
+            cohortRepository.save(cohortEnrollmentDTO.getCohort());
+
+            cohortEnrollmentDTO.getStudent().setCohort(cohortEnrollmentDTO.getCohort());
+            studentRepository.save(cohortEnrollmentDTO.getStudent());
+
+            return "redirect:/cohort/details/" + cohortEnrollmentDTO.getCohort().getCohortId();
+        }
 }

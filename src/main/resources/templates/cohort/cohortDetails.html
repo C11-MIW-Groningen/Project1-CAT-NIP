@@ -42,22 +42,24 @@
           <td th:text="${student.getEmailAddressStudent()}"></td>
         </tr>
         <tr>
-          <td><img src="/images/person-circle-plus-solid.svg" alt="add" style="width: 20px">
-            Add student to this cohort</td>
           <td>
-            <form th:action="@{/cohort/details/{cohortId}/addStudent/{studentId}}" method="post"
-                  th:object="${cohort}">
-              <input type="hidden" th:field="*{cohortId}" />
-              <label>
-                <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
-                        th:field="*{students}">
+            <img src="/images/person-circle-plus-solid.svg" alt="add" style="width: 20px">
+            <form th:action="@{/cohort/addStudent}" method="post"
+                  th:object="${enrollment}">
+              <input type="hidden" th:field="*{cohort}" />
+
+              <div class="form-group">
+                <label for="student">Add student to cohort</label>
+                <select id="student" class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+                        th:field="*{student}">
                   <option class="dropdown-item rounded-2"
                           th:each="student: ${allStudents}"
-                          th:value="${student.getStudentId()}"
-                          th:text="${student.getDisplayName()}">
+                          th:value="${student.studentId}"
+                          th:text="${student.displayName}">
                   </option>
                 </select>
-              </label>
+              </div>
+
               <div class="form-group form-button">
                 <button type="submit" class="btn btn-danger">Save</button>
               </div>

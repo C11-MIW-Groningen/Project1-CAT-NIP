@@ -5,18 +5,21 @@ package com.project1CATNIP.CATNIP.model;
  * A Cohort is an instance of a Course; it is defined by a number and a Course
  */
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter @Setter
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"number", "program_program_id"})})
+@Builder
+@AllArgsConstructor @NoArgsConstructor
 public class Cohort {
 
     @Id
@@ -40,7 +43,7 @@ public class Cohort {
     private Program program;
 
     @OneToMany(mappedBy = "cohort", cascade = CascadeType.PERSIST)
-    private List<Student> students = new ArrayList<>();
+    @Builder.Default private Set<Student> students = new HashSet<>();
 
     public String getDisplayCohort() {
         return String.format("%s %d", program.getNameProgram(), number);
