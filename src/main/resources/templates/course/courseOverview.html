@@ -10,8 +10,6 @@
 <div class="container">
   <h1>An overview of all courses</h1>
 
-  <a th:href="@{/course/add}">Add a new course</a>
-
   <table class="table">
     <tr>
       <th>Course</th>
@@ -26,10 +24,20 @@
       <td th:text="${course.getProgram().getNameProgram()}"></td>
       <td th:text="${course.teacher.getDisplayName()}"></td>
       <td><a th:href="@{/course/details/{courseId}(courseId=${course.courseId})}">Details</a></td>
-      <td><a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">Edit</a></td>
-      <td><a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">Delete</a></td>
+      <td><a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">
+        <img src="/images/file-pen-solid.svg" alt="edit">
+      </a></td>
+      <td><a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">
+        <img src="/images/trash-can-regular.svg" alt="delete">
+      </a></td>
     </tr>
   </table>
+
+  <div>
+    <a th:href="@{/course/add}"><img src="/images/plus-solid.svg" alt="add" style="width: 20px">
+      <span>Add a new course</span></a>
+  </div>
+
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

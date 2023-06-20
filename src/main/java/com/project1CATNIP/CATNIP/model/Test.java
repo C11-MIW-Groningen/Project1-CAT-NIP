@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
- * Each course has one test (for now): portfolio or exam.
+ * Each course can have multiple tests: portfolio or exam.
  */
 
 @Entity
@@ -26,6 +27,5 @@ public class Test {
     private Course course;
 
     @OneToMany
-    private List<TestItem> testItem;
-
+    private List<TestItem> testItem = new ArrayList<>();
 }

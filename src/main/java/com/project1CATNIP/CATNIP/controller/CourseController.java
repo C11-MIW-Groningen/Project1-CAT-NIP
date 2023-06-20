@@ -6,8 +6,6 @@ package com.project1CATNIP.CATNIP.controller;
  */
 
 import com.project1CATNIP.CATNIP.model.Course;
-import com.project1CATNIP.CATNIP.model.Student;
-import com.project1CATNIP.CATNIP.model.Teacher;
 import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -39,7 +37,7 @@ public class CourseController {
     private String showAllCourses(Model model) {
         model.addAttribute("allCourses", courseRepository.findAll());
 
-        return "courseOverview";
+        return "/course/courseOverview";
     }
 
     @GetMapping("/add")
@@ -48,7 +46,7 @@ public class CourseController {
         model.addAttribute("allPrograms", programRepository.findAll());
         model.addAttribute("allTeachers", teacherRepository.findAll());
 
-        return "courseAddForm";
+        return "/course/courseAddForm";
     }
 
     @PostMapping("/add")
@@ -78,7 +76,7 @@ public class CourseController {
             model.addAttribute("course", optionalCourse.get());
             model.addAttribute("allPrograms", programRepository.findAll());
             model.addAttribute("allTeachers", teacherRepository.findAll());
-            return "courseAddForm";
+            return "/course/courseAddForm";
         }
 
         return redirectOverview;
@@ -93,7 +91,7 @@ public class CourseController {
             model.addAttribute("course", optionalCourse.get());
             model.addAttribute("testsFromCourse", testRepository.findByCourse(course));
             model.addAttribute("assignmentsFromCourse", assignmentRepository.findByCourse(course));
-            return "courseDetails";
+            return "/course/courseDetails";
         }
 
         return "redirect:/course/all";

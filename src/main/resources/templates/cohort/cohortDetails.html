@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Cohort Details</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+  <h1 th:text="${cohort.getDisplayCohort()}"></h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      Description of Cohort <span th:text="${cohort.getNumber()}"></span>.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <tr>
+          <th>Courses</th>
+        </tr>
+        <tr th:each="course : ${cohort.getProgram().getCourses()}">
+          <td>
+            <a th:href="@{/course/details/{courseId}(courseId=${course.getCourseId()})}"
+               th:text="${course.getCourseName()}">
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table">
+        <tr>
+          <th>Students</th>
+          <th>Email</th>
+        </tr>
+        <tr th:each="student : ${cohort.getStudents()}">
+          <td th:text="${student.getDisplayName()}"></td>
+          <td th:text="${student.getEmailAddressStudent()}"></td>
+        </tr>
+        <tr>
+          <td><img src="/images/person-circle-plus-solid.svg" alt="add" style="width: 20px">
+            Add student to this cohort</td>
+          <td>
+            <form th:action="@{/cohort/details/{cohortId}/addStudent/{studentId}}" method="post"
+                  th:object="${cohort}">
+              <input type="hidden" th:field="*{cohortId}" />
+              <label>
+                <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+                        th:field="*{students}">
+                  <option class="dropdown-item rounded-2"
+                          th:each="student: ${allStudents}"
+                          th:value="${student.getStudentId()}"
+                          th:text="${student.getDisplayName()}">
+                  </option>
+                </select>
+              </label>
+              <div class="form-group form-button">
+                <button type="submit" class="btn btn-danger">Save</button>
+              </div>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>

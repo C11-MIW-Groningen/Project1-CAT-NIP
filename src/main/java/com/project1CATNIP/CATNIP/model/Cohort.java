@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,10 +39,18 @@ public class Cohort {
     @ManyToOne
     private Program program;
 
-    @OneToMany(mappedBy = "cohort")
-    private List<Student> students;
+    @OneToMany(mappedBy = "cohort", cascade = CascadeType.PERSIST)
+    private List<Student> students = new ArrayList<>();
 
     public String getDisplayCohort() {
         return String.format("%s %d", program.getNameProgram(), number);
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
     }
 }

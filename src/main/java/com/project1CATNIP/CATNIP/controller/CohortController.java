@@ -6,14 +6,18 @@ package com.project1CATNIP.CATNIP.controller;
  */
 
 import com.project1CATNIP.CATNIP.model.Cohort;
+import com.project1CATNIP.CATNIP.model.Student;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
+import com.project1CATNIP.CATNIP.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,11 +29,13 @@ public class CohortController {
 
         private final ProgramRepository programRepository;
 
+        private final StudentRepository studentRepository;
+
         @GetMapping({"", "/", "/all"})
         private String showAllCohorts(Model model) {
             model.addAttribute("allCohorts", cohortRepository.findAll());
 
-            return "cohortOverview";
+            return "/cohort/cohortOverview";
         }
 
         @GetMapping("/add")
@@ -37,7 +43,7 @@ public class CohortController {
             model.addAttribute("cohort", new Cohort());
             model.addAttribute("allPrograms", programRepository.findAll());
 
-            return "cohortAddForm";
+            return "/cohort/cohortAddForm";
         }
 
         @PostMapping("/add")
@@ -47,7 +53,7 @@ public class CohortController {
             }
 
             return "redirect:/cohort/add";
-            //TODO vinkje om keuze te geven om direct naar overview te gaan
+            //TODO Vinkje om keuze te geven om direct naar overview te gaan
         }
 
         @GetMapping("/delete/{cohortId}")
@@ -69,7 +75,7 @@ public class CohortController {
             if (optionalCohort.isPresent()) {
                 model.addAttribute("cohort", optionalCohort.get());
                 model.addAttribute("allPrograms", programRepository.findAll());
-                return "cohortAddForm";
+                return "/cohort/cohortAddForm";
             }
 
             return "redirect:/cohort/all";
@@ -81,9 +87,43 @@ public class CohortController {
 
             if (optionalCohort.isPresent()) {
                 model.addAttribute("cohort", optionalCohort.get());
-                return "cohortDetails";
+                model.addAttribute("allStudents", studentRepository.findAll());
+                return "/cohort/cohortDetails";
             }
 
             return "redirect:/cohort/all";
         }
+
+        //TODO met 1 PathVariable CohortStudent student toevoegen aan cohort
+//        @GetMapping("/details/{cohortId}/addStudent/{studentId}")
+//        private String addStudentToCohort(@PathVariable("studentId") Long studentId,
+//                                          @PathVariable("cohortId") Long cohortId,
+//                                          Model model) {
+//            Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
+//            Optional<Student> optionalStudent = studentRepository.findById(studentId);
+//
+//            if (optionalStudent.isPresent() && optionalCohort.isPresent()) {
+//                Cohort cohort = optionalCohort.get();
+//                Student student = optionalStudent.get();
+//                model.addAttribute("cohort", cohort);
+//                model.addAttribute("student", student);
+//            }
+//
+//            return "redirect:/cohort/all";
+//        }
+//
+//        @PostMapping("/details/{cohortId}/addStudent/{studentId}")
+//        private String addStudentToCohort(@ModelAttribute("cohort") Cohort cohortToBeSaved,
+//                                          @ModelAttribute("student") Student studentToAdd,
+//                                          BindingResult result) {
+//
+//            if (!result.hasErrors()) {
+//                cohortToBeSaved.addStudent(studentToAdd);
+//                studentToAdd.setCohort(cohortToBeSaved);
+//                cohortRepository.save(cohortToBeSaved);
+//                studentRepository.save(studentToAdd);
+//            }
+//
+//            return "redirect:/cohort/all";
+//        }
 }
