@@ -5,22 +5,15 @@ package com.project1CATNIP.CATNIP.controller;
  *The Purpose
  */
 
-import com.project1CATNIP.CATNIP.model.Cohort;
-import com.project1CATNIP.CATNIP.model.Course;
-import com.project1CATNIP.CATNIP.model.Student;
-import com.project1CATNIP.CATNIP.model.TestAttempt;
-import com.project1CATNIP.CATNIP.repository.CohortRepository;
-import com.project1CATNIP.CATNIP.repository.CourseRepository;
-import com.project1CATNIP.CATNIP.repository.StudentRepository;
-import com.project1CATNIP.CATNIP.repository.TestAttemptRepository;
+import com.project1CATNIP.CATNIP.model.*;
+import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,6 +26,8 @@ public class TestAttemptController {
     private final CourseRepository courseRepository;
 
     private final CohortRepository cohortRepository;
+
+    private final TestRepository testRepository;
 
     @GetMapping("/grading")
     private String showCohorts(Model model) {
@@ -71,13 +66,62 @@ public class TestAttemptController {
         Course course = optionalCourse.get();
 
         List<Student> listStudents = studentRepository.findStudentsByCohort(cohort);
-        List<TestAttempt> listTestAttempts = testAttemptRepository
-                .findTestAttemptsByStudentInAndTestIn(listStudents, course.getTests());
 
-        model.addAttribute("allTestAttempts", listTestAttempts);
+        model.addAttribute("allTestAttemptsResults", getAllHighestTestAttempts(listStudents, course));
         model.addAttribute("thisCourse", course);
+        model.addAttribute("thisCohort", cohort);
 
         return "/test_attempt/overviewTestAttemptsPerCourse";
+    }
+
+    //Todo: voor vrijdag 23-06 gebruiken of anders deleten!
+//    @GetMapping("/grading/add/{cohortId}/{courseId}/")
+//    private String showAddGradingForm(
+//            @PathVariable("courseId") Long courseId,
+//            @PathVariable("cohortId") Long cohortId,
+//            Model model) {
+//        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+//        Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
+//
+//        if (optionalCourse.isEmpty() || optionalCohort.isEmpty()) {
+//            return "redirect:/grading/";
+//        }
+//
+//        Cohort cohort = optionalCohort.get();
+//        Course course = optionalCourse.get();
+//        List<Student> studentList = studentRepository.findStudentsByCohort(cohort);
+//
+//        model.addAttribute("studentsForCohort", studentList);
+//        model.addAttribute("thisCourse", course);
+//        model.addAttribute("testsForCourse", testRepository.findByCourse(course));
+//
+//        return "/test_attempt/selectAddForm";
+//    }
+
+    private TestAttempt getHighestTestAttempt(Student student, Course course) {
+        List<TestAttempt> testAttempts = testAttemptRepository.
+                findTestAttemptsByStudentAndTestIn(student, course.getTests());
+
+        TestAttempt highestTestAttempt = null;
+        double highestResult = 0;
+
+        for (TestAttempt testAttempt : testAttempts) {
+            if (testAttempt.getAttemptResult() > highestResult) {
+                highestTestAttempt = testAttempt;
+                highestResult = testAttempt.getAttemptResult();
+            }
+        }
+
+        return highestTestAttempt;
+    }
+
+    private List<TestAttempt> getAllHighestTestAttempts(List<Student> studentList, Course course) {
+        List<TestAttempt> allHighestTestAttempts = new ArrayList<>();
+        for (Student student : studentList) {
+            allHighestTestAttempts.add(getHighestTestAttempt(student, course));
+        }
+
+        return allHighestTestAttempts;
     }
 
 }

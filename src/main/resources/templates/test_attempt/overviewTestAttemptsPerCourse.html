@@ -16,18 +16,14 @@
       <th>Date</th>
       <th>Test</th>
       <th>Result</th>
-      <th></th>
     </tr>
-    <tr th:each="attempt : ${allTestAttempts}">
-      <td th:text="${attempt.getStudent().getDisplayName()}"></td>
+    <tr th:each="attempt : ${allTestAttemptsResults}">
+      <td th:text="${attempt.getStudent().getLastName()}"></td>
       <td th:text="${attempt.getAttemptDate()}"></td>
       <td th:text="${attempt.getTest().getNameTest()}"></td>
       <td th:text="${attempt.getAttemptResult()}"></td>
-      <td></td>
-      <td></td>
     </tr>
   </table>
-
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

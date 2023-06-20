@@ -21,10 +21,10 @@
       <th>Course</th>
       <th>Teacher</th>
     </tr>
-<!--    <tr th:each="cohort : ${}">-->
-<!--      <td th:text="${course.getCourseName()}"></td>-->
-<!--      <td><a th:href="@{/program/course/{courseId}(courseId=${course.getCourseId()})}"></a>Results</td>-->
-<!--    </tr>-->
+    <tr th:each="course : ${cohort}">
+      <td th:text="${course.getCourseName()}"></td>
+      <td th:text="${course.getTeacher().getDisplayName()}"></td>
+    </tr>
   </table>
 </div>
 

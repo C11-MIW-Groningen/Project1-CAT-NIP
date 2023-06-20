@@ -125,6 +125,21 @@ public class SeedController {
         test2student2attempt2.setAttemptResult(8.7);
         testAttemptRepository.save(test2student2attempt2);
 
+
+        TestAttempt test1student2attempt1 = new TestAttempt();
+        test1student2attempt1.setAttemptDate(LocalDate.of(2024, 2, 3));
+        test1student2attempt1.setStudent(student2);
+        test1student2attempt1.setTest(test1);
+        test1student2attempt1.setAttemptResult(6.1);
+        testAttemptRepository.save(test1student2attempt1);
+
+        TestAttempt test1student2attempt2 = new TestAttempt();
+        test1student2attempt2.setAttemptDate(LocalDate.of(2024, 3, 3));
+        test1student2attempt2.setStudent(student2);
+        test1student2attempt2.setTest(test2);
+        test1student2attempt2.setAttemptResult(9.2);
+        testAttemptRepository.save(test1student2attempt2);
+
         Assignment assignment1 = new Assignment();
         assignment1.setAssignmentName("Meetkunde");
         assignment1.setDayPart(1);
