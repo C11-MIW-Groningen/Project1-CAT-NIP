@@ -24,11 +24,17 @@
       <table class="table">
         <tr>
           <th>Tests</th>
+          <th>Add Testitem(s)</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
         <tr th:each="test : ${testsFromCourse}">
           <td th:text="${test.getNameTest()}"></td>
+          <td>
+            <a th:href="@{/test/{testId}/addtestitems(testId=${test.testId})}">
+              <img src="/images/file-circle-plus-solid.svg" alt="addItem" style="height: 18px">
+            </a>
+          </td>
           <td>
             <a th:href="@{/test/edit/{testId}(testId=${test.testId})}">
             <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">

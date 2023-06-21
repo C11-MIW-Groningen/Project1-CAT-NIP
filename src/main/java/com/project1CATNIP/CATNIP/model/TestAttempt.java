@@ -40,7 +40,7 @@ public class TestAttempt {
             sumPoints += testItemScore;
         }
 
-        List<TestItem> testItems = test.getTestItem();
+        List<TestItem> testItems = test.getTestItems();
         int testMaxScore = testItems.stream().mapToInt(TestItem::getMaxPoints).sum();
 
         attemptResult = sumPoints/ (double) testMaxScore;

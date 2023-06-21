@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Test Items</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+    <h1 th:text="${test.nameTest}"></h1>
+
+    <h4>Test items</h4>
+
+    <table class="table">
+        <tr>
+            <th>Test</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Max Points</th>
+            <th></th>
+        </tr>
+        <tr th:each="testitem: ${allTestItemsFromTest}">
+            <td th:text="${test.nameTest}"></td>
+            <td th:text="${testitem.itemNumberForTest}"></td>
+            <td th:text="${testitem.description}"></td>
+            <td th:text="${testitem.maxPoints}"></td>
+        </tr>
+        <tr>
+            <form th:action="@{/test/addtestitem}" method="post" th:object="${testitem}">
+                <input type="hidden" th:field="*{itemId}"/>
+                <td class="col">
+                    <label>
+                        <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+                                th:field="*{test}">
+                            <option class="dropdown-item rounded-2"
+                                    th:each="test: ${allTest}"
+                                    th:value="${test.testId}"
+                                    th:text="${test.nameTest}">
+                            </option>
+                        </select>
+                    </label>
+                </td>
+                <td class="col">
+                    <label>
+                        <input id="testItemNumber" type="number"
+                               class="form-control" th:field="*{itemNumberForTest}">
+                    </label>
+                </td>
+                <td class="col">
+                    <label>
+                        <input id="testItemDescription" type="text"
+                               class="form-control" th:field="*{description}">
+                    </label>
+                </td>
+                <td class="col">
+                    <label>
+                        <input id="testItemMaxPoints" type="number"
+                               class="form-control" th:field="*{maxPoints}">
+                    </label>
+                </td>
+                <td class="col"><button type="submit" class="btn btn-danger">Save</button></td>
+            </form>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>
