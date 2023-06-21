@@ -31,25 +31,35 @@
         </tr>
       </table>
     </div>
+
     <div class="col-md-6">
       <table class="table">
         <tr>
           <th>Students</th>
           <th>Email</th>
+          <th>Remove</th>
         </tr>
-        <tr th:each="student : ${cohort.getStudents()}">
+        <tr th:each="student : ${cohort.students}">
           <td th:text="${student.getDisplayName()}"></td>
           <td th:text="${student.getEmailAddressStudent()}"></td>
+          <td>
+            <a th:href="@{/cohort/remove/{cohortId}/{studentId}
+              (cohortId=${cohort.cohortId}, studentId=${student.studentId})}">
+              <img src="/images/person-circle-minus-solid.svg" alt="removePerson" style="height: 18px">
+            </a>
+          </td>
         </tr>
         <tr>
           <td>
-            <img src="/images/person-circle-plus-solid.svg" alt="add" style="width: 20px">
             <form th:action="@{/cohort/addStudent}" method="post"
                   th:object="${enrollment}">
               <input type="hidden" th:field="*{cohort}" />
 
               <div class="form-group">
-                <label for="student">Add student to cohort</label>
+                <label for="student">
+                  <img src="/images/person-circle-plus-solid.svg" alt="add" style="width: 18px">
+                  Add student to cohort
+                </label>
                 <select id="student" class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
                         th:field="*{student}">
                   <option class="dropdown-item rounded-2"

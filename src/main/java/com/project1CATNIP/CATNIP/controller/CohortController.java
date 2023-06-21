@@ -113,4 +113,23 @@ public class CohortController {
 
             return "redirect:/cohort/details/" + cohortEnrollmentDTO.getCohort().getCohortId();
         }
+
+        @GetMapping("/remove/{cohortId}/{studentId}")
+        private String removeStudentFromCohort(@PathVariable("cohortId") Long cohortId,
+                                               @PathVariable("studentId") Long studentId) {
+            Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
+            Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+            if (optionalCohort.isEmpty() || optionalStudent.isEmpty()) {
+                return "redirect:/cohort/all";
+            }
+
+            optionalCohort.get().removeStudent(optionalStudent.get());
+            cohortRepository.save(optionalCohort.get());
+
+            optionalStudent.get().setCohort(null);
+            studentRepository.save(optionalStudent.get());
+
+            return "redirect:/cohort/details/" + cohortId;
+        }
 }
