@@ -1,0 +1,16 @@
+<script th:fragment="dateCheck">
+    document.addEventListener('DOMContentLoaded', function() {
+        let startDateField = document.getElementById('startDate');
+        let endDateField = document.getElementById('endDate');
+
+        startDateField.addEventListener('change', function() {
+            let startDate = startDateField.value;
+            endDateField.setAttribute('min', startDate);
+        });
+
+        endDateField.addEventListener('change', function() {
+            let endDate = endDateField.value;
+            startDateField.setAttribute('max', endDate);
+        });
+    });
+</script>
