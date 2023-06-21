@@ -46,4 +46,5 @@ public class TestAttempt {
 
         attemptResult = sumPoints/ (double) testMaxScore;
     }
+
 }
