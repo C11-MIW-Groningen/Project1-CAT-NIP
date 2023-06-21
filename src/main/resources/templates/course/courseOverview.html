@@ -15,21 +15,27 @@
       <th>Course</th>
       <th>Part of program</th>
       <th>Teacher</th>
-      <th>Link to details</th>
       <th></th>
       <th></th>
     </tr>
     <tr th:each="course : ${allCourses}">
-      <td th:text="${course.getCourseName()}"></td>
+      <td>
+        <a th:href="@{/course/details/{courseId}(courseId=${course.courseId})}"
+           th:text="${course.getCourseName()}">
+        </a>
+      </td>
       <td th:text="${course.getProgram().getNameProgram()}"></td>
       <td th:text="${course.teacher.getDisplayName()}"></td>
-      <td><a th:href="@{/course/details/{courseId}(courseId=${course.courseId})}">Details</a></td>
-      <td><a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">
-        <img src="/images/file-pen-solid.svg" alt="edit">
-      </a></td>
-      <td><a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">
-        <img src="/images/trash-can-regular.svg" alt="delete">
-      </a></td>
+      <td>
+        <a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">
+        <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px;">
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">
+          <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
+        </a>
+      </td>
     </tr>
   </table>
 

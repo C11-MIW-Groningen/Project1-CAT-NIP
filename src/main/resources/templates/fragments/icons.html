@@ -6,13 +6,23 @@
 </head>
 <body>
 
-<div th:fragment="editIcon">
-  <img src="/images/file-pen-solid.svg" alt="edit" height="20px">
+<!-- Icon: add a new OBJECT -->
+<div>
+    <a th:href="@{#}"><img src="/images/plus-solid.svg" alt="add" style="width: 20px">
+        <span>Add a new ?</span></a>
 </div>
 
-<div th:fragment="deleteIcon">
-    <img src="/images/trash-can-regular.svg" alt="delete" height="20px">
-</div>
+<!-- Icon: edit something -->
+<img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
+
+<!-- Icon: delete something -->
+<img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
+
+<!-- Icon: add person -->
+<img src="/images/person-circle-plus-solid.svg" alt="add" style="width: 18px">
+
+<!-- Icon: delete person -->
+<img src="/images/person-circle-minus-solid.svg" alt="removePerson" style="height: 18px">
 
 </body>
 </html>

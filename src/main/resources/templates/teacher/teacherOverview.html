@@ -11,8 +11,6 @@
 <div class="container">
   <h1>An overview of all teachers</h1>
 
-  <a th:href="@{/teacher/add}">Add a new teacher</a>
-
   <table class="table">
     <tr>
       <th>First name</th>
@@ -23,18 +21,24 @@
       <th></th>
     </tr>
     <tr th:each="teacher : ${allTeachers}">
-      <td>
-        <a th:href="@{/teacher/details/{teacherId}(teacherId=${teacher.teacherId})}"
-             th:text="${teacher.getFirstName()}">
-        </a>
-      </td>
+      <td th:text="${teacher.getFirstName()}"></td>
       <td th:text="${teacher.getInfixName()}"></td>
       <td th:text="${teacher.getLastName()}"></td>
       <td th:text="${teacher.getEmailAddress()}"></td>
-      <td><a th:href="@{/teacher/edit/{teacherId}(teacherId=${teacher.teacherId})}">Edit</a></td>
-      <td><a th:href="@{/teacher/delete/{teacherId}(teacherId=${teacher.teacherId})}">Delete</a></td>
+      <td><a th:href="@{/teacher/edit/{teacherId}(teacherId=${teacher.teacherId})}">
+        <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
+      </a></td>
+      <td><a th:href="@{/teacher/delete/{teacherId}(teacherId=${teacher.teacherId})}">
+        <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
+      </a></td>
     </tr>
   </table>
+
+  <div>
+    <a th:href="@{/teacher/add}"><img src="/images/plus-solid.svg" alt="add" style="width: 20px">
+      <span>Add a new Teacher</span></a>
+  </div>
+
 </div>
 
 <div th:replace="fragments/general :: footer"></div>
