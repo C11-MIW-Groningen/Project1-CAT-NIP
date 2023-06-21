@@ -72,7 +72,7 @@ public class StudentController {
         if (optionalStudent.isPresent()) {
             model.addAttribute("student", optionalStudent.get());
             model.addAttribute("allCohorts", cohortRepository.findAll());
-            return "studentAddForm";
+            return "/student/studentAddForm";
         }
 
         return "redirect:/student/all";
@@ -86,7 +86,7 @@ public class StudentController {
             Student student = studentOptional.get();
             model.addAttribute("student", student);
             model.addAttribute("courses", getCoursesForStudent(student));
-            return "studentDetails";
+            return "/student/studentDetails";
         }
 
         return "redirect:/student/all";
@@ -97,5 +97,4 @@ public class StudentController {
         Program program = cohort.getProgram();
         return courseRepository.findByProgram(program);
     }
-
 }
