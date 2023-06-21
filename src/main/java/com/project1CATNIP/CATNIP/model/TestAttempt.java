@@ -31,7 +31,7 @@ public class TestAttempt {
     @ManyToOne
     private Test test;
 
-    @OneToOne
+    @ManyToOne
     private Student student;
 
     //Todo: wordt gebruikt om attemptResult vast te stellen. Als TestItems klaar is, dan kan deze worden gebruikt.

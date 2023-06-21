@@ -68,6 +68,7 @@ public class TestAttemptController {
         List<Student> listStudents = studentRepository.findStudentsByCohort(cohort);
         List<TestAttempt> listTestAttempts = getAllHighestTestAttempts(listStudents, course);
 
+        model.addAttribute("allStudentsForCohort", listStudents);
         model.addAttribute("allTestAttemptsResults", listTestAttempts);
         model.addAttribute("thisCourse", course);
         model.addAttribute("thisCohort", cohort);
@@ -102,6 +103,10 @@ public class TestAttemptController {
     private TestAttempt getHighestTestAttempt(Student student, Course course) {
         List<TestAttempt> testAttempts = testAttemptRepository.
                 findTestAttemptsByStudentAndTestIn(student, course.getTests());
+
+        if (testAttempts.isEmpty()) {
+            return null;
+        }
 
         TestAttempt highestTestAttempt = null;
         double highestResult = 0;

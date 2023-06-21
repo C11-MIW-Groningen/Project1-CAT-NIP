@@ -13,15 +13,33 @@
   <table class="table">
     <tr>
       <th>Student</th>
-      <th>Date</th>
-      <th>Test</th>
-      <th>Result</th>
+      <th>Test Date</th>
+      <th>Test name</th>
+      <th>Highest Result</th>
     </tr>
-    <tr th:each="attempt : ${allTestAttemptsResults}">
-      <td th:text="${attempt.getStudent().getDisplayName()}"></td>
-      <td th:text="${attempt.getAttemptDate()}"></td>
-      <td th:text="${attempt.getTest().getNameTest()}"></td>
-      <td th:text="${attempt.getAttemptResult()}"></td>
+    <tr th:each="student : ${allStudentsForCohort}">
+      <td th:text="${student.getDisplayName()}"></td>
+      <td>
+        <span
+          th:each="attempt : ${allTestAttemptsResults}"
+          th:if="${attempt.getStudent().getStudentId() == student.getStudentId()}"
+          th:text="${attempt.getAttemptDate()}">
+        </span>
+      </td>
+      <td>
+        <span
+          th:each="attempt : ${allTestAttemptsResults}"
+          th:if="${attempt.getStudent().getStudentId() == student.getStudentId()}"
+          th:text="${attempt.getTest().getNameTest()}">
+        </span>
+      </td>
+      <td>
+        <span
+          th:each="attempt : ${allTestAttemptsResults}"
+          th:if="${attempt.getStudent().getStudentId() == student.getStudentId()}"
+          th:text="${attempt.getAttemptResult()}">
+        </span>
+      </td>
     </tr>
   </table>
 </div>
