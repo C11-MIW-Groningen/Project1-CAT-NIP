@@ -24,17 +24,21 @@
       <table class="table">
         <tr>
           <th>Tests</th>
-          <th></th>
-          <th></th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
         <tr th:each="test : ${testsFromCourse}">
           <td th:text="${test.getNameTest()}"></td>
-          <td><a th:href="@{/test/edit/{testId}(testId=${test.testId})}">
-            <div th:replace="fragments/icons :: editIcon"></div>
-          </a></td>
-          <td><a th:href="@{/test/delete/{testId}(testId=${test.testId})}">
-            <div th:replace="fragments/icons :: deleteIcon"></div>
-          </a></td>
+          <td>
+            <a th:href="@{/test/edit/{testId}(testId=${test.testId})}">
+            <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
+            </a>
+          </td>
+          <td>
+            <a th:href="@{/test/delete/{testId}(testId=${test.testId})}">
+              <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
+            </a>
+          </td>
         </tr>
       </table>
 
@@ -48,16 +52,16 @@
       <table class="table">
         <tr>
           <th>Assignments</th>
-          <th></th>
-          <th></th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
         <tr th:each="assignment : ${assignmentsFromCourse}">
           <td th:text="${assignment.getDisplayAssignment()}"></td>
           <td><a th:href="@{/assignment/edit/{assignmentId}(assignmentId=${assignment.assignmentId})}">
-            <div th:replace="fragments/icons :: editIcon"></div>
+            <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
           </a></td>
           <td><a th:href="@{/assignment/delete/{assignmentId}(assignmentId=${assignment.assignmentId})}">
-            <div th:replace="fragments/icons :: deleteIcon"></div>
+            <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
           </a></td>
         </tr>
       </table>

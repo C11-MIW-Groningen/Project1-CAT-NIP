@@ -16,8 +16,8 @@
       <th>Cohort</th>
       <th>Start date</th>
       <th>End date</th>
-      <th></th>
-      <th></th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
     <tr th:each="cohort : ${allCohorts}">
       <td>
@@ -28,10 +28,10 @@
       <td th:text="${cohort.getStartDate()}"></td>
       <td th:text="${cohort.getEndDate()}"></td>
       <td><a th:href="@{/cohort/edit/{cohortId}(cohortId=${cohort.cohortId})}">
-        <img src="/images/file-pen-solid.svg" alt="edit">
+        <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
       </a></td>
       <td><a th:href="@{/cohort/delete/{cohortId}(cohortId=${cohort.cohortId})}">
-        <img src="/images/trash-can-regular.svg" alt="delete">
+        <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
       </a></td>
     </tr>
   </table>
