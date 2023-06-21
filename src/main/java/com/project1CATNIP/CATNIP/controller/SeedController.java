@@ -38,7 +38,6 @@ public class SeedController {
     @GetMapping("/seed")
     private String seedDatabase() {
 
-
         Teacher janna = new Teacher();
         janna.setFirstName("Janna");
         janna.setInfixName("");
@@ -48,7 +47,6 @@ public class SeedController {
         if (teacherRepository.findTeacherByEmailAddress("j.scherpenzeel@cat-nip.nl").isEmpty()) {
             teacherRepository.save(janna);
         }
-
 
         Teacher mark = new Teacher();
         mark.setFirstName("Mark");
