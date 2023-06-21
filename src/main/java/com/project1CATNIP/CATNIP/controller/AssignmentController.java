@@ -29,7 +29,7 @@ public class AssignmentController {
     private String showAllAssignments(Model model) {
         model.addAttribute("allAssignments", assignmentRepository.findAll());
 
-        return "/assignment/assignmentOverview";
+        return "/archive/assignmentOverview";
     }
 
     @GetMapping("/add")

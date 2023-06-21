@@ -1,7 +1,6 @@
 package com.project1CATNIP.CATNIP.controller;
 
 import com.project1CATNIP.CATNIP.model.Test;
-import com.project1CATNIP.CATNIP.model.TestItem;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -31,7 +29,7 @@ public class TestController {
     private String showAllTests(Model model) {
         model.addAttribute("allTests", testRepository.findAll());
 
-        return "/test/overview";
+        return "/archive/overview";
     }
 
     @GetMapping("/add")
