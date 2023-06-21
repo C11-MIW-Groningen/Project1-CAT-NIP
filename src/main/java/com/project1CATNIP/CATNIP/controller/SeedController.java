@@ -55,6 +55,9 @@ public class SeedController {
         mark.setEmailAddress("m.vd.berg@cat-nip.nl");
         mark.setImage("mark.jpg");
         teacherRepository.save(mark);
+        if (teacherRepository.findTeacherByEmailAddress("m.vd.berg@cat-nip.nl").isEmpty()) {
+            teacherRepository.save(mark);
+        }
 
         Program softwareEngineering = new Program();
         softwareEngineering.setNameProgram("Software Engineering");
@@ -115,6 +118,16 @@ public class SeedController {
         test2.setCourse(programming);
         testRepository.save(test2);
 
+        Test test3 = new Test();
+        test3.setNameTest("MySQL Queries: bedrijf");
+        test3.setCourse(databases);
+        testRepository.save(test3);
+
+        Test test4 = new Test();
+        test4.setNameTest("MariaDB: Woningen");
+        test4.setCourse(databases);
+        testRepository.save(test4);
+
         TestAttempt test1student1attempt1 = new TestAttempt();
         test1student1attempt1.setAttemptDate(LocalDate.of(2024, 2, 3));
         test1student1attempt1.setStudent(student1);
@@ -129,7 +142,6 @@ public class SeedController {
         test2student2attempt2.setAttemptResult(8.7);
         testAttemptRepository.save(test2student2attempt2);
 
-
         TestAttempt test1student2attempt1 = new TestAttempt();
         test1student2attempt1.setAttemptDate(LocalDate.of(2024, 2, 3));
         test1student2attempt1.setStudent(student2);
@@ -143,6 +155,20 @@ public class SeedController {
         test1student2attempt2.setTest(test2);
         test1student2attempt2.setAttemptResult(9.2);
         testAttemptRepository.save(test1student2attempt2);
+
+        TestAttempt ta5 = new TestAttempt();
+        ta5.setAttemptDate(LocalDate.of(2023, 4, 5));
+        ta5.setStudent(student1);
+        ta5.setTest(test3);
+        ta5.setAttemptResult(7.2);
+        testAttemptRepository.save(ta5);
+
+        TestAttempt ta6 = new TestAttempt();
+        ta6.setAttemptDate(LocalDate.of(2023, 4, 5));
+        ta6.setStudent(student2);
+        ta6.setTest(test4);
+        ta6.setAttemptResult(8);
+        testAttemptRepository.save(ta6);
 
         Assignment assignment1 = new Assignment();
         assignment1.setAssignmentName("Meetkunde");

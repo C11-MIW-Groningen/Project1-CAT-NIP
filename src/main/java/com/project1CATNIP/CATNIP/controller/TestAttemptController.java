@@ -66,8 +66,9 @@ public class TestAttemptController {
         Course course = optionalCourse.get();
 
         List<Student> listStudents = studentRepository.findStudentsByCohort(cohort);
+        List<TestAttempt> listTestAttempts = getAllHighestTestAttempts(listStudents, course);
 
-        model.addAttribute("allTestAttemptsResults", getAllHighestTestAttempts(listStudents, course));
+        model.addAttribute("allTestAttemptsResults", listTestAttempts);
         model.addAttribute("thisCourse", course);
         model.addAttribute("thisCohort", cohort);
 

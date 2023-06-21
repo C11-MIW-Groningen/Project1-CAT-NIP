@@ -27,5 +27,8 @@ public class Test {
     private Course course;
 
     @OneToMany
+    private List<TestAttempt> testAttempts;
+
+    @OneToMany
     private List<TestItem> testItem = new ArrayList<>();
 }
