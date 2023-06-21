@@ -34,16 +34,4 @@ public class TestAttempt {
     @OneToOne
     private Student student;
 
-    //Todo: wordt gebruikt om attemptResult vast te stellen. Als TestItems klaar is, dan kan deze worden gebruikt.
-    public void calculateAttemptResult(List<Integer> testItemScores) {
-        int sumPoints = 0;
-        for (Integer testItemScore : testItemScores) {
-            sumPoints += testItemScore;
-        }
-
-        List<TestItem> testItems = test.getTestItem();
-        int testMaxScore = testItems.stream().mapToInt(TestItem::getMaxPoints).sum();
-
-        attemptResult = sumPoints/ (double) testMaxScore;
-    }
 }

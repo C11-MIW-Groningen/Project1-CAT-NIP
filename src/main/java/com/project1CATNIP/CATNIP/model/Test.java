@@ -1,5 +1,6 @@
 package com.project1CATNIP.CATNIP.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,4 +32,5 @@ public class Test {
 
     @OneToMany
     private List<TestItem> testItem = new ArrayList<>();
+
 }

@@ -1,7 +1,10 @@
 package com.project1CATNIP.CATNIP.controller;
 
+import com.project1CATNIP.CATNIP.dto.TestItemsToTestDTO;
 import com.project1CATNIP.CATNIP.model.Test;
+import com.project1CATNIP.CATNIP.model.TestItem;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
+import com.project1CATNIP.CATNIP.repository.TestItemRepository;
 import com.project1CATNIP.CATNIP.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -24,6 +28,8 @@ public class TestController {
     private final TestRepository testRepository;
 
     private final CourseRepository courseRepository;
+
+    private final TestItemRepository testItemRepository;
 
     @GetMapping({"", "/", "/all"})
     private String showAllTests(Model model) {
@@ -74,5 +80,39 @@ public class TestController {
         }
 
         return "redirect:/test/all";
+    }
+
+    @GetMapping("/{testId}/addtestitems")
+    private String addTestItemsForm(@PathVariable("testId") Long testId, Model model) {
+        Optional<Test> optionalTest = testRepository.findById(testId);
+
+        if (optionalTest.isPresent()) {
+            model.addAttribute("test", optionalTest.get());
+            model.addAttribute("testitem", new TestItem());
+            model.addAttribute("allTest", testRepository.findAll());
+            List<TestItem> allTestItemsFromTest = optionalTest.get().getTestItems();
+            model.addAttribute("allTestItemsFromTest", allTestItemsFromTest);
+//            model.addAttribute("buildingTest",
+//                    TestItemsToTestDTO.builder().test(optionalTest.get()).build());
+            return "/test/addTestItemsForm";
+        }
+
+        return "redirect:/course/all";
+    }
+
+    @PostMapping("/addtestitem")
+    private String saveTestItem(@ModelAttribute("testitem") TestItem testItem,
+                                BindingResult result) {
+        if (!result.hasErrors()) {
+            testItemRepository.save(testItem);
+        }
+
+        return "redirect:/course/all";
+
+//        buildingTest.getTest().addTestItem(buildingTest.getTestItem());
+//        testRepository.save(buildingTest.getTest());
+//
+//        buildingTest.getTestItem().setTest(buildingTest.getTest());
+//        testItemRepository.save(buildingTest.getTestItem());
     }
 }
