@@ -8,10 +8,12 @@ package com.project1CATNIP.CATNIP.controller;
 import com.project1CATNIP.CATNIP.model.*;
 import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
+import net.datafaker.Faker;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,13 +38,17 @@ public class SeedController {
     @GetMapping("/seed")
     private String seedDatabase() {
 
+
         Teacher janna = new Teacher();
         janna.setFirstName("Janna");
         janna.setInfixName("");
         janna.setLastName("Scherpenzeel");
         janna.setEmailAddress("j.scherpenzeel@cat-nip.nl");
         janna.setImage("teacher1.png");
-        teacherRepository.save(janna);
+        if (teacherRepository.findTeacherByEmailAddress("j.scherpenzeel@cat-nip.nl").isEmpty()) {
+            teacherRepository.save(janna);
+        }
+
 
         Teacher mark = new Teacher();
         mark.setFirstName("Mark");
