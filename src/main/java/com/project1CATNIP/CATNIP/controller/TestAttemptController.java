@@ -66,8 +66,8 @@ public class TestAttemptController {
         Course course = optionalCourse.get();
 
         List<Student> listStudents = studentRepository.findStudentsByCohort(cohort);
-        List<TestAttempt> listTestAttempts = getAllHighestTestAttempts(listStudents, course);
-
+        List<TestAttempt> listTestAttempts = getHighestTestAttemptsForCourse(listStudents, course);
+        model.addAttribute("allStudentsForCohort", listStudents);
         model.addAttribute("allTestAttemptsResults", listTestAttempts);
         model.addAttribute("thisCourse", course);
         model.addAttribute("thisCohort", cohort);
@@ -75,31 +75,8 @@ public class TestAttemptController {
         return "/test_attempt/overviewTestAttemptsPerCourse";
     }
 
-    //Todo: voor vrijdag 23-06 gebruiken of anders deleten!
-//    @GetMapping("/grading/add/{cohortId}/{courseId}/")
-//    private String showAddGradingForm(
-//            @PathVariable("courseId") Long courseId,
-//            @PathVariable("cohortId") Long cohortId,
-//            Model model) {
-//        Optional<Course> optionalCourse = courseRepository.findById(courseId);
-//        Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
-//
-//        if (optionalCourse.isEmpty() || optionalCohort.isEmpty()) {
-//            return "redirect:/grading/";
-//        }
-//
-//        Cohort cohort = optionalCohort.get();
-//        Course course = optionalCourse.get();
-//        List<Student> studentList = studentRepository.findStudentsByCohort(cohort);
-//
-//        model.addAttribute("studentsForCohort", studentList);
-//        model.addAttribute("thisCourse", course);
-//        model.addAttribute("testsForCourse", testRepository.findByCourse(course));
-//
-//        return "/test_attempt/selectAddForm";
-//    }
-
-    private TestAttempt getHighestTestAttempt(Student student, Course course) {
+    //Haalt alle TestAttempts voor een vak van een student op en geeft de TestAttempt terug met het hoogste cijfer
+    private TestAttempt getHighestTestAttemptForCourse(Student student, Course course) {
         List<TestAttempt> testAttempts = testAttemptRepository.
                 findTestAttemptsByStudentAndTestIn(student, course.getTests());
 
@@ -116,10 +93,15 @@ public class TestAttemptController {
         return highestTestAttempt;
     }
 
-    private List<TestAttempt> getAllHighestTestAttempts(List<Student> studentList, Course course) {
+    // Haalt voor een vak alle studenten van een cohort op
+    // en geeft voor elke student de TestAttempt met het hoogste cijfer terug
+    private List<TestAttempt> getHighestTestAttemptsForCourse(List<Student> studentList, Course course) {
         List<TestAttempt> allHighestTestAttempts = new ArrayList<>();
+
         for (Student student : studentList) {
-            allHighestTestAttempts.add(getHighestTestAttempt(student, course));
+            if (!testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()).isEmpty()) {
+                allHighestTestAttempts.add(getHighestTestAttemptForCourse(student, course));
+            }
         }
 
         return allHighestTestAttempts;

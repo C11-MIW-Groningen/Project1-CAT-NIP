@@ -27,7 +27,7 @@ public class Test {
     @ManyToOne
     private Course course;
 
-    @OneToMany
+    @OneToMany (mappedBy = "test")
     private List<TestAttempt> testAttempts;
 
     @OneToMany

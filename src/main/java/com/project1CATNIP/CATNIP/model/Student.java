@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
@@ -23,4 +24,7 @@ public class Student extends Person {
 
     @ManyToOne
     private Cohort cohort;
+
+    @OneToMany (mappedBy = "student")
+    private List<TestAttempt> testAttempt;
 }
