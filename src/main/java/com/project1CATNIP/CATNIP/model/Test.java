@@ -33,4 +33,15 @@ public class Test {
     @OneToMany
     private List<TestItem> testItem = new ArrayList<>();
 
+    @OneToMany (mappedBy = "test", cascade = CascadeType.PERSIST)
+    @Builder.Default private List<TestItem> testItems = new ArrayList<>();
+
+    public void addTestItem(TestItem testItem) {
+        testItems.add(testItem);
+    }
+
+    public void removeTestItem(TestItem testItem) {
+        testItems.remove(testItem);
+    }
+
 }

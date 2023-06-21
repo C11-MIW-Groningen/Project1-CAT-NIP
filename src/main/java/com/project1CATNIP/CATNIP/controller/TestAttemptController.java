@@ -76,7 +76,7 @@ public class TestAttemptController {
     }
 
     //Haalt alle TestAttempts voor een vak van een student op en geeft de TestAttempt terug met het hoogste cijfer
-    private TestAttempt getHighestTestAttemptForCourse(Student student, Course course) {
+    public TestAttempt getHighestTestAttemptForCourse(Student student, Course course) {
         List<TestAttempt> testAttempts = testAttemptRepository.
                 findTestAttemptsByStudentAndTestIn(student, course.getTests());
 
