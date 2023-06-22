@@ -22,6 +22,5 @@ public class Teacher extends Person {
 
     @Column (nullable = false)
     private String emailAddress;
-    
-    private String image;
+
 }

@@ -71,15 +71,4 @@ public class TeacherController {
         return "redirect:/teacher/all";
     }
 
-    @GetMapping("/details/{teacherId}")
-    private String showDetailsTeacher(@PathVariable("teacherId") Long teacherId, Model model) {
-        Optional<Teacher> optionalTeacher = teacherRepository.findById(teacherId);
-
-        if (optionalTeacher.isPresent()) {
-            model.addAttribute("teacher", optionalTeacher.get());
-            return "/teacher/teacherDetails";
-        }
-
-        return "redirect:/teacher/all";
-    }
 }

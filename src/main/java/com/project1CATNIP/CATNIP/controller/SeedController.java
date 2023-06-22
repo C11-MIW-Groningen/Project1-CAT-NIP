@@ -43,7 +43,6 @@ public class SeedController {
         janna.setInfixName("");
         janna.setLastName("Scherpenzeel");
         janna.setEmailAddress("j.scherpenzeel@cat-nip.nl");
-        janna.setImage("teacher1.png");
         if (teacherRepository.findTeacherByEmailAddress("j.scherpenzeel@cat-nip.nl").isEmpty()) {
             teacherRepository.save(janna);
         }
@@ -53,7 +52,6 @@ public class SeedController {
         mark.setInfixName("Van der");
         mark.setLastName("Berg");
         mark.setEmailAddress("m.vd.berg@cat-nip.nl");
-        mark.setImage("mark.jpg");
         teacherRepository.save(mark);
         if (teacherRepository.findTeacherByEmailAddress("m.vd.berg@cat-nip.nl").isEmpty()) {
             teacherRepository.save(mark);
