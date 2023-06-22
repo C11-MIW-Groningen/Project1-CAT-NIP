@@ -1,5 +1,6 @@
 package com.project1CATNIP.CATNIP.controller;
 
+import com.project1CATNIP.CATNIP.model.Student;
 import com.project1CATNIP.CATNIP.model.Test;
 import com.project1CATNIP.CATNIP.model.TestItem;
 import com.project1CATNIP.CATNIP.repository.TestItemRepository;
@@ -29,4 +30,14 @@ public class TestItemController {
 
     private final TestRepository testRepository;
 
+    @GetMapping("/testitem/delete/{itemId}")
+    private String deleteTestItem(@PathVariable("itemId") Long itemId) {
+        Optional<TestItem> itemToDelete = testItemRepository.findById(itemId);
+
+        if (itemToDelete.isPresent()) {
+            testItemRepository.delete(itemToDelete.get());
+        }
+
+        return "redirect:/test/" + itemToDelete.get().getTest().getTestId() + "/addtestitems";
+    }
 }
