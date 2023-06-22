@@ -9,20 +9,33 @@
 
 <div class="container">
 
+  <h1>Grades for cohorts</h1>
+
+  <h2>Current cohorts</h2>
+
   <table class="table">
     <tr>
-      <th>Cohort number</th>
-      <th>Program</th>
+      <th>Cohort</th>
     </tr>
-    <tr th:each="cohort : ${allCohorts}">
+    <tr th:each="cohort : ${allCohorts}" th:unless="${cohort.isOldCohort()}">
       <td>
         <a th:href="@{/grading/{cohortId}(cohortId=${cohort.getCohortId})}">
-          <span th:text="${cohort.getNumber()}"></span>
+          <span th:text="${cohort.getDisplayCohort()}"></span>
         </a>
       </td>
+    </tr>
+  </table>
+
+  <h2>Old cohorts</h2>
+
+  <table class="table">
+    <tr>
+      <th>Cohort</th>
+    </tr>
+    <tr th:each="cohort : ${allCohorts}"  th:if="${cohort.isOldCohort()}">
       <td>
-        <a th:href="@{/cohort/details/{cohortId}(cohortId=${cohort.getCohortId()})}">
-          <span  th:text="${cohort.getProgram().getNameProgram()}"></span>
+        <a th:href="@{/grading/{cohortId}(cohortId=${cohort.getCohortId})}">
+          <span th:text="${cohort.getDisplayCohort()}"></span>
         </a>
       </td>
     </tr>

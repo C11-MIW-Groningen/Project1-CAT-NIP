@@ -54,4 +54,8 @@ public class Cohort {
     public void removeStudent(Student student) {
         students.remove(student);
     }
+
+    public boolean isOldCohort() {
+        return endDate.isBefore(LocalDate.now());
+    }
 }
