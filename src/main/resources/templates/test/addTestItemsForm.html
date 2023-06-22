@@ -8,9 +8,9 @@
 <div th:replace="fragments/general :: navbar"></div>
 
 <div class="container">
-    <h1 th:text="${test.nameTest}"></h1>
+    <h1>Test items for <span th:text="${test.nameTest}"></span></h1>
 
-    <h4>Test items</h4>
+    <a th:href="@{/course/}">Back to Course Overview</a>
 
     <table class="table">
         <tr>
@@ -18,27 +18,31 @@
             <th>Item</th>
             <th>Description</th>
             <th>Max Points</th>
-            <th></th>
+            <th>Delete</th>
         </tr>
         <tr th:each="testitem: ${allTestItemsFromTest}">
             <td th:text="${test.nameTest}"></td>
             <td th:text="${testitem.itemNumberForTest}"></td>
             <td th:text="${testitem.description}"></td>
             <td th:text="${testitem.maxPoints}"></td>
+            <td><a th:href="@{/testitem/delete/{itemId}(itemId=${testitem.itemId})}">
+                <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
+            </a></td>
         </tr>
         <tr>
             <form th:action="@{/test/addtestitem}" method="post" th:object="${testitem}">
                 <input type="hidden" th:field="*{itemId}"/>
                 <td class="col">
-                    <label>
-                        <select class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
-                                th:field="*{test}">
-                            <option class="dropdown-item rounded-2"
-                                    th:each="test: ${allTest}"
-                                    th:value="${test.testId}"
-                                    th:text="${test.nameTest}">
-                            </option>
-                        </select>
+                    <select id="testName"
+                            class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
+                            th:field="*{test}">
+                        <option class="dropdown-item rounded-2"
+                                th:value="${test.testId}"
+                                th:text="${test.nameTest}">
+                        </option>
+                    </select>
+                    <label for="testName"><img src="/images/plus-solid.svg" alt="add" style="width: 20px">
+                        Add Item for Test
                     </label>
                 </td>
                 <td class="col">

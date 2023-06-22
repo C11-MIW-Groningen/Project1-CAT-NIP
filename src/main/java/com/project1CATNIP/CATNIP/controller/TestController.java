@@ -1,6 +1,5 @@
 package com.project1CATNIP.CATNIP.controller;
 
-import com.project1CATNIP.CATNIP.dto.TestItemsToTestDTO;
 import com.project1CATNIP.CATNIP.model.Test;
 import com.project1CATNIP.CATNIP.model.TestItem;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
@@ -89,11 +88,8 @@ public class TestController {
         if (optionalTest.isPresent()) {
             model.addAttribute("test", optionalTest.get());
             model.addAttribute("testitem", new TestItem());
-            model.addAttribute("allTest", testRepository.findAll());
             List<TestItem> allTestItemsFromTest = optionalTest.get().getTestItems();
             model.addAttribute("allTestItemsFromTest", allTestItemsFromTest);
-//            model.addAttribute("buildingTest",
-//                    TestItemsToTestDTO.builder().test(optionalTest.get()).build());
             return "/test/addTestItemsForm";
         }
 
@@ -105,14 +101,9 @@ public class TestController {
                                 BindingResult result) {
         if (!result.hasErrors()) {
             testItemRepository.save(testItem);
+            return "redirect:/test/" + testItem.getTest().getTestId() + "/addtestitems";
         }
 
         return "redirect:/course/all";
-
-//        buildingTest.getTest().addTestItem(buildingTest.getTestItem());
-//        testRepository.save(buildingTest.getTest());
-//
-//        buildingTest.getTestItem().setTest(buildingTest.getTest());
-//        testItemRepository.save(buildingTest.getTestItem());
     }
 }
