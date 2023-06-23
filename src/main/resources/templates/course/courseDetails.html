@@ -29,7 +29,11 @@
           <th>Delete</th>
         </tr>
         <tr th:each="test : ${testsFromCourse}">
-          <td th:text="${test.getNameTest()}"></td>
+          <td>
+            <a th:href="@{/test/details/{testId}(testId=${test.testId})}"
+               th:text="${test.getNameTest()}">
+            </a>
+          </td>
           <td>
             <a th:href="@{/test/{testId}/addtestitems(testId=${test.testId})}">
               <img src="/images/file-circle-plus-solid.svg" alt="addItem" style="height: 18px">
