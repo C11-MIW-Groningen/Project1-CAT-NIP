@@ -18,7 +18,11 @@
       <th>Highest Result</th>
     </tr>
     <tr th:each="student : ${allStudentsForCohort}">
-      <td th:text="${student.getDisplayName()}"></td>
+      <td>
+        <a th:href="@{/grading/student/{studentId}/{courseId}(courseId=${thisCourse.getCourseId()}, studentId=${student.getStudentId()})}">
+        <span  th:text="${student.getDisplayName()}"></span>
+        </a>
+      </td>
       <td>
         <span
           th:each="attempt : ${allTestAttemptsResults}"

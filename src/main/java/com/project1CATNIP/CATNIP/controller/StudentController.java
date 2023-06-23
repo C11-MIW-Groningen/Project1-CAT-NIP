@@ -78,23 +78,5 @@ public class StudentController {
         return "redirect:/student/all";
     }
 
-    @GetMapping("/details/{studentId}")
-    private String showStudentDetails(@PathVariable("studentId") Long studentId, Model  model) {
-        Optional<Student> studentOptional = studentRepository.findById(studentId);
 
-        if (studentOptional.isPresent()) {
-            Student student = studentOptional.get();
-            model.addAttribute("student", student);
-            model.addAttribute("courses", getCoursesForStudent(student));
-            return "/student/studentDetails";
-        }
-
-        return "redirect:/student/all";
-    }
-
-    private List<Course> getCoursesForStudent(Student student) {
-        Cohort cohort = student.getCohort();
-        Program program = cohort.getProgram();
-        return courseRepository.findByProgram(program);
-    }
 }

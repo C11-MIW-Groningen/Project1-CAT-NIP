@@ -20,14 +20,16 @@
     <tr th:each="course : ${courses}">
       <td th:text="${course.getCourseName()}"></td>
       <td>
-        <a th:href="@{/student/{studentId}/{courseId}(courseId=${course.getCourseId()}, studentId=${student.getStudentId()})}">
-          Results
+        <a th:href="@{/grading/student/{studentId}/{courseId}(courseId=${course.getCourseId()}, studentId=${student.getStudentId()})}">
+          All test attempts
         </a>
       </td>
       <td>
-        <a th:href="@{/testattempts/{studentId}/{courseId}(courseId=${course.getCourseId()}, studentId=${student.getStudentId()})}">
-          Results
-        </a>
+        <span
+          th:each="attempt : ${testAttempts}"
+          th:if="${attempt.getTest().getCourse().getCourseId() == course.getCourseId()}"
+          th:text="${attempt.getAttemptResult()}">
+        </span>
       </td>
     </tr>
   </table>

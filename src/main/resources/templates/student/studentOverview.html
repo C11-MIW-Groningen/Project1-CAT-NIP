@@ -23,7 +23,7 @@
         </tr>
         <tr th:each="student : ${allStudents}">
             <td>
-                <a th:href="@{/student/details/{studentId}(studentId=${student.studentId})}"
+                <a th:href="@{/grading/student/{studentId}(studentId=${student.studentId})}"
                    th:text="${student.getFirstName()}">
                 </a>
             </td>

@@ -42,11 +42,12 @@ public class TestAttemptController {
     @GetMapping("/grading/{cohortId}")
     private String showCoursesForCohort(@PathVariable("cohortId") Long cohortId, Model model) {
         Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
+
         if (optionalCohort.isEmpty()) {
             return "redirect:/grading/";
         }
-        Cohort cohort = optionalCohort.get();
 
+        Cohort cohort = optionalCohort.get();
         List<Course> listCourses = courseRepository.findByProgram(cohort.getProgram());
 
         model.addAttribute("thisCohort", cohort);
@@ -81,6 +82,7 @@ public class TestAttemptController {
     @GetMapping("/grading/add/{cohortId}")
     private String addTestAttempt(@PathVariable("cohortId") Long cohortId, Model model) {
         Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
+
         if (optionalCohort.isEmpty()) {
             return "redirect:/grading";
         }
@@ -103,6 +105,50 @@ public class TestAttemptController {
 
         testAttemptRepository.save(testAttemptToSave);
         return "redirect:/grading";
+    }
+
+    @GetMapping("/grading/student/{studentId}")
+    private String showGradesForStudent(@PathVariable("studentId") Long studentId, Model model) {
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+        if (optionalStudent.isEmpty()) {
+            return "redirect:/student/all";
+        }
+        Student student = optionalStudent.get();
+        List<Course> studentCourses = getCoursesForStudent(student);
+
+        model.addAttribute("student", student);
+        model.addAttribute("courses", studentCourses);
+        model.addAttribute("testAttempts", getHighestTestAttemptsForStudent(student, studentCourses));
+        return "/test_attempt/overviewStudent";
+    }
+
+    @GetMapping("/grading/student/{studentId}/{courseId}")
+    private String showAllTestAttemptsForStudent(
+            @PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, Model model) {
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+
+        if (optionalStudent.isEmpty() || optionalCourse.isEmpty()) {
+            return "redirect:/grading/";
+        }
+
+        Student student = optionalStudent.get();
+        Course course = optionalCourse.get();
+        List<TestAttempt> testAttempts = testAttemptRepository.
+                findTestAttemptsByStudentAndTestIn(student, course.getTests());
+
+        model.addAttribute("student", student);
+        model.addAttribute("course", student);
+        model.addAttribute("allTestAttempts", testAttempts);
+
+        return "test_attempt/overviewStudentCourse";
+    }
+
+    private List<Course> getCoursesForStudent(Student student) {
+        Cohort cohort = student.getCohort();
+        Program program = cohort.getProgram();
+        return courseRepository.findByProgram(program);
     }
 
     //Haalt alle TestAttempts voor een vak van een student op en geeft de TestAttempt terug met het hoogste cijfer
@@ -129,6 +175,18 @@ public class TestAttemptController {
         List<TestAttempt> allHighestTestAttempts = new ArrayList<>();
 
         for (Student student : studentList) {
+            if (!testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()).isEmpty()) {
+                allHighestTestAttempts.add(getHighestTestAttemptForCourse(student, course));
+            }
+        }
+
+        return allHighestTestAttempts;
+    }
+
+    private List<TestAttempt> getHighestTestAttemptsForStudent(Student student, List<Course> courses) {
+        List<TestAttempt> allHighestTestAttempts = new ArrayList<>();
+
+        for (Course course : courses) {
             if (!testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()).isEmpty()) {
                 allHighestTestAttempts.add(getHighestTestAttemptForCourse(student, course));
             }
