@@ -2,6 +2,8 @@ package com.project1CATNIP.CATNIP.controller;
 
 import com.project1CATNIP.CATNIP.model.*;
 import com.project1CATNIP.CATNIP.repository.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,50 +16,44 @@ import static org.mockito.Mockito.when;
 
 class TestAttemptControllerTest {
 
-    @Test
-    void getHighestTestAttemptForCourseTest() {
+    Program program;
+    Cohort cohort;
+    Course course;
+    com.project1CATNIP.CATNIP.model.Test test1;
+    com.project1CATNIP.CATNIP.model.Test test2;
+    Student student;
+    List<TestAttempt> testAttempts;
+    TestAttemptRepository testAttemptRepository;
+    StudentRepository studentRepository;
+    CourseRepository courseRepository;
+    CohortRepository cohortRepository;
+    TestRepository testRepository;
 
-        // Objects aanmaken
-        Program program = new Program();
+    @BeforeEach
+    void setAttributes() {
+        program = new Program();
 
-        Cohort cohort = new Cohort();
+        cohort = new Cohort();
         cohort.setProgram(program);
 
-        Course course = new Course();
+        course = new Course();
 
-        com.project1CATNIP.CATNIP.model.Test test1 = new com.project1CATNIP.CATNIP.model.Test();
+        test1 = new com.project1CATNIP.CATNIP.model.Test();
         test1.setCourse(course);
-        com.project1CATNIP.CATNIP.model.Test test2 = new com.project1CATNIP.CATNIP.model.Test();
+        test2 = new com.project1CATNIP.CATNIP.model.Test();
         test2.setCourse(course);
 
-        Student student = new Student();
+        student = new Student();
         student.setCohort(cohort);
 
-        List<TestAttempt> testAttempts = getTestAttemptList(student, test1, test2);
+        testAttempts = getTestAttemptList(student, test1, test2);
 
         // Mock-repositories aanmaken
-        TestAttemptRepository testAttemptRepository = mock(TestAttemptRepository.class);
-        StudentRepository studentRepository = mock(StudentRepository.class);
-        CourseRepository courseRepository = mock(CourseRepository.class);
-        CohortRepository cohortRepository = mock(CohortRepository.class);
-        TestRepository testRepository = mock(TestRepository.class);
-
-        when(testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()))
-                .thenReturn(testAttempts);
-
-        TestAttemptController testAttemptController = new TestAttemptController(
-                testAttemptRepository, studentRepository, courseRepository, cohortRepository, testRepository
-        );
-
-        // Act
-        TestAttempt result = testAttemptController.getHighestTestAttemptForCourse(student, course);
-        TestAttempt expectedResult1 = testAttempts.get(1); //
-        TestAttempt expectedResult2 = testAttempts.get(0);
-
-        // Assert
-        assertEquals(expectedResult1, result);
-        assertNotEquals(expectedResult2, result);
-
+        testAttemptRepository = mock(TestAttemptRepository.class);
+        studentRepository = mock(StudentRepository.class);
+        courseRepository = mock(CourseRepository.class);
+        cohortRepository = mock(CohortRepository.class);
+        testRepository = mock(TestRepository.class);
     }
 
     private List<TestAttempt> getTestAttemptList(
@@ -76,5 +72,48 @@ class TestAttemptControllerTest {
 
         return Arrays.asList(attempt1, attempt2);
     }
+
+    @Test
+    @DisplayName("Getting highest test attempt for a student for a course")
+    void getHighestTestAttemptForCourseTest() {
+        when(testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()))
+                .thenReturn(testAttempts);
+
+        TestAttemptController testAttemptController = new TestAttemptController(
+                testAttemptRepository, studentRepository, courseRepository, cohortRepository, testRepository
+        );
+
+        TestAttempt expectedResult = testAttempts.get(1);
+
+        //Activate
+        TestAttempt result = testAttemptController.getHighestTestAttemptForCourse(student, course);
+
+        // Assert
+        assertEquals(expectedResult, result);
+
+
+    }
+
+    @Test
+    @DisplayName("Getting highest test attempt for a student for a course: if wrong")
+    void getHighestTestAttemptForCourseTestIsWrong() {
+        when(testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()))
+                .thenReturn(testAttempts);
+
+        TestAttemptController testAttemptController = new TestAttemptController(
+                testAttemptRepository, studentRepository, courseRepository, cohortRepository, testRepository
+        );
+
+        TestAttempt expectedResult = testAttempts.get(0);
+
+        //Activate
+        TestAttempt result = testAttemptController.getHighestTestAttemptForCourse(student, course);
+
+        // Assert
+        assertNotEquals(expectedResult, result);
+
+    }
+
+
 
 }

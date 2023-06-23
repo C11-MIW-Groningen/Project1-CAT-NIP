@@ -9,24 +9,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestAttemptTest {
 
+    com.project1CATNIP.CATNIP.model.Test test;
+    List<TestItem> testItems;
+    List<Integer> testItemScores;
+    TestAttempt testAttempt;
+
+    void setItems() {
+        test = new com.project1CATNIP.CATNIP.model.Test();
+        testItems = getTestItemList();
+        testAttempt = new TestAttempt();
+    }
     @Test
     void calculateAttemptResult() {
         // Het blijkt onhandig een klasse de naam 'Test' te geven...
         // ...vanwege de gelijknamige klasse in Jupiter; hier het volledige pad naar het model.
-        com.project1CATNIP.CATNIP.model.Test test = new com.project1CATNIP.CATNIP.model.Test();
 
-        List<TestItem> testItems = getTestItemList();
-
+        //Arrange
+        testItemScores = Arrays.asList(5, 10, 15);
         test.setTestItems(testItems);
-
-        List<Integer> testItemScores = Arrays.asList(5, 10, 15);
-
-        TestAttempt testAttempt = new TestAttempt();
         testAttempt.setTest(test);
+        double expectedAttemptResult = 0.5;  // sumPoints = 5 + 10 + 15 = 30, testMaxScore = 10 + 20 + 30 = 60
 
+        //Activate
         testAttempt.calculateAttemptResult(testItemScores);
 
-        double expectedAttemptResult = 0.5;  // sumPoints = 5 + 10 + 15 = 30, testMaxScore = 10 + 20 + 30 = 60
+        //Assert
         assertEquals(expectedAttemptResult, testAttempt.getAttemptResult());
     }
 
