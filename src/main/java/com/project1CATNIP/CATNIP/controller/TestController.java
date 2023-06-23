@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -113,7 +114,11 @@ public class TestController {
         Optional<Test> optionalTest = testRepository.findById(testId);
 
         if (optionalTest.isPresent()) {
-            model.addAttribute("test", optionalTest.get());
+            Test test = optionalTest.get();
+            List<TestItem> testItemsFromTest = test.getTestItems();
+            Collections.sort(testItemsFromTest);
+            model.addAttribute("test", test);
+            model.addAttribute("testItemsForTest", testItemsFromTest);
             return "/test/testDetails";
         }
 

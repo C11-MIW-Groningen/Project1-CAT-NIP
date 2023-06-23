@@ -13,7 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class TestItem {
+public class TestItem implements Comparable<TestItem> {
 
     @Id
     @GeneratedValue
@@ -29,4 +29,9 @@ public class TestItem {
 
     @ManyToOne
     private Test test;
+
+    @Override
+    public int compareTo(TestItem testItem) {
+        return itemNumberForTest.compareTo(testItem.itemNumberForTest);
+    }
 }

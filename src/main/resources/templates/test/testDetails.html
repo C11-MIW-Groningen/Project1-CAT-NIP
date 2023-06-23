@@ -18,7 +18,7 @@
       <th>Description</th>
       <th>Max Points</th>
     </tr>
-    <tr th:each="testitem: ${test.getTestItems()}">
+    <tr th:each="testitem: ${testItemsForTest}">
       <td th:text="${testitem.itemNumberForTest}" ></td>
       <td th:text="${testitem.description}"></td>
       <td th:text="${testitem.maxPoints}"></td>
