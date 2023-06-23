@@ -6,6 +6,7 @@ import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.TestItemRepository;
 import com.project1CATNIP.CATNIP.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -102,6 +103,18 @@ public class TestController {
         if (!result.hasErrors()) {
             testItemRepository.save(testItem);
             return "redirect:/test/" + testItem.getTest().getTestId() + "/addtestitems";
+        }
+
+        return "redirect:/course/all";
+    }
+
+    @GetMapping("/details/{testId}")
+    private String showTestDetails(@PathVariable("testId") Long testId, Model model) {
+        Optional<Test> optionalTest = testRepository.findById(testId);
+
+        if (optionalTest.isPresent()) {
+            model.addAttribute("test", optionalTest.get());
+            return "/test/testDetails";
         }
 
         return "redirect:/course/all";
