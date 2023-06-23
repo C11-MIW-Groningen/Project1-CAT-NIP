@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Add test for student</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+<h1>Add testresult for cohort: cohortnummer</h1>
+
+  <form th:object="${newTestAttempt}">
+    <input type="hidden" th:field="*{testAttemptId}">
+    <div class="form-group">
+      <label for="student">Select student</label>
+      <select class="form-control" id="student" th:field="*{student}">
+        <option th:each="student : ${allStudents}" th:value="${student.getStudentId()}"
+                th:text="${student.getDisplayName()}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="test">Select test</label>
+      <select class="form-control" id="test" th:field="*{test}">
+        <option th:each="test : ${allTests}" th:value="${test.getTestId()}"
+                th:text="${test.getDisplayName()}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="testDate">Select date</label>
+      <input class="form-control" id="testDate" type="date" th:field="*{attemptDate}" required>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Create test form" th:href="@{}">
+    </div>
+  </form>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>

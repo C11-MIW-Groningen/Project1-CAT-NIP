@@ -25,7 +25,6 @@ public class TestAttempt {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate attemptDate;
 
-    @Column(nullable = false)
     private double attemptResult;
 
     @ManyToOne

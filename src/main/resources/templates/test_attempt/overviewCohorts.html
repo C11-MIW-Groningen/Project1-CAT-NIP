@@ -16,11 +16,17 @@
   <table class="table">
     <tr>
       <th>Cohort</th>
+      <th>Add grade for student</th>
     </tr>
     <tr th:each="cohort : ${allCohorts}" th:unless="${cohort.isOldCohort()}">
       <td>
-        <a th:href="@{/grading/{cohortId}(cohortId=${cohort.getCohortId})}">
+        <a th:href="@{/grading/add/{cohortId}(cohortId=${cohort.getCohortId})}">
           <span th:text="${cohort.getDisplayCohort()}"></span>
+        </a>
+      </td>
+      <td>
+        <a th:href="@{/grading/add/{cohortId}(cohortId=${cohort.getCohortId()})}">
+          <img src="/images/file-circle-plus-solid.svg" alt="addItem" style="height: 18px">
         </a>
       </td>
     </tr>

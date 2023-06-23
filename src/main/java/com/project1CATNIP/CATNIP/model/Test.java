@@ -44,4 +44,8 @@ public class Test {
         testItems.remove(testItem);
     }
 
+    public String getDisplayName() {
+        return course.getCourseName() + ": " + nameTest;
+    }
+
 }

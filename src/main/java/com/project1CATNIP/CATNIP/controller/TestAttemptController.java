@@ -75,6 +75,22 @@ public class TestAttemptController {
         return "/test_attempt/overviewTestAttemptsPerCourse";
     }
 
+    @GetMapping("/grading/add/{cohortId}")
+    private String addTestAttempt(@PathVariable("cohortId") Long cohortId, Model model) {
+        Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
+        if (optionalCohort.isEmpty()) {
+            return "redirect:/grading";
+        }
+        Cohort cohort = optionalCohort.get();
+
+        model.addAttribute("cohort", cohort);
+        model.addAttribute("allStudents", studentRepository.findStudentsByCohort(cohort));
+        model.addAttribute("allTests", testRepository.findAll());
+        model.addAttribute("newTestAttempt", new TestAttempt());
+
+        return "/test_attempt/testAttemptAddForm";
+    }
+
     //Haalt alle TestAttempts voor een vak van een student op en geeft de TestAttempt terug met het hoogste cijfer
     public TestAttempt getHighestTestAttemptForCourse(Student student, Course course) {
         List<TestAttempt> testAttempts = testAttemptRepository.
