@@ -117,7 +117,7 @@ public class SeedController {
         testRepository.save(test1);
 
         Test test2 = new Test();
-        test2.setNameTest("Re-exam Dice application");
+        test2.setNameTest("Re-sit Dice application");
         test2.setCourse(programming);
         testRepository.save(test2);
 
