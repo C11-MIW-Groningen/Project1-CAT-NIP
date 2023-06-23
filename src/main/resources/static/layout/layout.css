@@ -2,29 +2,29 @@
     margin-top: 12px;
 }
 
-.nav {
-    background-color: peachpuff;
-    padding: 12px;
+.navbar {
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
-/* unvisited link */
-a:link {
-    color: black;
-    text-decoration: underline;
-}
+/*!* unvisited link *!*/
+/*a:link {*/
+/*    color: black;*/
+/*    text-decoration: underline;*/
+/*}*/
 
-/* visited link */
-a:visited {
-    color: black;
-}
+/*!* visited link *!*/
+/*a:visited {*/
+/*    color: black;*/
+/*}*/
 
-/* mouse over link */
-a:hover {
-    color: blue;
-    text-decoration: underline;
-}
+/*!* mouse over link *!*/
+/*a:hover {*/
+/*    color: blue;*/
+/*    text-decoration: underline;*/
+/*}*/
 
-/* selected link */
-a:active {
-    color: blue;
-}
+/*!* selected link *!*/
+/*a:active {*/
+/*    color: blue;*/
+/*}*/
