@@ -35,12 +35,6 @@ public class SeedController {
 
     private final TestItemRepository testItemRepository;
 
-    @GetMapping("/dropdata")
-    private String dropData() {
-
-        return "redirect:/program";
-    }
-
     @GetMapping("/seed")
     private String seedDatabase() {
 
