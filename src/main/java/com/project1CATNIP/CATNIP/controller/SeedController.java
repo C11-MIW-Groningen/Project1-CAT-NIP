@@ -8,12 +8,10 @@ package com.project1CATNIP.CATNIP.controller;
 import com.project1CATNIP.CATNIP.model.*;
 import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
-import net.datafaker.Faker;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,17 +33,33 @@ public class SeedController {
 
     private final TestAttemptRepository testAttemptRepository;
 
+    private final TestItemRepository testItemRepository;
+
+    @GetMapping("/dropdata")
+    private String dropData() {
+
+        return "redirect:/program";
+    }
+
     @GetMapping("/seed")
     private String seedDatabase() {
+
+        testItemRepository.deleteAll();
+        testAttemptRepository.deleteAll();
+        assignmentRepository.deleteAll();
+        studentRepository.deleteAll();
+        testRepository.deleteAll();
+        courseRepository.deleteAll();
+        cohortRepository.deleteAll();
+        teacherRepository.deleteAll();
+        programRepository.deleteAll();
 
         Teacher janna = new Teacher();
         janna.setFirstName("Janna");
         janna.setInfixName("");
         janna.setLastName("Scherpenzeel");
         janna.setEmailAddress("j.scherpenzeel@cat-nip.nl");
-        if (teacherRepository.findTeacherByEmailAddress("j.scherpenzeel@cat-nip.nl").isEmpty()) {
-            teacherRepository.save(janna);
-        }
+        teacherRepository.save(janna);
 
         Teacher mark = new Teacher();
         mark.setFirstName("Mark");
@@ -53,9 +67,6 @@ public class SeedController {
         mark.setLastName("Berg");
         mark.setEmailAddress("m.vd.berg@cat-nip.nl");
         teacherRepository.save(mark);
-        if (teacherRepository.findTeacherByEmailAddress("m.vd.berg@cat-nip.nl").isEmpty()) {
-            teacherRepository.save(mark);
-        }
 
         Program softwareEngineering = new Program();
         softwareEngineering.setNameProgram("Software Engineering");
