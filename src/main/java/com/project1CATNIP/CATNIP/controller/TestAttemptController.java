@@ -10,8 +10,11 @@ import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.*;
 
@@ -89,6 +92,17 @@ public class TestAttemptController {
         model.addAttribute("newTestAttempt", new TestAttempt());
 
         return "/test_attempt/testAttemptAddForm";
+    }
+
+    @PostMapping("/grading/add")
+    private String saveTestAttempt(@ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
+                                   BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/grading";
+        }
+
+        testAttemptRepository.save(testAttemptToSave);
+        return "redirect:/grading";
     }
 
     //Haalt alle TestAttempts voor een vak van een student op en geeft de TestAttempt terug met het hoogste cijfer

@@ -20,7 +20,7 @@
     </tr>
     <tr th:each="cohort : ${allCohorts}" th:unless="${cohort.isOldCohort()}">
       <td>
-        <a th:href="@{/grading/add/{cohortId}(cohortId=${cohort.getCohortId})}">
+        <a th:href="@{/grading/{cohortId}(cohortId=${cohort.getCohortId})}">
           <span th:text="${cohort.getDisplayCohort()}"></span>
         </a>
       </td>
