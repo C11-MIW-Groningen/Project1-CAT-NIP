@@ -39,9 +39,13 @@ public class ProgramController {
     }
 
     @PostMapping("/program/add")
-    private String saveProgram(@ModelAttribute("program") Program programToAdd, BindingResult result) {
+    private String saveProgram(@ModelAttribute("program") Program programToAdd, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             programRepository.save(programToAdd);
+            String successMessage = "Program added successfully.";
+            model.addAttribute("program", new Program());
+            model.addAttribute("success", successMessage);
+            return "/program/programAddForm";
         }
 
         return "redirect:/program/all";

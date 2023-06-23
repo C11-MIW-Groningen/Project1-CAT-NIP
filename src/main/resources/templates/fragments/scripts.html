@@ -14,3 +14,10 @@
         });
     });
 </script>
+
+<script th:fragment="maxDateToday">
+    let testDateInput = document.getElementById('testDate');
+
+    let today = new Date().toISOString().split('T')[0];
+    testDateInput.setAttribute('max', today);
+</script>

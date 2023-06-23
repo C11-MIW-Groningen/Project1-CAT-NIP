@@ -7,7 +7,7 @@
 
 <div th:replace="fragments/general :: navbar"></div>
 
-<div class="container">
+<div class="container w-25">
 <h1>Add test result for cohort: <span th:text="${cohort.getNumber()}"></span></h1>
 
   <form th:action="@{/grading/add}" method="post" th:object="${newTestAttempt}">
@@ -38,6 +38,7 @@
     <div class="form-group">
       <input type="submit" value="Create test result">
     </div>
+    <script th:replace="fragments/scripts :: maxDateToday"></script>
   </form>
 </div>
 

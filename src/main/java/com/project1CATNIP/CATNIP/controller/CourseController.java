@@ -55,7 +55,7 @@ public class CourseController {
             courseRepository.save(course);
         }
 
-        return redirectOverview;
+        return "redirect:/course/add";
     }
 
     @GetMapping("/delete/{courseId}")
