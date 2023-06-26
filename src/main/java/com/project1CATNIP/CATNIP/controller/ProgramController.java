@@ -46,21 +46,14 @@ public class ProgramController {
     @PostMapping("/program/add")
     private String saveProgram(@ModelAttribute("program") Program programToAdd, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            String errorMessage = result.getFieldError().getDefaultMessage();
-            model.addAttribute("errorMessage", errorMessage);
             return "/program/programAddForm";
         }
 
-        try {
-            programToAdd.setNameProgram(programToAdd.getNameProgram());
-            programRepository.save(programToAdd);
-            String successMessage = "Program added successfully.";
-            model.addAttribute("success", successMessage);
-            return "/program/programAddForm";
-        } catch (Program.InvalidProgramNameException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "redirect:/program/all";
-        }
+        programToAdd.setNameProgram(programToAdd.getNameProgram());
+        programRepository.save(programToAdd);
+        String successMessage = "Program added successfully.";
+        model.addAttribute("success", successMessage);
+        return "/program/programAddForm";
     }
 
     @GetMapping("/program/delete/{programId}")
