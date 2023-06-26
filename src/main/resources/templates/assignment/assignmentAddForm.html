@@ -11,7 +11,7 @@
 <div class="container w-25">
   <h1>Add an Assignment</h1>
 
-  <a th:href="@{/assignment/all}">Back to Assignment Overview</a>
+  <a th:href="@{/course/}">Back to Course Overview</a>
 
   <form th:action="@{/assignment/add}" method="post" th:object="${assignment}">
     <input type="hidden" th:field="*{assignmentId}" />
