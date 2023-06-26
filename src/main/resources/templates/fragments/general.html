@@ -23,31 +23,31 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/program/all}">Programs</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAnyRole('TEACHER', 'ADMIN')">
                 <a class="nav-link" th:href="@{/cohort/all}">Cohorts</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAnyRole('TEACHER', 'ADMIN')">
                 <a class="nav-link" th:href="@{/teacher/all}">Teachers</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:href="@{/course/all}">Courses</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAnyRole('TEACHER', 'ADMIN')">
                 <a class="nav-link" th:href="@{/student/all}">Students</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAnyRole('TEACHER', 'ADMIN')">
                 <a class="nav-link" th:href="@{/grading}">Grading</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="nav-link btn btn-danger" th:href="@{/seed}">Seed</a>
             </li>
         </ul>
     </div>
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+    <div class="navbar-nav" sec:authorize="isAnonymous()">
+        <a class="nav-item nav-link" th:href="@{/login}">Login</a>
     </div>
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" sec:authorize="isAuthenticated()"
+    <div sec:authorize="isAuthenticated()">
+        <a class="nav-item nav-link"
            th:href="@{/logout}">Logout <span sec:authentication="name"></span></a>
     </div>
 </nav>

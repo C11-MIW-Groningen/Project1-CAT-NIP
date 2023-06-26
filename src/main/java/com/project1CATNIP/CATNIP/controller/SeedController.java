@@ -52,7 +52,6 @@ public class SeedController {
         cohortRepository.deleteAll();
         teacherRepository.deleteAll();
         programRepository.deleteAll();
-        miwUserRepository.deleteAll();
 
         Teacher janna = new Teacher();
         janna.setFirstName("Janna");
@@ -197,7 +196,7 @@ public class SeedController {
         teacherUser.setUsername("teacher");
         teacherUser.setPassword(passwordEncoder.encode("teacherpw"));
         teacherUser.setTeacher(true);
-        if (miwUserRepository.findByUsername("teacher").isPresent()) {
+        if (miwUserRepository.findByUsername("teacher").isEmpty()) {
             miwUserRepository.save(teacherUser);
         }
 
@@ -205,7 +204,7 @@ public class SeedController {
         MIWUser studentUser = new MIWUser();
         studentUser.setUsername("student");
         studentUser.setPassword(passwordEncoder.encode("studentpw"));
-        if (miwUserRepository.findByUsername("student").isPresent()) {
+        if (miwUserRepository.findByUsername("student").isEmpty()) {
             miwUserRepository.save(studentUser);
         }
 
