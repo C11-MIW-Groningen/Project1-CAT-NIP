@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,12 +42,13 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    private String saveStudent(@ModelAttribute("student") Student studentToAdd, BindingResult result) {
+    private String saveStudent(@Valid @ModelAttribute("student") Student studentToAdd, BindingResult result) {
 
-        if (!result.hasErrors()) {
-            studentRepository.save(studentToAdd);
+        if (result.hasErrors()) {
+            return "redirect:/student/all";
         }
 
+        studentRepository.save(studentToAdd);
         return "redirect:/student/add";
     }
 

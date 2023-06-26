@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class TestAttempt {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate attemptDate;
 
+    @Max(value = 10)
+    @Min(value = 1)
     private double attemptResult;
 
     @ManyToOne
