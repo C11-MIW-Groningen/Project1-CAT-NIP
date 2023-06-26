@@ -41,7 +41,7 @@
         </tr>
         <tr th:each="student : ${cohort.students}">
           <td th:text="${student.getDisplayName()}"></td>
-          <td th:text="${student.getEmailAddressStudent()}"></td>
+          <td th:text="${student.getEmailAddress()}"></td>
           <td>
             <a th:href="@{/cohort/remove/{cohortId}/{studentId}
               (cohortId=${cohort.cohortId}, studentId=${student.studentId})}">

@@ -29,7 +29,7 @@
             </td>
             <td th:text="${student.getInfixName()}"></td>
             <td th:text="${student.getLastName()}"></td>
-            <td th:text="${student.getEmailAddressStudent()}"></td>
+            <td th:text="${student.getEmailAddress()}"></td>
             <td>
                 <span th:if="${student.getCohort()}" th:text="${student.getCohort().getDisplayCohort()}"></span>
                 <span th:unless="${student.getCohort()}">No cohort</span>

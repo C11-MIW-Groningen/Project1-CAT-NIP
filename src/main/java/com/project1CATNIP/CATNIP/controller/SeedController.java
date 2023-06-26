@@ -100,14 +100,14 @@ public class SeedController {
         student1.setFirstName("Henk");
         student1.setInfixName("de");
         student1.setLastName("Vries");
-        student1.setEmailAddressStudent("h.de.vries@hmail.com");
+        student1.setEmailAddress("h.de.vries@hmail.com");
         student1.setCohort(se11);
         studentRepository.save(student1);
 
         Student student2 = new Student();
         student2.setFirstName("Angela");
         student2.setLastName("Jongsma");
-        student2.setEmailAddressStudent("ajongsma@hmail.com");
+        student2.setEmailAddress("ajongsma@hmail.com");
         student2.setCohort(se11);
         studentRepository.save(student2);
 

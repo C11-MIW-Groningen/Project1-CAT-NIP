@@ -24,6 +24,9 @@ public abstract class Person {
     @Column (nullable = false)
     String lastName;
 
+    @Column (nullable = false)
+    private String emailAddress;
+
     public String getDisplayName() {
         String displayName = firstName;
 

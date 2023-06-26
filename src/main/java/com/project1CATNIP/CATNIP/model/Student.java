@@ -20,9 +20,6 @@ public class Student extends Person {
     @GeneratedValue
     private Long studentId;
 
-    @Column (nullable = false)
-    private String emailAddressStudent;
-
     @ManyToOne
     private Cohort cohort;
 
@@ -40,6 +37,7 @@ public class Student extends Person {
         return testAttempts;
 
     }
+
     public TestAttempt getHighestTestAttemptByCourse(Course course) {
         List<TestAttempt> testAttemptsForCourse = allTestAttemptsForCourse(course);
         TestAttempt highestTestAttempt = new TestAttempt();

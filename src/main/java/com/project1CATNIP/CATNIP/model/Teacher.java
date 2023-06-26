@@ -20,7 +20,4 @@ public class Teacher extends Person {
     @GeneratedValue
     private Long teacherId;
 
-    @Column (nullable = false)
-    private String emailAddress;
-
 }
