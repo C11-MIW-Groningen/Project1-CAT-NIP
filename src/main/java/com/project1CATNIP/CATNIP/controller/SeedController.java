@@ -36,7 +36,7 @@ public class SeedController {
     private final TestItemRepository testItemRepository;
 
     @GetMapping("/seed")
-    private String seedDatabase() {
+    private String seedDatabase() throws Program.InvalidProgramNameException {
 
         testItemRepository.deleteAll();
         testAttemptRepository.deleteAll();
