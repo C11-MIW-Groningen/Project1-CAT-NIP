@@ -25,7 +25,7 @@ public class Program {
     @Column (nullable = false)
     private String nameProgram;
 
-    @OneToMany (mappedBy = "program")
+    @OneToMany (mappedBy = "program", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Cohort> cohorts;
 
     @OneToMany (mappedBy = "program")
@@ -48,5 +48,13 @@ public class Program {
         public InvalidProgramNameException(String message) {
             super(message);
         }
+    }
+
+    public void addCohort(Cohort cohort) {
+        cohorts.add(cohort);
+    }
+
+    public void removeCohort(Cohort cohort) {
+        cohorts.remove(cohort);
     }
 }

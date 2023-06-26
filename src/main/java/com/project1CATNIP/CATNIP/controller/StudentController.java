@@ -25,8 +25,6 @@ public class StudentController {
 
     private final CohortRepository cohortRepository;
 
-    private final CourseRepository courseRepository;
-
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {
         model.addAttribute("allStudents", studentRepository.findAll());
@@ -77,6 +75,4 @@ public class StudentController {
 
         return "redirect:/student/all";
     }
-
-
 }
