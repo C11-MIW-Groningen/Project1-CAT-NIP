@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -95,7 +96,7 @@ public class TestAttemptController {
     }
 
     @PostMapping("/grading/add")
-    private String saveTestAttempt(@ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
+    private String saveTestAttempt(@Valid @ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
                                    BindingResult result) {
         if (result.hasErrors()) {
             return "redirect:/grading";

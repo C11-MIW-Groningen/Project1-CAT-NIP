@@ -6,6 +6,8 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 /**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
@@ -16,15 +18,16 @@ import javax.persistence.OneToMany;
 @MappedSuperclass
 public abstract class Person {
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     String firstName;
 
     String infixName = "";
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     String lastName;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
+    @Email(message = "E-mail must be properly formatted")
     private String emailAddress;
 
     public String getDisplayName() {
