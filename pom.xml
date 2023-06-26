@@ -76,35 +76,14 @@
 			<artifactId>datafaker</artifactId>
 			<version>1.6.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework</groupId>-->
-<!--			<artifactId>spring-webmvc</artifactId>-->
-<!--			<version>6.0.9</version>-->
-<!--		</dependency>-->
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.tomcat</groupId>-->
-<!--			<artifactId>tomcat-jasper</artifactId>-->
-<!--			<version>9.0.12</version>-->
-<!--		</dependency>-->
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>javax.servlet</groupId>-->
-<!--			<artifactId>servlet-api</artifactId>-->
-<!--			<version>3.0-alpha-1</version>-->
-<!--		</dependency>-->
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/javax.servlet/jstl &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>javax.servlet</groupId>-->
-<!--			<artifactId>jstl</artifactId>-->
-<!--			<version>1.2</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.hibernate.validator</groupId>-->
-<!--			<artifactId>hibernate-validator</artifactId>-->
-<!--			<version>6.0.21.Final</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
