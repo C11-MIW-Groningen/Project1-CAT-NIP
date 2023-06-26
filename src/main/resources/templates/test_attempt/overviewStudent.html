@@ -26,9 +26,8 @@
       </td>
       <td>
         <span
-          th:each="attempt : ${testAttempts}"
-          th:if="${attempt.getTest().getCourse().getCourseId() == course.getCourseId()}"
-          th:text="${attempt.getAttemptResult()}">
+          th:unless="${student.allTestAttemptsForCourse(course).isEmpty()}"
+          th:text="${student.getHighestTestAttemptByCourse(course).getAttemptResult()}">
         </span>
       </td>
     </tr>

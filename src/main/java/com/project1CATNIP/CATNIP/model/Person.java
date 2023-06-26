@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 /**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
@@ -33,4 +34,7 @@ public abstract class Person {
         displayName += " "+ lastName;
         return displayName;
     }
+
+
+
 }

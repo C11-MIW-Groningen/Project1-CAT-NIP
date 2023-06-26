@@ -70,9 +70,7 @@ public class TestAttemptController {
         Course course = optionalCourse.get();
 
         List<Student> listStudents = studentRepository.findStudentsByCohort(cohort);
-        List<TestAttempt> listTestAttempts = getHighestTestAttemptsForCourse(listStudents, course);
         model.addAttribute("allStudentsForCohort", listStudents);
-        model.addAttribute("allTestAttemptsResults", listTestAttempts);
         model.addAttribute("thisCourse", course);
         model.addAttribute("thisCohort", cohort);
 
@@ -119,7 +117,6 @@ public class TestAttemptController {
 
         model.addAttribute("student", student);
         model.addAttribute("courses", studentCourses);
-        model.addAttribute("testAttempts", getHighestTestAttemptsForStudent(student, studentCourses));
         return "/test_attempt/overviewStudent";
     }
 
@@ -149,50 +146,6 @@ public class TestAttemptController {
         Cohort cohort = student.getCohort();
         Program program = cohort.getProgram();
         return courseRepository.findByProgram(program);
-    }
-
-    //Haalt alle TestAttempts voor een vak van een student op en geeft de TestAttempt terug met het hoogste cijfer
-    public TestAttempt getHighestTestAttemptForCourse(Student student, Course course) {
-        List<TestAttempt> testAttempts = testAttemptRepository.
-                findTestAttemptsByStudentAndTestIn(student, course.getTests());
-
-        TestAttempt highestTestAttempt = null;
-        double highestResult = 0;
-
-        for (TestAttempt testAttempt : testAttempts) {
-            if (testAttempt.getAttemptResult() > highestResult) {
-                highestTestAttempt = testAttempt;
-                highestResult = testAttempt.getAttemptResult();
-            }
-        }
-
-        return highestTestAttempt;
-    }
-
-    // Haalt voor een vak alle studenten van een cohort op
-    // en geeft voor elke student de TestAttempt met het hoogste cijfer terug
-    private List<TestAttempt> getHighestTestAttemptsForCourse(List<Student> studentList, Course course) {
-        List<TestAttempt> allHighestTestAttempts = new ArrayList<>();
-
-        for (Student student : studentList) {
-            if (!testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()).isEmpty()) {
-                allHighestTestAttempts.add(getHighestTestAttemptForCourse(student, course));
-            }
-        }
-
-        return allHighestTestAttempts;
-    }
-
-    private List<TestAttempt> getHighestTestAttemptsForStudent(Student student, List<Course> courses) {
-        List<TestAttempt> allHighestTestAttempts = new ArrayList<>();
-
-        for (Course course : courses) {
-            if (!testAttemptRepository.findTestAttemptsByStudentAndTestIn(student, course.getTests()).isEmpty()) {
-                allHighestTestAttempts.add(getHighestTestAttemptForCourse(student, course));
-            }
-        }
-
-        return allHighestTestAttempts;
     }
 
 }

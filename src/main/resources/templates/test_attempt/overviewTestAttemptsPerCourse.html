@@ -25,23 +25,20 @@
       </td>
       <td>
         <span
-          th:each="attempt : ${allTestAttemptsResults}"
-          th:if="${attempt.getStudent().getStudentId() == student.getStudentId()}"
-          th:text="${attempt.getAttemptDate()}">
+          th:unless="${student.allTestAttemptsForCourse(thisCourse).isEmpty()}"
+          th:text="${student.getHighestTestAttemptByCourse(thisCourse).getAttemptDate()}">
         </span>
       </td>
       <td>
         <span
-          th:each="attempt : ${allTestAttemptsResults}"
-          th:if="${attempt.getStudent().getStudentId() == student.getStudentId()}"
-          th:text="${attempt.getTest().getNameTest()}">
+          th:unless="${student.allTestAttemptsForCourse(thisCourse).isEmpty()}"
+          th:text="${student.getHighestTestAttemptByCourse(thisCourse).getTest().getNameTest()}">
         </span>
       </td>
       <td>
         <span
-          th:each="attempt : ${allTestAttemptsResults}"
-          th:if="${attempt.getStudent().getStudentId() == student.getStudentId()}"
-          th:text="${attempt.getAttemptResult()}">
+          th:unless="${student.allTestAttemptsForCourse(thisCourse).isEmpty()}"
+          th:text="${student.getHighestTestAttemptByCourse(thisCourse).getAttemptResult()}">
         </span>
       </td>
     </tr>
