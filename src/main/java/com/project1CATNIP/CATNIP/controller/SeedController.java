@@ -8,6 +8,7 @@ package com.project1CATNIP.CATNIP.controller;
 import com.project1CATNIP.CATNIP.model.*;
 import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -35,6 +36,10 @@ public class SeedController {
 
     private final TestItemRepository testItemRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
+    private final MIWUserRepository miwUserRepository;
+
     @GetMapping("/seed")
     private String seedDatabase() throws Program.InvalidProgramNameException {
 
@@ -47,6 +52,7 @@ public class SeedController {
         cohortRepository.deleteAll();
         teacherRepository.deleteAll();
         programRepository.deleteAll();
+        miwUserRepository.deleteAll();
 
         Teacher janna = new Teacher();
         janna.setFirstName("Janna");
@@ -186,6 +192,22 @@ public class SeedController {
         assignment2.setAssignmentNumber(1);
         assignment2.setCourse(databases);
         assignmentRepository.save(assignment2);
+
+        MIWUser teacherUser = new MIWUser();
+        teacherUser.setUsername("teacher");
+        teacherUser.setPassword(passwordEncoder.encode("teacherpw"));
+        teacherUser.setTeacher(true);
+        if (miwUserRepository.findByUsername("teacher").isPresent()) {
+            miwUserRepository.save(teacherUser);
+        }
+
+
+        MIWUser studentUser = new MIWUser();
+        studentUser.setUsername("student");
+        studentUser.setPassword(passwordEncoder.encode("studentpw"));
+        if (miwUserRepository.findByUsername("student").isPresent()) {
+            miwUserRepository.save(studentUser);
+        }
 
         return "redirect:/program";
     }

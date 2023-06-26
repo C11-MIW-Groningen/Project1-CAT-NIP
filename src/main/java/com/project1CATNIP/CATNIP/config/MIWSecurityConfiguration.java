@@ -28,7 +28,7 @@ public class MIWSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((authorize) -> authorize
-                        .antMatchers("/layout/**").permitAll()
+                        .antMatchers("/layout/**", "/webjars/**", "/images/**").permitAll()
                         .antMatchers("/", "/programs/all").permitAll()
                         .antMatchers(HttpMethod.POST,"/program/add").hasAnyRole("ADMIN")
                         .anyRequest().authenticated()

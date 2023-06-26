@@ -4,13 +4,16 @@ import com.project1CATNIP.CATNIP.service.MIWUserDetailsService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
@@ -32,9 +35,21 @@ public class MIWUser implements UserDetails {
 
     private Boolean administrator = false;
 
+    private Boolean teacher = false;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+
+        if (administrator) {
+            authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else if (teacher) {
+            authorityList.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+        } else {
+            authorityList.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+        }
+
+        return authorityList;
     }
 
     @Override
