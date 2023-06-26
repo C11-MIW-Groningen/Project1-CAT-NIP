@@ -1,6 +1,8 @@
 package com.project1CATNIP.CATNIP.controller;
 
+import com.project1CATNIP.CATNIP.model.Cohort;
 import com.project1CATNIP.CATNIP.model.Program;
+import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,6 +26,8 @@ public class ProgramController {
     private final ProgramRepository programRepository;
 
     private final CourseRepository courseRepository;
+
+    private final CohortRepository cohortRepository;
 
     @GetMapping({"/", "", "/program", "/program/all"})
     private String showAllPrograms(Model model) {
@@ -56,7 +61,15 @@ public class ProgramController {
         Optional<Program> programToDelete = programRepository.findById(programId);
 
         if (programToDelete.isPresent()) {
-            programRepository.delete(programToDelete.get());
+            Program program = programToDelete.get();
+            List<Cohort> cohortsFromProgram = cohortRepository.findByProgram(program);
+
+            for (Cohort cohort : cohortsFromProgram) {
+                cohort.setProgram(null);
+                cohortsFromProgram.remove(cohort);
+            }
+
+            programRepository.delete(program);
         }
 
         return "redirect:/program/all";

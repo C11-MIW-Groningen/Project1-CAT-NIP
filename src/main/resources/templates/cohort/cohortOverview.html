@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
   <title>All cohorts</title>
 </head>
@@ -23,9 +23,12 @@
     </tr>
     <tr th:each="cohort : ${allCohorts}" th:unless="${cohort.isOldCohort()}">
       <td>
-        <a th:href="@{/cohort/details/{cohortId}(cohortId=${cohort.getCohortId()})}"
-           th:text="${cohort.getDisplayCohort()}">
-        </a>
+        <span th:if="${cohort.getProgram()}">
+          <a th:href="@{/cohort/details/{cohortId}(cohortId=${cohort.getCohortId()})}"
+             th:text="${cohort.getDisplayCohort()}">
+          </a>
+        </span>
+        <span th:unless="${cohort.getProgram()}">No program assigned</span>
       </td>
       <td th:text="${cohort.getStartDate()}"></td>
       <td th:text="${cohort.getEndDate()}"></td>
