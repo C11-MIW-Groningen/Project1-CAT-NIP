@@ -61,7 +61,6 @@ public class ProgramController {
 
         return "redirect:/program/all";
     }
-    //TODO Delete validatie
 
     @GetMapping("/program/edit/{programId}")
     private String showEditProgramForm(@PathVariable("programId") Long programId, Model model) {

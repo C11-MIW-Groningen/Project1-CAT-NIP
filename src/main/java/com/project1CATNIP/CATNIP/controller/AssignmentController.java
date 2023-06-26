@@ -48,7 +48,6 @@ public class AssignmentController {
         }
 
         return "redirect:/assignment/add";
-        //TODO vinkje om keuze te geven om direct naar overview te gaan
     }
 
     @GetMapping("/delete/{assignmentId}")
@@ -61,7 +60,6 @@ public class AssignmentController {
 
         return "redirect:/assignment/all";
     }
-    //TODO Delete validatie
 
     @GetMapping("/edit/{assignmentId}")
     private String showEditAssignmentForm(@PathVariable("assignmentId") Long assignmentId, Model model) {

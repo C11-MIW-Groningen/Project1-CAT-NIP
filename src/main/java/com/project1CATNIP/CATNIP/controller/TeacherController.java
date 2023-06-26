@@ -44,7 +44,6 @@ public class TeacherController {
         }
 
         return "redirect:/teacher/add";
-        //TODO vinkje om keuze te geven om direct naar overview te gaan
     }
 
     @GetMapping("/delete/{teacherId}")
@@ -57,7 +56,6 @@ public class TeacherController {
 
         return "redirect:/teacher/all";
     }
-    //TODO Delete validatie
 
     @GetMapping("/edit/{teacherId}")
     private String showEditTeacherForm(@PathVariable("teacherId") Long teacherId, Model model) {

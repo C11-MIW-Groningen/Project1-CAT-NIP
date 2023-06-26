@@ -50,7 +50,6 @@ public class StudentController {
         }
 
         return "redirect:/student/add";
-        //TODO vinkje om keuze te geven om direct naar overview te gaan
     }
 
     @GetMapping("/delete/{studentId}")
@@ -63,7 +62,6 @@ public class StudentController {
 
         return "redirect:/student/all";
     }
-    //TODO Delete validatie
 
     @GetMapping("/edit/{studentId}")
     private String showEditStudentForm(@PathVariable("studentId") Long studentId, Model model) {

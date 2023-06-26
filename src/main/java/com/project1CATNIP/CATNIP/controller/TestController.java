@@ -55,7 +55,6 @@ public class TestController {
         }
 
         return "redirect:/test/add";
-        //TODO vinkje om keuze te geven om direct naar overview te gaan
     }
 
     @GetMapping("/delete/{testId}")
@@ -68,7 +67,6 @@ public class TestController {
 
         return "redirect:/test/all";
     }
-    //TODO Delete validatie
 
     @GetMapping("/edit/{testId}")
     private String showEditTestForm(@PathVariable("testId") Long testId, Model model) {

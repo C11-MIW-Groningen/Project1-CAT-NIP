@@ -30,9 +30,6 @@ public class CourseController {
 
     private final TestRepository testRepository;
 
-    private final String redirectOverview = "redirect:/course/all";
-    //TODO: bij alle controllers een redirectOverview maken
-
     @GetMapping({"", "/","/all"})
     private String showAllCourses(Model model) {
         model.addAttribute("allCourses", courseRepository.findAll());
@@ -65,7 +62,7 @@ public class CourseController {
             courseRepository.delete(optionalCourse.get());
         }
 
-        return redirectOverview;
+        return "redirect:/course/all";
     }
 
     @GetMapping("/edit/{courseId}")
@@ -79,7 +76,7 @@ public class CourseController {
             return "/course/courseAddForm";
         }
 
-        return redirectOverview;
+        return "redirect:/course/all";
     }
 
     @GetMapping("/details/{courseId}")

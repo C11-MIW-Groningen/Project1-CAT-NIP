@@ -53,7 +53,6 @@ public class CohortController {
             }
 
             return "redirect:/cohort/add";
-            //TODO Vinkje om keuze te geven om direct naar overview te gaan
         }
 
         @GetMapping("/delete/{cohortId}")
@@ -66,7 +65,6 @@ public class CohortController {
 
             return "redirect:/cohort/all";
         }
-        //TODO Delete validatie (voor alle models)
 
         @GetMapping("/edit/{cohortId}")
         private String showEditCohortForm(@PathVariable("cohortId") Long cohortId, Model model) {
