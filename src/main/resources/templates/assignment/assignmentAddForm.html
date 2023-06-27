@@ -11,14 +11,14 @@
 <div class="container w-25">
   <h1>Add an Assignment</h1>
 
-  <a th:href="@{/course/}">Back to Course Overview</a>
+  <a th:href="@{/course/all}">Back to Course Overview</a>
 
   <form th:action="@{/assignment/add}" method="post" th:object="${assignment}">
     <input type="hidden" th:field="*{assignmentId}" />
     <div class="form-group">
       <label for="assignmentName">Assignment name</label>
-      <input id="assignmentName" class="form-control" type="text"
-             placeholder="Assignment name" th:field="*{assignmentName}">
+      <input id="assignmentName" class="form-control" type="text" minlength="2"
+             placeholder="Assignment name" th:field="*{assignmentName}" required>
     </div>
     <div class="form-group">
       <label for="dayPart">Day-part</label>
@@ -43,6 +43,8 @@
     <div class="form-group form-button">
       <button type="submit" class="btn btn-danger" >Save Test</button>
     </div>
+    <h3 th:if="${success}" th:text="${success}"></h3>
+    <h3 th:unless="${success}" class="error-message" th:text="${errorMessage}"></h3>
   </form>
 </div>
 

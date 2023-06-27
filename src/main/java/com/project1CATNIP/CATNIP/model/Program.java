@@ -25,7 +25,7 @@ public class Program {
     @Column (nullable = false)
     private String nameProgram;
 
-    @OneToMany (mappedBy = "program", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @OneToMany (mappedBy = "program", cascade = {CascadeType.PERSIST})
     private List<Cohort> cohorts;
 
     @OneToMany (mappedBy = "program")

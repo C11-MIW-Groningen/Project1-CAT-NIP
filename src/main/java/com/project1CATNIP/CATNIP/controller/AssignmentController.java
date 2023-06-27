@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import java.util.Optional;
 
 /**
@@ -41,13 +42,21 @@ public class AssignmentController {
     }
 
     @PostMapping("/add")
-    private String saveAssignment(@ModelAttribute("assignment") Assignment assignmentToAdd, BindingResult result) {
-
-        if (!result.hasErrors()) {
-            assignmentRepository.save(assignmentToAdd);
+    private String saveAssignment(@ModelAttribute("assignment") Assignment assignmentToAdd, BindingResult result,
+                                  Model model) {
+        try {
+            if (!result.hasErrors()) {
+                assignmentRepository.save(assignmentToAdd);
+                String successMessage = "Assignment added successfully.";
+                model.addAttribute("success", successMessage);
+                return "/assignment/assignmentAddForm";
+            }
+        } catch (ConstraintViolationException e) {
+            String errorMessage = e.getMessage() + "This assignment already exists. Try again.";
+            model.addAttribute("errorMessage", errorMessage);
         }
 
-        return "redirect:/assignment/add";
+        return "/assignment/assignmentAddForm";
     }
 
     @GetMapping("/delete/{assignmentId}")
@@ -68,9 +77,8 @@ public class AssignmentController {
         if (optionalAssignment.isPresent()) {
             model.addAttribute("assignment", optionalAssignment.get());
             model.addAttribute("allCourses", courseRepository.findAll());
-            return "redirect:/course/details/" + optionalAssignment.get().getCourse().getCourseId();
+            return "/assignment/assignmentAddForm";
         }
-
-        return "/assignment/assignmentAddForm";
+        return "redirect:/course/details/" + optionalAssignment.get().getCourse().getCourseId();
     }
 }
