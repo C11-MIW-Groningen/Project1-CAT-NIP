@@ -35,7 +35,6 @@ public class Cohort {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
-    @Column (name = "program_program_id")
     @ManyToOne
     private Program program;
 
