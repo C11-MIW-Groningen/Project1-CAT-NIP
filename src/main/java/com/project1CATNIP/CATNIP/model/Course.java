@@ -34,4 +34,13 @@ public class Course {
 
     @OneToMany (mappedBy = "course")
     private List<Assignment> assignments;
+
+    public void setCourseName(String courseName) {
+        if (courseName == null || courseName.trim().length() < 2) {
+            throw new IllegalArgumentException("Course name must be more than one character");
+        }
+        this.courseName = courseName;
+    }
+
+
 }
