@@ -35,17 +35,18 @@ public class TestAttempt {
     @ManyToOne
     private Student student;
 
-    //Todo: wordt gebruikt om attemptResult vast te stellen. Als TestItems klaar is, dan kan deze worden gebruikt.
-    public void calculateAttemptResult(List<Integer> testItemScores) {
-        int sumPoints = 0;
-        for (Integer testItemScore : testItemScores) {
-            sumPoints += testItemScore;
+    public void setAttemptDate(LocalDate attemptDate) {
+        if (attemptDate == null || attemptDate.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("Test attempt must have a date that is not in the future.");
         }
+        this.attemptDate = attemptDate;
+    }
 
-        List<TestItem> testItems = this.test.getTestItems();
-        int testMaxScore = testItems.stream().mapToInt(TestItem::getMaxPoints).sum();
-
-        this.attemptResult = sumPoints/ (double) testMaxScore;
+    public void setAttemptResult(Double attemptResult) {
+        if (attemptResult == null || attemptResult < 1 || attemptResult > 10) {
+            throw new IllegalArgumentException("Item number must be a positive integer");
+        }
+        this.attemptResult = attemptResult;
     }
 
 }

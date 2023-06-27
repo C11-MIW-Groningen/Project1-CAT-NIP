@@ -30,6 +30,27 @@ public class TestItem implements Comparable<TestItem> {
     @ManyToOne
     private Test test;
 
+    public void setItemNumberForTest(Integer itemNumberForTest) {
+        if (itemNumberForTest == null) {
+            throw new IllegalArgumentException("Item number must be a positive integer");
+        }
+        this.itemNumberForTest = itemNumberForTest;
+    }
+
+    public void setDescription(String description) {
+        if (description == null || description.trim().length() < 2) {
+            throw new IllegalArgumentException("Item must have a description (with more than 1 character)");
+        }
+        this.description = description;
+    }
+
+    public void setMaxPoints(Integer maxPoints) {
+        if (maxPoints == null) {
+            throw new IllegalArgumentException("Item number must be a positive integer");
+        }
+        this.maxPoints = maxPoints;
+    }
+
     @Override
     public int compareTo(TestItem testItem) {
         return itemNumberForTest.compareTo(testItem.itemNumberForTest);

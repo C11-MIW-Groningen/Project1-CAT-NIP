@@ -98,10 +98,10 @@ public class TestController {
     @PostMapping("/addtestitem")
     private String saveTestItem(@ModelAttribute("testitem") TestItem testItem,
                                 BindingResult result) {
-        if (!result.hasErrors()) {
-            testItemRepository.save(testItem);
-            return "redirect:/test/" + testItem.getTest().getTestId() + "/addtestitems";
-        }
+            if (!result.hasErrors()) {
+                testItemRepository.save(testItem);
+                return "redirect:/test/" + testItem.getTest().getTestId() + "/addtestitems";
+            }
 
         return "redirect:/course/all";
     }
