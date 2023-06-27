@@ -38,7 +38,7 @@ public class Cohort {
     @ManyToOne
     private Program program;
 
-    @OneToMany(mappedBy = "cohort", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cohort")
     @Builder.Default private Set<Student> students = new HashSet<>();
 
     public String getDisplayCohort() {

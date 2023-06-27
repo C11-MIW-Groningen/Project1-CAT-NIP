@@ -60,7 +60,14 @@ public class CohortController {
             Optional<Cohort> cohortToDelete = cohortRepository.findById(cohortId);
 
             if (cohortToDelete.isPresent()) {
-                cohortRepository.delete(cohortToDelete.get());
+                Cohort cohort = cohortToDelete.get();
+                List<Student> studentsFromCohort = studentRepository.findStudentsByCohort(cohort);
+
+                for (Student student : studentsFromCohort) {
+                    student.setCohort(null);
+                    studentRepository.save(student);
+                }
+                cohortRepository.delete(cohort);
             }
 
             return "redirect:/cohort/all";
