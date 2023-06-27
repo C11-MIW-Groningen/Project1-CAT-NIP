@@ -24,7 +24,7 @@ public class Cohort {
     @GeneratedValue
     Long cohortId;
 
-    @Column (nullable = false)
+    @Column (nullable = false, name = "number")
     private Integer number;
 
     @Column(nullable = false)
@@ -35,6 +35,7 @@ public class Cohort {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
+    @Column (name = "program_program_id")
     @ManyToOne
     private Program program;
 
@@ -43,6 +44,13 @@ public class Cohort {
 
     public String getDisplayCohort() {
         return String.format("%s %d", program.getNameProgram(), number);
+    }
+
+    public void setNumber(Integer number) {
+        if (number < 1 || number > 100) {
+            throw new IllegalArgumentException("Cohort number must be between 1 and 100");
+        }
+        this.number = number;
     }
 
     public void addStudent(Student student) {

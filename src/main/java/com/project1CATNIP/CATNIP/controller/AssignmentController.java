@@ -4,12 +4,12 @@ import com.project1CATNIP.CATNIP.model.Assignment;
 import com.project1CATNIP.CATNIP.repository.AssignmentRepository;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolationException;
 import java.util.Optional;
 
 /**

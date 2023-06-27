@@ -5,9 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 
 /**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
@@ -40,6 +37,24 @@ public abstract class Person {
         return displayName;
     }
 
+    public void setFirstName(String firstName) {
+        if (firstName == null || firstName.trim().length() < 2) {
+            throw new IllegalArgumentException("First name must be more than one character");
+        }
+        this.firstName = firstName;
+    }
 
+    public void setLastName(String lastName) {
+        if (lastName == null || lastName.trim().length() < 2) {
+            throw new IllegalArgumentException("Last name must be more than one character");
+        }
+        this.lastName = lastName;
+    }
 
+    public void setEmailAddress(String emailAddress) {
+        if (emailAddress == null || emailAddress.trim().length() < 2) {
+            throw new IllegalArgumentException("Email address must be more than one character");
+        }
+        this.emailAddress = emailAddress;
+    }
 }
