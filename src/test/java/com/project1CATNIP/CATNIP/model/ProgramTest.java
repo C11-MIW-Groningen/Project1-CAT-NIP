@@ -1,6 +1,7 @@
 package com.project1CATNIP.CATNIP.model;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.core.parameters.P;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProgramTest {
 
     @Test
-    void setNameProgramWithValidName() throws Program.InvalidProgramNameException {
+    void setNameProgramWithValidName() {
         String validName = "Software Engineering";
         Program program2 = new Program();
 
@@ -24,6 +25,21 @@ class ProgramTest {
         String invalidName = "a";
         Program program2 = new Program();
 
-        assertThrows(Program.InvalidProgramNameException.class, () -> {program2.setNameProgram(invalidName);});
+        assertThrows(IllegalArgumentException.class, () -> {program2.setNameProgram(invalidName);});
+    }
+
+    @Test
+    void setNameProgramWithNoInput() {
+        Program program3 = new Program();
+
+        assertThrows(IllegalArgumentException.class, () -> {program3.setNameProgram(null);});
+    }
+
+    @Test
+    void setNameProgramWithTooManySpaces() {
+        String invalidName2 = "       ";
+        Program program4 = new Program();
+
+        assertThrows(IllegalArgumentException.class, () -> {program4.setNameProgram(invalidName2);});
     }
 }

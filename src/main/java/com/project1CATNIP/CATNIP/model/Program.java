@@ -36,18 +36,11 @@ public class Program {
         return cohorts.size();
     }
 
-    public void setNameProgram(String nameProgram) throws InvalidProgramNameException {
-        if (nameProgram.length() >= 2) {
-            this.nameProgram = nameProgram;
-        } else {
-            throw new InvalidProgramNameException("Program name has to be more than one characters");
+    public void setNameProgram(String nameProgram) {
+        if (nameProgram == null || nameProgram.trim().length() < 2) {
+            throw new IllegalArgumentException("Program name must be more than one character");
         }
-    }
-
-    public static class InvalidProgramNameException extends Exception {
-        public InvalidProgramNameException(String message) {
-            super(message);
-        }
+        this.nameProgram = nameProgram;
     }
 
     public void addCohort(Cohort cohort) {

@@ -41,7 +41,7 @@ public class SeedController {
     private final MIWUserRepository miwUserRepository;
 
     @GetMapping("/seed")
-    private String seedDatabase() throws Program.InvalidProgramNameException {
+    private String seedDatabase() {
 
         testItemRepository.deleteAll();
         testAttemptRepository.deleteAll();
