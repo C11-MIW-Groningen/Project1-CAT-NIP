@@ -27,7 +27,6 @@ public abstract class Person {
     String lastName;
 
     @Column(nullable = false)
-    @Email(message = "E-mail must be properly formatted")
     private String emailAddress;
 
     public String getDisplayName() {

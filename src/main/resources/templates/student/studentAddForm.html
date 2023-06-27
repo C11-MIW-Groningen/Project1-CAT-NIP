@@ -18,7 +18,7 @@
         <div class="form-group">
             <label for="firstNameStudent">First name</label>
             <input id="firstNameStudent" class="form-control" type="text"
-                   placeholder="First name" th:field="*{firstName}">
+                   placeholder="First name" minlength="2" th:field="*{firstName}" required>
         </div>
         <div class="form-group">
             <label for="infixNameStudent">Infix</label>
@@ -28,12 +28,12 @@
         <div class="form-group">
             <label for="lastNameStudent">Last name</label>
             <input id="lastNameStudent" class="form-control" type="text"
-                   placeholder="Last name" th:field="*{lastName}">
+                   placeholder="Last name" minlength="2" th:field="*{lastName}" required>
         </div>
         <div class="form-group">
             <label for="emailAddress">Email address</label>
             <input id="emailAddress" class="form-control" type="email"
-                   placeholder="Email address" th:field="*{emailAddress}">
+                   placeholder="Email address" th:field="*{emailAddress}" required>
         </div>
         <div>
             <label for="cohort">Select cohort</label>

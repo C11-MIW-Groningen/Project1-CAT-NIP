@@ -18,7 +18,8 @@
     <div th:fragment="teacherForm">
       <div class="form-group">
         <label for="courseName">First name</label>
-        <input id="courseName" class="form-control" type="text" placeholder="First name" th:field="*{firstName}">
+        <input id="courseName" class="form-control" type="text" placeholder="First name"
+               minlength="2" th:field="*{firstName}" required>
       </div>
       <div class="form-group">
         <label for="infixName">Infix</label>
@@ -26,11 +27,13 @@
       </div>
       <div class="form-group">
         <label for="lastName">Last name</label>
-        <input id="lastName" class="form-control" type="text" placeholder="Last name" th:field="*{lastName}">
+        <input id="lastName" class="form-control" type="text" placeholder="Last name"
+               minlength="2" th:field="*{lastName}" required>
       </div>
       <div class="form-group">
         <label for="emailAddress">Email address</label>
-        <input id="emailAddress" class="form-control" type="text" placeholder="Email address" th:field="*{emailAddress}">
+        <input id="emailAddress" class="form-control" type="email" placeholder="Email address"
+               th:field="*{emailAddress}" required>
       </div>
       <div class="form-group form-button">
         <button type="submit" class="btn btn-danger" >Save Teacher</button>
