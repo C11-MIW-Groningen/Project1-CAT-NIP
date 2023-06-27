@@ -36,6 +36,13 @@ public class Test {
     @OneToMany (mappedBy = "test", cascade = CascadeType.PERSIST)
     @Builder.Default private List<TestItem> testItems = new ArrayList<>();
 
+    public void setNameTest(String nameTest) {
+        if (nameTest == null || nameTest.trim().length() < 2) {
+            throw new IllegalArgumentException("Test must have a name (with more than 1 character)");
+        }
+        this.nameTest = nameTest;
+    }
+
     public void addTestItem(TestItem testItem) {
         testItems.add(testItem);
     }

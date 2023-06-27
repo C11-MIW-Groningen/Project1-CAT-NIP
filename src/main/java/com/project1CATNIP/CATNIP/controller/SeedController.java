@@ -140,7 +140,7 @@ public class SeedController {
         test1student1attempt1.setAttemptDate(LocalDate.of(2024, 2, 3));
         test1student1attempt1.setStudent(student1);
         test1student1attempt1.setTest(test1);
-        test1student1attempt1.setAttemptResult(9);
+        test1student1attempt1.setAttemptResult(9.0);
         testAttemptRepository.save(test1student1attempt1);
 
         TestAttempt test2student2attempt2 = new TestAttempt();
@@ -175,7 +175,7 @@ public class SeedController {
         ta6.setAttemptDate(LocalDate.of(2023, 4, 5));
         ta6.setStudent(student2);
         ta6.setTest(test4);
-        ta6.setAttemptResult(8);
+        ta6.setAttemptResult(8.0);
         testAttemptRepository.save(ta6);
 
         Assignment assignment1 = new Assignment();
