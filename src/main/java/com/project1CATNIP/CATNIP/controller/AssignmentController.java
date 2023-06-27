@@ -54,6 +54,7 @@ public class AssignmentController {
         } catch (ConstraintViolationException e) {
             String errorMessage = e.getMessage() + "This assignment already exists. Try again.";
             model.addAttribute("errorMessage", errorMessage);
+            return "/assignment/assignmentAddForm";
         }
 
         return "/assignment/assignmentAddForm";
