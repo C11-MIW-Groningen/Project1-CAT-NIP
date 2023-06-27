@@ -17,7 +17,8 @@
     <input type="hidden" th:field="*{testId}" />
     <div class="form-group">
       <label for="nameTest">Test name</label>
-      <input id="nameTest" class="form-control" type="text" placeholder="Test name" th:field="*{nameTest}">
+      <input id="nameTest" class="form-control" type="text" placeholder="Test name"
+             minlength="1" th:field="*{nameTest}" required>
     </div>
     <div>
       <label for="course">Course name</label>

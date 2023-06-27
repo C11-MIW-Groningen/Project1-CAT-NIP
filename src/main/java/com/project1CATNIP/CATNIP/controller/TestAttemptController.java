@@ -96,7 +96,7 @@ public class TestAttemptController {
     }
 
     @PostMapping("/grading/add")
-    private String saveTestAttempt(@Valid @ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
+    private String saveTestAttempt(@ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
                                    BindingResult result) {
         if (result.hasErrors()) {
             return "redirect:/grading";

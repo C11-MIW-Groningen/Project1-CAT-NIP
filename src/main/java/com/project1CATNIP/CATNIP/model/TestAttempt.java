@@ -27,8 +27,6 @@ public class TestAttempt {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate attemptDate;
 
-    @Max(value = 10)
-    @Min(value = 1)
     private double attemptResult;
 
     @ManyToOne

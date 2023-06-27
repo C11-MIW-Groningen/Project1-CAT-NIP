@@ -48,19 +48,22 @@
                 <td class="col">
                     <label>
                         <input id="testItemNumber" type="number"
-                               class="form-control" th:field="*{itemNumberForTest}">
+                               class="form-control"
+                               min="0" th:field="*{itemNumberForTest}" required>
                     </label>
                 </td>
                 <td class="col">
                     <label>
                         <input id="testItemDescription" type="text"
-                               class="form-control" th:field="*{description}">
+                               class="form-control"
+                               min="0" th:field="*{description}" required>
                     </label>
                 </td>
                 <td class="col">
                     <label>
                         <input id="testItemMaxPoints" type="number"
-                               class="form-control" th:field="*{maxPoints}">
+                               class="form-control"
+                               min="0" th:field="*{maxPoints}" required>
                     </label>
                 </td>
                 <td class="col"><button type="submit" class="btn btn-danger">Save</button></td>

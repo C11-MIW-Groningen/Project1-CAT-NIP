@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -38,7 +36,7 @@ public class TeacherController {
     }
 
     @PostMapping("/add")
-    private String saveTeacher(@Valid @ModelAttribute("teacher") Teacher teacherToAdd, BindingResult result) {
+    private String saveTeacher(@ModelAttribute("teacher") Teacher teacherToAdd, BindingResult result) {
 
         if (!result.hasErrors()) {
             teacherRepository.save(teacherToAdd);
