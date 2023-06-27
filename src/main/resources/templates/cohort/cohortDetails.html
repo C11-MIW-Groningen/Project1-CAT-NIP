@@ -10,6 +10,8 @@
 <div class="container">
   <h1 th:text="${cohort.getDisplayCohort()}"></h1>
 
+  <a th:href="@{/cohort/}">Back to Cohort Overview</a>
+
   <div class="row">
     <div class="col-md-8">
       Description of Cohort <span th:text="${cohort.getNumber()}"></span>.
