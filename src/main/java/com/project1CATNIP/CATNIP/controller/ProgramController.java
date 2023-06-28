@@ -1,6 +1,7 @@
 package com.project1CATNIP.CATNIP.controller;
 
 import com.project1CATNIP.CATNIP.model.Cohort;
+import com.project1CATNIP.CATNIP.model.Course;
 import com.project1CATNIP.CATNIP.model.Program;
 import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
@@ -61,15 +62,17 @@ public class ProgramController {
         Optional<Program> programToDelete = programRepository.findById(programId);
 
         if (programToDelete.isPresent()) {
-            Program program = programToDelete.get();
-            List<Cohort> cohortsFromProgram = cohortRepository.findByProgram(program);
-
-            for (Cohort cohort : cohortsFromProgram) {
+            for (Cohort cohort : cohortRepository.findByProgram(programToDelete.get())) {
                 cohort.setProgram(null);
-                cohortsFromProgram.remove(cohort);
+                cohortRepository.save(cohort);
             }
 
-            programRepository.delete(program);
+            for (Course course : courseRepository.findByProgram(programToDelete.get())) {
+                course.setProgram(null);
+                courseRepository.save(course);
+            }
+
+            programRepository.delete(programToDelete.get());
         }
 
         return "redirect:/program/all";
