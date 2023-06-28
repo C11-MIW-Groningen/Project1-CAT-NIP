@@ -66,9 +66,10 @@ public class AssignmentController {
 
         if (assignmentToDelete.isPresent()) {
             assignmentRepository.delete(assignmentToDelete.get());
+            return "redirect:/course/details/" + assignmentToDelete.get().getCourse().getCourseId();
         }
 
-        return "redirect:/course/details/" + assignmentToDelete.get().getCourse().getCourseId();
+        return "redirect:/course/all";
     }
 
     @GetMapping("/edit/{assignmentId}")
@@ -80,6 +81,7 @@ public class AssignmentController {
             model.addAttribute("allCourses", courseRepository.findAll());
             return "/assignment/assignmentAddForm";
         }
-        return "redirect:/course/details/" + optionalAssignment.get().getCourse().getCourseId();
+
+        return "redirect:/course/all";
     }
 }

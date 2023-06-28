@@ -11,7 +11,7 @@
 <div class="container w-25">
   <h1>Add a Test</h1>
 
-  <a th:href="@{/test/all}">Back to Test Overview</a>
+  <a th:href="@{/course/all}">Back to Course Overview</a>
 
   <form th:action="@{/test/add}" method="post" th:object="${test}">
     <input type="hidden" th:field="*{testId}" />

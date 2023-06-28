@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -61,10 +62,15 @@ public class TestController {
         Optional<Test> testToDelete = testRepository.findById(testId);
 
         if (testToDelete.isPresent()) {
-            testRepository.delete(testToDelete.get());
+            Test test = testToDelete.get();
+            List<TestItem> testItemList = testItemRepository.findTestItemsByTest(test);
+            testItemRepository.deleteAll(testItemList);
+            testRepository.delete(test);
+
+            return "redirect:/course/details/" + testToDelete.get().getCourse().getCourseId();
         }
 
-        return "redirect:/test/all";
+        return "redirect:/course/all";
     }
 
     @GetMapping("/edit/{testId}")
@@ -77,7 +83,7 @@ public class TestController {
             return "/test/addForm";
         }
 
-        return "redirect:/test/all";
+        return "redirect:/course/all";
     }
 
     @GetMapping("/{testId}/addtestitems")

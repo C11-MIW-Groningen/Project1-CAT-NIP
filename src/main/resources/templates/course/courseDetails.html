@@ -19,12 +19,12 @@
 
   <a th:href="@{/course/}">Back to Course Overview</a>
 
-  <div class="row" sec:authorize="hasAnyRole('TEACHER', 'ADMIN')">
+  <div class="row" sec:authorize="hasRole('TEACHER') OR hasRole('ADMIN')">
     <div class="col-md-6">
       <table class="table">
         <tr>
           <th>Tests</th>
-          <th>Add Testitem(s)</th>
+          <th>Add/Edit Testitem(s)</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
