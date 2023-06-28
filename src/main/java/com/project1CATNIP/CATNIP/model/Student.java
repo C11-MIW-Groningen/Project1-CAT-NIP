@@ -35,7 +35,6 @@ public class Student extends Person {
         }
 
         return testAttempts;
-
     }
 
     public TestAttempt getHighestTestAttemptByCourse(Course course) {
@@ -44,11 +43,11 @@ public class Student extends Person {
         double highScore = 0;
 
         for (TestAttempt attempt : testAttemptsForCourse) {
-                double attemptScore = attempt.getAttemptResult();
-                if (attemptScore >= highScore) {
-                    highestTestAttempt = attempt;
-                    highScore = attemptScore;
-                }
+            double attemptScore = attempt.getAttemptResult();
+            if (attemptScore >= highScore) {
+                highestTestAttempt = attempt;
+                highScore = attemptScore;
+            }
         }
 
         return highestTestAttempt;

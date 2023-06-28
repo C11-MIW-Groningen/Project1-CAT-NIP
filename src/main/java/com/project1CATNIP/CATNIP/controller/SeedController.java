@@ -136,29 +136,113 @@ public class SeedController {
         test4.setCourse(databases);
         testRepository.save(test4);
 
+        TestItem test1item1 = new TestItem();
+        test1item1.setItemNumberForTest(1);
+        test1item1.setDescription("Onderdeel 1");
+        test1item1.setMaxPoints(5);
+        test1item1.setTest(test1);
+        testItemRepository.save(test1item1);
+
+        TestItem test1item2 = new TestItem();
+        test1item2.setItemNumberForTest(2);
+        test1item2.setDescription("Onderdeel 2");
+        test1item2.setMaxPoints(10);
+        test1item2.setTest(test1);
+        testItemRepository.save(test1item2);
+
+        TestItem test1item3 = new TestItem();
+        test1item3.setItemNumberForTest(3);
+        test1item3.setDescription("Onderdeel 3");
+        test1item3.setMaxPoints(15);
+        test1item3.setTest(test1);
+        testItemRepository.save(test1item3);
+
+        TestItem test2item1 = new TestItem();
+        test2item1.setItemNumberForTest(1);
+        test2item1.setDescription("Vraag 1");
+        test2item1.setMaxPoints(4);
+        test2item1.setTest(test2);
+        testItemRepository.save(test2item1);
+
+        TestItem test2item2 = new TestItem();
+        test2item2.setItemNumberForTest(2);
+        test2item2.setDescription("Vraag 2");
+        test2item2.setMaxPoints(8);
+        test2item2.setTest(test2);
+        testItemRepository.save(test2item2);
+
+        TestItem test2item3 = new TestItem();
+        test2item3.setItemNumberForTest(3);
+        test2item3.setDescription("Vraag 3");
+        test2item3.setMaxPoints(12);
+        test2item3.setTest(test2);
+        testItemRepository.save(test2item3);
+
+        TestItem test3item1 = new TestItem();
+        test3item1.setItemNumberForTest(1);
+        test3item1.setDescription("Onderwerp 1");
+        test3item1.setMaxPoints(11);
+        test3item1.setTest(test3);
+        testItemRepository.save(test3item1);
+
+        TestItem test3item2 = new TestItem();
+        test3item2.setItemNumberForTest(2);
+        test3item2.setDescription("Onderwerp 2");
+        test3item2.setMaxPoints(6);
+        test3item2.setTest(test3);
+        testItemRepository.save(test3item2);
+
+        TestItem test3item3 = new TestItem();
+        test3item3.setItemNumberForTest(3);
+        test3item3.setDescription("Onderwerp 3");
+        test3item3.setMaxPoints(14);
+        test3item3.setTest(test3);
+        testItemRepository.save(test3item3);
+
+        TestItem test4item1 = new TestItem();
+        test4item1.setItemNumberForTest(1);
+        test4item1.setDescription("Vraag 1");
+        test4item1.setMaxPoints(10);
+        test4item1.setTest(test4);
+        testItemRepository.save(test4item1);
+
+        TestItem test4item2 = new TestItem();
+        test4item2.setItemNumberForTest(2);
+        test4item2.setDescription("Vraag 2");
+        test4item2.setMaxPoints(12);
+        test4item2.setTest(test4);
+        testItemRepository.save(test4item2);
+
+        TestItem test4item3 = new TestItem();
+        test4item3.setItemNumberForTest(3);
+        test4item3.setDescription("Vraag 3");
+        test4item3.setMaxPoints(12);
+        test4item3.setTest(test4);
+        testItemRepository.save(test4item3);
+
         TestAttempt test1student1attempt1 = new TestAttempt();
-        test1student1attempt1.setAttemptDate(LocalDate.of(2024, 2, 3));
+        test1student1attempt1.setAttemptDate(LocalDate.of(2022, 2, 3));
         test1student1attempt1.setStudent(student1);
         test1student1attempt1.setTest(test1);
         test1student1attempt1.setAttemptResult(9.0);
         testAttemptRepository.save(test1student1attempt1);
 
         TestAttempt test2student2attempt2 = new TestAttempt();
-        test2student2attempt2.setAttemptDate(LocalDate.of(2024, 2, 3));
+        test2student2attempt2.setAttemptDate(LocalDate.of(2022, 2, 3));
         test2student2attempt2.setStudent(student1);
         test2student2attempt2.setTest(test2);
         test2student2attempt2.setAttemptResult(8.7);
         testAttemptRepository.save(test2student2attempt2);
 
         TestAttempt test1student2attempt1 = new TestAttempt();
-        test1student2attempt1.setAttemptDate(LocalDate.of(2024, 2, 3));
+        test1student2attempt1.setAttemptDate(LocalDate.of(2022, 2, 3));
         test1student2attempt1.setStudent(student2);
         test1student2attempt1.setTest(test1);
         test1student2attempt1.setAttemptResult(6.1);
         testAttemptRepository.save(test1student2attempt1);
 
         TestAttempt test1student2attempt2 = new TestAttempt();
-        test1student2attempt2.setAttemptDate(LocalDate.of(2024, 3, 3));
+        test1student2attempt2.setAttemptDate(LocalDate.of(2022, 3, 3));
         test1student2attempt2.setStudent(student2);
         test1student2attempt2.setTest(test2);
         test1student2attempt2.setAttemptResult(9.2);
@@ -199,7 +283,6 @@ public class SeedController {
         if (miwUserRepository.findByUsername("teacher").isEmpty()) {
             miwUserRepository.save(teacherUser);
         }
-
 
         MIWUser studentUser = new MIWUser();
         studentUser.setUsername("student");

@@ -19,7 +19,7 @@
 
   <a th:href="@{/course/}">Back to Course Overview</a>
 
-  <div class="row">
+  <div class="row" sec:authorize="hasAnyRole('TEACHER', 'ADMIN')">
     <div class="col-md-6">
       <table class="table">
         <tr>
