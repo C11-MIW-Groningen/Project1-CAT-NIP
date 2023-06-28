@@ -31,24 +31,7 @@ html, body {
     margin-top: 12px;
 }
 
-/*!* unvisited link *!*/
-/*a:link {*/
-/*    color: black;*/
-/*    text-decoration: underline;*/
-/*}*/
-
-/*!* visited link *!*/
-/*a:visited {*/
-/*    color: black;*/
-/*}*/
-
-/*!* mouse over link *!*/
-/*a:hover {*/
-/*    color: blue;*/
-/*    text-decoration: underline;*/
-/*}*/
-
-/*!* selected link *!*/
-/*a:active {*/
-/*    color: blue;*/
-/*}*/
+#deleteLink {
+    color: white;
+    text-decoration: none;
+}
