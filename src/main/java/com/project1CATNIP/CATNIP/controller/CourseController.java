@@ -5,7 +5,9 @@ package com.project1CATNIP.CATNIP.controller;
  * Handles all interactions of courses.
  */
 
+import com.project1CATNIP.CATNIP.model.Assignment;
 import com.project1CATNIP.CATNIP.model.Course;
+import com.project1CATNIP.CATNIP.model.Test;
 import com.project1CATNIP.CATNIP.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -58,7 +61,18 @@ public class CourseController {
     @GetMapping("/delete/{courseId}")
     private String deleteCourse(@PathVariable("courseId") Long courseId) {
         Optional<Course> optionalCourse = courseRepository.findById(courseId);
+
         if (optionalCourse.isPresent()) {
+            for (Test test : testRepository.findByCourse(optionalCourse.get())) {
+                test.setCourse(null);
+                testRepository.save(test);
+            }
+
+            for (Assignment assignment : assignmentRepository.findByCourse(optionalCourse.get())) {
+                assignment.setCourse(null);
+                assignmentRepository.save(assignment);
+            }
+
             courseRepository.delete(optionalCourse.get());
         }
 
