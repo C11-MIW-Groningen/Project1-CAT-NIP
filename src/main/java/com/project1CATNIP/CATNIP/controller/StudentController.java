@@ -93,13 +93,11 @@ public class StudentController {
                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_STUDENT"));
 
         if (isStudent) {
-            // Fetch grades for the authenticated student
             List<TestAttempt> grades = testAttemptRepository.findTestAttemptByStudent(user.getStudent());
             model.addAttribute("grades", grades);
             model.addAttribute("student", user.getStudent());
             return "student/mygrades";
         } else {
-            // Throw an exception or handle unauthorized access
             throw new AccessDeniedException("Access to grades denied.");
         }
 

@@ -26,7 +26,7 @@ public class MIWKickstarter implements CommandLineRunner {
             MIWUser admin = new MIWUser();
             admin.setUsername("admin");
             admin.setPassword(passwordEncoder.encode("adminpw"));
-            admin.setAdministrator(true);
+            admin.setIsAdministrator(true);
             miwUserRepository.save(admin);
             System.err.println("Admin generated.");
         } else {

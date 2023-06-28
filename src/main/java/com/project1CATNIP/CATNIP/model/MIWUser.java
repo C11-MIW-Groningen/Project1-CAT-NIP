@@ -1,6 +1,5 @@
 package com.project1CATNIP.CATNIP.model;
 
-import com.project1CATNIP.CATNIP.service.MIWUserDetailsService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,20 +29,23 @@ public class MIWUser implements UserDetails {
 
     private String password;
 
-    private Boolean administrator = false;
+    private Boolean isAdministrator = false;
 
-    private Boolean teacher = false;
+    private Boolean isTeacher = false;
 
     @OneToOne
     private Student student;
+
+    @OneToOne
+    private Teacher teacher;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
-        if (administrator) {
+        if (isAdministrator) {
             authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        } else if (teacher) {
+        } else if (isTeacher) {
             authorityList.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
         } else {
             authorityList.add(new SimpleGrantedAuthority("ROLE_STUDENT"));

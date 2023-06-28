@@ -54,7 +54,6 @@ public class SeedController {
 
         Teacher janna = new Teacher();
         janna.setFirstName("Janna");
-        janna.setInfixName("");
         janna.setLastName("Scherpenzeel");
         janna.setEmailAddress("j.scherpenzeel@cat-nip.nl");
         teacherRepository.save(janna);
@@ -65,6 +64,19 @@ public class SeedController {
         mark.setLastName("Berg");
         mark.setEmailAddress("m.vd.berg@cat-nip.nl");
         teacherRepository.save(mark);
+
+        Teacher hendrik = new Teacher();
+        hendrik.setFirstName("Hendrik");
+        hendrik.setLastName("Jansma");
+        hendrik.setEmailAddress("h.jansma@cat-nip.nl");
+        teacherRepository.save(hendrik);
+
+        Teacher sterre = new Teacher();
+        sterre.setFirstName("Sterre");
+        sterre.setInfixName("De");
+        sterre.setLastName("Laat");
+        sterre.setEmailAddress("s.d.laat@cat-nip.nl");
+        teacherRepository.save(sterre);
 
         Program softwareEngineering = new Program();
         softwareEngineering.setNameProgram("Software Engineering");
@@ -100,25 +112,44 @@ public class SeedController {
         databases.setTeacher(janna);
         courseRepository.save(databases);
 
-        Student student1 = new Student();
-        student1.setFirstName("Henk");
-        student1.setInfixName("de");
-        student1.setLastName("Vries");
-        student1.setEmailAddress("h.de.vries@hmail.com");
-        student1.setCohort(se11);
-        if (!studentRepository.findAll().contains(student1)) {
-            studentRepository.save(student1);
+        Student henk = new Student();
+        henk.setFirstName("Henk");
+        henk.setInfixName("de");
+        henk.setLastName("Vries");
+        henk.setEmailAddress("h.d.vries@st.hanze.nl");
+        henk.setCohort(se11);
+        if (!studentRepository.findAll().contains(henk)) {
+            studentRepository.save(henk);
         }
 
+        Student angela = new Student();
+        angela.setFirstName("Angela");
+        angela.setLastName("Jongsma");
+        angela.setEmailAddress("a.jongsma@st.hanze.nl");
+        angela.setCohort(se11);
+        studentRepository.save(angela);
+        if (!studentRepository.findAll().contains(angela)) {
+            studentRepository.save(angela);
+        }
 
-        Student student2 = new Student();
-        student2.setFirstName("Angela");
-        student2.setLastName("Jongsma");
-        student2.setEmailAddress("ajongsma@hmail.com");
-        student2.setCohort(se11);
-        studentRepository.save(student2);
-        if (!studentRepository.findAll().contains(student2)) {
-            studentRepository.save(student2);
+        Student anton = new Student();
+        anton.setFirstName("Anton");
+        anton.setInfixName("Van de");
+        anton.setLastName("Berg");
+        anton.setEmailAddress("a.vd.berg@st.hanze.nl");
+        anton.setCohort(se11);
+        if (!studentRepository.findAll().contains(anton)) {
+            studentRepository.save(anton);
+        }
+
+        Student leonie = new Student();
+        leonie.setFirstName("Leonie");
+        leonie.setLastName("Hendriksen");
+        leonie.setEmailAddress("l.hendriksen@st.hanze.nl");
+        leonie.setCohort(se11);
+        studentRepository.save(leonie);
+        if (!studentRepository.findAll().contains(leonie)) {
+            studentRepository.save(leonie);
         }
 
         Test test1 = new Test();
@@ -227,42 +258,42 @@ public class SeedController {
 
         TestAttempt test1student1attempt1 = new TestAttempt();
         test1student1attempt1.setAttemptDate(LocalDate.of(2022, 2, 3));
-        test1student1attempt1.setStudent(student1);
+        test1student1attempt1.setStudent(henk);
         test1student1attempt1.setTest(test1);
         test1student1attempt1.setAttemptResult(9.0);
         testAttemptRepository.save(test1student1attempt1);
 
         TestAttempt test2student2attempt2 = new TestAttempt();
         test2student2attempt2.setAttemptDate(LocalDate.of(2022, 2, 3));
-        test2student2attempt2.setStudent(student1);
+        test2student2attempt2.setStudent(henk);
         test2student2attempt2.setTest(test2);
         test2student2attempt2.setAttemptResult(8.7);
         testAttemptRepository.save(test2student2attempt2);
 
         TestAttempt test1student2attempt1 = new TestAttempt();
         test1student2attempt1.setAttemptDate(LocalDate.of(2022, 2, 3));
-        test1student2attempt1.setStudent(student2);
+        test1student2attempt1.setStudent(angela);
         test1student2attempt1.setTest(test1);
         test1student2attempt1.setAttemptResult(6.1);
         testAttemptRepository.save(test1student2attempt1);
 
         TestAttempt test1student2attempt2 = new TestAttempt();
         test1student2attempt2.setAttemptDate(LocalDate.of(2022, 3, 3));
-        test1student2attempt2.setStudent(student2);
+        test1student2attempt2.setStudent(angela);
         test1student2attempt2.setTest(test2);
         test1student2attempt2.setAttemptResult(9.2);
         testAttemptRepository.save(test1student2attempt2);
 
         TestAttempt ta5 = new TestAttempt();
         ta5.setAttemptDate(LocalDate.of(2023, 4, 5));
-        ta5.setStudent(student1);
+        ta5.setStudent(henk);
         ta5.setTest(test3);
         ta5.setAttemptResult(7.2);
         testAttemptRepository.save(ta5);
 
         TestAttempt ta6 = new TestAttempt();
         ta6.setAttemptDate(LocalDate.of(2023, 4, 5));
-        ta6.setStudent(student2);
+        ta6.setStudent(angela);
         ta6.setTest(test4);
         ta6.setAttemptResult(8.0);
         testAttemptRepository.save(ta6);
@@ -281,28 +312,68 @@ public class SeedController {
         assignment2.setCourse(databases);
         assignmentRepository.save(assignment2);
 
-        MIWUser teacherUser = new MIWUser();
-        teacherUser.setUsername("teacher");
-        teacherUser.setPassword(passwordEncoder.encode("teacherpw"));
-        teacherUser.setTeacher(true);
-        if (miwUserRepository.findByUsername("teacher").isEmpty()) {
-            miwUserRepository.save(teacherUser);
+        MIWUser studentHenk = new MIWUser();
+        studentHenk.setUsername("henk");
+        studentHenk.setStudent(henk);
+        studentHenk.setPassword(passwordEncoder.encode("studentpw"));
+        if (miwUserRepository.findByUsername("henk").isEmpty()) {
+            miwUserRepository.save(studentHenk);
         }
 
-        MIWUser studentUser = new MIWUser();
-        studentUser.setUsername("student");
-        studentUser.setStudent(student1);
-        studentUser.setPassword(passwordEncoder.encode("studentpw"));
-        if (miwUserRepository.findByUsername("student").isEmpty()) {
-            miwUserRepository.save(studentUser);
-        }
-
-        MIWUser studentUser2 = new MIWUser();
-        studentUser2.setUsername("angela");
-        studentUser2.setStudent(student2);
-        studentUser2.setPassword(passwordEncoder.encode("studentpw"));
+        MIWUser studentAngela = new MIWUser();
+        studentAngela.setUsername("angela");
+        studentAngela.setStudent(angela);
+        studentAngela.setPassword(passwordEncoder.encode("studentpw"));
         if (miwUserRepository.findByUsername("angela").isEmpty()) {
-            miwUserRepository.save(studentUser2);
+            miwUserRepository.save(studentAngela);
+        }
+
+        MIWUser studentAnton = new MIWUser();
+        studentAnton.setUsername("anton");
+        studentAnton.setStudent(angela);
+        studentAnton.setPassword(passwordEncoder.encode("studentpw"));
+        if (miwUserRepository.findByUsername("anton").isEmpty()) {
+            miwUserRepository.save(studentAnton);
+        }
+
+        MIWUser studentLeonie = new MIWUser();
+        studentLeonie.setUsername("leonie");
+        studentLeonie.setStudent(angela);
+        studentLeonie.setPassword(passwordEncoder.encode("studentpw"));
+        if (miwUserRepository.findByUsername("leonie").isEmpty()) {
+            miwUserRepository.save(studentLeonie);
+        }
+
+        MIWUser teacherJanna = new MIWUser();
+        teacherJanna.setUsername("janna");
+        teacherJanna.setTeacher(janna);
+        teacherJanna.setPassword(passwordEncoder.encode("teacherpw"));
+        if (miwUserRepository.findByUsername("janna").isEmpty()) {
+            miwUserRepository.save(teacherJanna);
+        }
+
+        MIWUser teacherMark = new MIWUser();
+        teacherMark.setUsername("mark");
+        teacherMark.setTeacher(mark);
+        teacherMark.setPassword(passwordEncoder.encode("teacherpw"));
+        if (miwUserRepository.findByUsername("mark").isEmpty()) {
+            miwUserRepository.save(teacherMark);
+        }
+
+        MIWUser teacherHendrik = new MIWUser();
+        teacherHendrik.setUsername("hendrik");
+        teacherHendrik.setTeacher(hendrik);
+        teacherHendrik.setPassword(passwordEncoder.encode("teacherpw"));
+        if (miwUserRepository.findByUsername("hendrik").isEmpty()) {
+            miwUserRepository.save(teacherHendrik);
+        }
+
+        MIWUser teacherSterre = new MIWUser();
+        teacherSterre.setUsername("sterre");
+        teacherSterre.setTeacher(sterre);
+        teacherSterre.setPassword(passwordEncoder.encode("teacherpw"));
+        if (miwUserRepository.findByUsername("sterre").isEmpty()) {
+            miwUserRepository.save(teacherSterre);
         }
 
         return "redirect:/program";
