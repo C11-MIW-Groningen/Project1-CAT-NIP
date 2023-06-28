@@ -38,7 +38,13 @@
             <li class="nav-item" sec:authorize="hasRole('TEACHER') OR hasRole('ADMIN')">
                 <a class="nav-link" th:href="@{/grading}">Grading</a>
             </li>
-            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item" sec:authorize="hasRole('STUDENT')">
+                <a class="nav-link" >My Courses</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('STUDENT')">
+                <a class="nav-link" th:href="@{/student/mygrades}">My Grades</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                 <a class="nav-link btn btn-danger" th:href="@{/seed}">Seed</a>
             </li>
         </ul>
