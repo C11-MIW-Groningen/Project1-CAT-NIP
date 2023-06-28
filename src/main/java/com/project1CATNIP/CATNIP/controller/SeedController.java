@@ -286,6 +286,7 @@ public class SeedController {
 
         MIWUser studentUser = new MIWUser();
         studentUser.setUsername("student");
+        studentUser.setStudent(student1);
         studentUser.setPassword(passwordEncoder.encode("studentpw"));
         if (miwUserRepository.findByUsername("student").isEmpty()) {
             miwUserRepository.save(studentUser);

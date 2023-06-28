@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.nio.file.AccessDeniedException;
+import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -22,6 +26,10 @@ public class StudentController {
     private final StudentRepository studentRepository;
 
     private final CohortRepository cohortRepository;
+
+    private final MIWUserRepository miwUserRepository;
+
+    private final TestAttemptRepository testAttemptRepository;
 
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {
@@ -71,5 +79,29 @@ public class StudentController {
         }
 
         return "redirect:/student/all";
+    }
+
+    @GetMapping("/mygrades")
+    private String showGrades(Model model, Principal principal) throws AccessDeniedException {
+        Optional<MIWUser> optionalUser = miwUserRepository.findByUsername(principal.getName());
+        if (optionalUser.isEmpty()) {
+            return "redirect:/";
+        }
+        MIWUser user = optionalUser.get();
+
+        boolean isStudent = user.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_STUDENT"));
+
+        if (isStudent) {
+            // Fetch grades for the authenticated student
+            List<TestAttempt> grades = testAttemptRepository.findTestAttemptByStudent(user.getStudent());
+            model.addAttribute("grades", grades);
+            model.addAttribute("student", user.getStudent());
+            return "student/mygrades";
+        } else {
+            // Throw an exception or handle unauthorized access
+            throw new AccessDeniedException("Access to grades denied.");
+        }
+
     }
 }
