@@ -21,16 +21,16 @@
       <th sec:authorize="hasRole('ADMIN')">Delete</th>
     </tr>
     <tr th:each="teacher : ${allTeachers}">
-      <td th:text="${teacher.getFirstName()}"></td>
-      <td th:text="${teacher.getInfixName()}"></td>
-      <td th:text="${teacher.getLastName()}"></td>
-      <td th:text="${teacher.getEmailAddress()}"></td>
-      <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/teacher/edit/{teacherId}(teacherId=${teacher.teacherId})}">
+      <td class="align-middle" th:text="${teacher.getFirstName()}"></td>
+      <td class="align-middle" th:text="${teacher.getInfixName()}"></td>
+      <td class="align-middle" th:text="${teacher.getLastName()}"></td>
+      <td class="align-middle" th:text="${teacher.getEmailAddress()}"></td>
+      <td class="align-middle" sec:authorize="hasRole('ADMIN')"><a th:href="@{/teacher/edit/{teacherId}(teacherId=${teacher.teacherId})}">
         <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
       </a></td>
-      <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/teacher/delete/{teacherId}(teacherId=${teacher.teacherId})}">
-        <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
-      </a></td>
+      <td class="align-middle" sec:authorize="hasRole('ADMIN')">
+        <div th:replace="fragments/buttons :: deleteTeacher"></div>
+      </td>
     </tr>
   </table>
 

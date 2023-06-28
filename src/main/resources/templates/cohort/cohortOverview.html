@@ -22,7 +22,7 @@
       <th>Delete</th>
     </tr>
     <tr th:each="cohort : ${allCohorts}" th:unless="${cohort.isOldCohort()}">
-      <td>
+      <td class="align-middle">
         <span th:if="${cohort.getProgram()}">
           <a th:href="@{/cohort/details/{cohortId}(cohortId=${cohort.getCohortId()})}"
              th:text="${cohort.getDisplayCohort()}">
@@ -30,14 +30,14 @@
         </span>
         <span th:unless="${cohort.getProgram()}">No program assigned</span>
       </td>
-      <td th:text="${cohort.getStartDate()}"></td>
-      <td th:text="${cohort.getEndDate()}"></td>
-      <td>
+      <td class="align-middle" th:text="${cohort.getStartDate()}"></td>
+      <td class="align-middle" th:text="${cohort.getEndDate()}"></td>
+      <td class="align-middle">
         <a th:href="@{/cohort/edit/{cohortId}(cohortId=${cohort.cohortId})}">
           <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
         </a>
       </td>
-      <td>
+      <td class="align-middle">
         <div th:replace="fragments/buttons :: deleteCohort"></div>
       </td>
     </tr>

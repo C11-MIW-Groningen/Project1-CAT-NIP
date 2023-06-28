@@ -19,18 +19,18 @@
       <th sec:authorize="hasRole('ADMIN')">Delete</th>
     </tr>
     <tr th:each="program, programStatus : ${allPrograms}">
-      <td>
+      <td class="align-middle">
         <a th:href="@{/program/details/{programId}(programId=${program.getProgramId()})}"
            th:text="${program.getNameProgram()}">
         </a>
       </td>
-      <td th:text="${program.getNumberOfCohorts()}"></td>
-      <td sec:authorize="hasRole('TEACHER') OR hasRole('ADMIN')">
+      <td class="align-middle" th:text="${program.getNumberOfCohorts()}"></td>
+      <td class="align-middle" sec:authorize="hasRole('TEACHER') OR hasRole('ADMIN')">
         <a th:href="@{/program/edit/{programId}(programId=${program.getProgramId()})}">
         <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
         </a>
       </td>
-      <td sec:authorize="hasRole('ADMIN')">
+      <td class="align-middle" sec:authorize="hasRole('ADMIN')">
         <div th:replace="fragments/buttons :: deleteProgram"></div>
       </td>
     </tr>

@@ -19,22 +19,20 @@
       <th>Delete</th>
     </tr>
     <tr th:each="course : ${allCourses}">
-      <td>
+      <td class="align-middle">
         <a th:href="@{/course/details/{courseId}(courseId=${course.courseId})}"
            th:text="${course.getCourseName()}">
         </a>
       </td>
-      <td th:text="${course.getProgram().getNameProgram()}"></td>
-      <td th:text="${course.teacher.getDisplayName()}"></td>
-      <td>
+      <td class="align-middle" th:text="${course.getProgram().getNameProgram()}"></td>
+      <td class="align-middle" th:text="${course.teacher.getDisplayName()}"></td>
+      <td class="align-middle">
         <a th:href="@{/course/edit/{courseId}(courseId=${course.courseId})}">
         <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px;">
         </a>
       </td>
-      <td>
-        <a th:href="@{/course/delete/{courseId}(courseId=${course.courseId})}">
-          <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
-        </a>
+      <td class="align-middle">
+        <div th:replace="fragments/buttons :: deleteCourse"></div>
       </td>
     </tr>
   </table>
