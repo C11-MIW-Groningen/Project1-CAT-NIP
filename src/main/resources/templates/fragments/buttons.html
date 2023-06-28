@@ -1,0 +1,61 @@
+<!--Button + Modal to delete cohort-->
+<div th:fragment="deleteCohort">
+  <button type="button" class="btn" data-bs-toggle="modal"
+          th:data-bs-target="'#deleteModal-' + ${cohort.cohortId}">
+    <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
+  </button>
+
+  <div class="modal fade" th:id="'deleteModal-' + ${cohort.cohortId}"
+       tabindex="-1" aria-labelledby="deleteCohort" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteCohort">Delete Cohort</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this cohort?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <a class="deleteLink" th:href="@{/cohort/delete/{cohortId}(cohortId=${cohort.cohortId})}">
+            <button type="button" class="btn btn-danger">
+              Yes, i'm sure
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Button + Modal to delete Program-->
+<div th:fragment="deleteProgram">
+  <button type="button" class="btn" data-bs-toggle="modal"
+          th:data-bs-target="'#deleteModal-' + ${program.getProgramId()}">
+    <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
+  </button>
+
+  <div class="modal fade" th:id="'deleteModal-' + ${program.getProgramId()}"
+       tabindex="-1" aria-labelledby="deleteProgram" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteProgram">Delete Program</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this program?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <a class="deleteLink" th:href="@{/program/delete/{programId}(programId=${program.programId})}">
+            <button type="button" class="btn btn-danger">
+              Yes, i'm sure
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

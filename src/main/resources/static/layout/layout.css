@@ -31,7 +31,7 @@ html, body {
     margin-top: 12px;
 }
 
-#deleteLink {
+.deleteLink {
     color: white;
     text-decoration: none;
 }

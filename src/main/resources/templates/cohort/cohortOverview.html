@@ -32,12 +32,14 @@
       </td>
       <td th:text="${cohort.getStartDate()}"></td>
       <td th:text="${cohort.getEndDate()}"></td>
-      <td><a th:href="@{/cohort/edit/{cohortId}(cohortId=${cohort.cohortId})}">
-        <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
-      </a></td>
-      <td><a th:href="@{/cohort/delete/{cohortId}(cohortId=${cohort.cohortId})}">
-        <img src="/images/trash-can-regular.svg" alt="delete" style="height: 18px">
-      </a></td>
+      <td>
+        <a th:href="@{/cohort/edit/{cohortId}(cohortId=${cohort.cohortId})}">
+          <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
+        </a>
+      </td>
+      <td>
+        <div th:replace="fragments/buttons :: deleteCohort"></div>
+      </td>
     </tr>
   </table>
 
