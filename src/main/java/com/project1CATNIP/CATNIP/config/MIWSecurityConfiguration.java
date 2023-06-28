@@ -33,7 +33,7 @@ public class MIWSecurityConfiguration {
                         .antMatchers("/program/add", "/program/edit/**").hasAnyRole("ADMIN", "TEACHER")
                         .antMatchers("/program/delete/**").hasRole("ADMIN")
                         .antMatchers("/cohort/**").hasAnyRole("ADMIN", "TEACHER")
-                        .antMatchers("/student/**").hasAnyRole("ADMIN", "TEACHER")
+                        .antMatchers("/student/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT")
                         .antMatchers("/teacher/add", "/teacher/delete/**", "/teacher/edit/**").hasRole("ADMIN")
                         .antMatchers("/course/add", "/course/delete/**", "/course/edit/**")
                         .hasAnyRole("ADMIN", "TEACHER")
