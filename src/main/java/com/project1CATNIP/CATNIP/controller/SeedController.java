@@ -46,7 +46,6 @@ public class SeedController {
         testItemRepository.deleteAll();
         testAttemptRepository.deleteAll();
         assignmentRepository.deleteAll();
-        studentRepository.deleteAll();
         testRepository.deleteAll();
         courseRepository.deleteAll();
         cohortRepository.deleteAll();
@@ -107,7 +106,10 @@ public class SeedController {
         student1.setLastName("Vries");
         student1.setEmailAddress("h.de.vries@hmail.com");
         student1.setCohort(se11);
-        studentRepository.save(student1);
+        if (!studentRepository.findAll().contains(student1)) {
+            studentRepository.save(student1);
+        }
+
 
         Student student2 = new Student();
         student2.setFirstName("Angela");
@@ -115,6 +117,9 @@ public class SeedController {
         student2.setEmailAddress("ajongsma@hmail.com");
         student2.setCohort(se11);
         studentRepository.save(student2);
+        if (!studentRepository.findAll().contains(student2)) {
+            studentRepository.save(student2);
+        }
 
         Test test1 = new Test();
         test1.setNameTest("Exam BMI application");
@@ -290,6 +295,14 @@ public class SeedController {
         studentUser.setPassword(passwordEncoder.encode("studentpw"));
         if (miwUserRepository.findByUsername("student").isEmpty()) {
             miwUserRepository.save(studentUser);
+        }
+
+        MIWUser studentUser2 = new MIWUser();
+        studentUser2.setUsername("angela");
+        studentUser2.setStudent(student2);
+        studentUser2.setPassword(passwordEncoder.encode("studentpw"));
+        if (miwUserRepository.findByUsername("angela").isEmpty()) {
+            miwUserRepository.save(studentUser2);
         }
 
         return "redirect:/program";
