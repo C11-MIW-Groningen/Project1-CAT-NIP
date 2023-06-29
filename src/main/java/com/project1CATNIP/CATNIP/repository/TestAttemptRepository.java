@@ -8,10 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TestAttemptRepository extends JpaRepository<TestAttempt, Long> {
-
     List<TestAttempt> findTestAttemptsByStudentAndTestIn(Student studentId, List<Test> testId);
-    List<TestAttempt> findTestAttemptsByStudentInAndTestIn(List<Student> studentid, List<Test> testId);
-    List<TestAttempt> findTestAttemptByStudent(Student studentId);
-
-
 }

@@ -1,11 +1,7 @@
 package com.project1CATNIP.CATNIP.model;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
-import org.springframework.validation.annotation.Validated;
-
-import javax.naming.InvalidNameException;
 import javax.persistence.*;
 import java.util.List;
 
@@ -30,7 +26,6 @@ public class Program {
 
     @OneToMany (mappedBy = "program")
     private List<Course> courses;
-
 
     public int getNumberOfCohorts() {
         return cohorts.size();
