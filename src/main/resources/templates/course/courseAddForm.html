@@ -19,6 +19,7 @@
                 <label for="courseName">Course name</label>
                 <input id="courseName" class="form-control" type="text" minlength="2"
                        placeholder="Course name" th:field="*{courseName}" required>
+                <p th:if="${#fields.hasErrors('courseName')}" class="text-danger" th:errors="*{courseName}"></p>
             </div>
             <div class="form-group">
                 <label for="program">Select program</label>
@@ -41,6 +42,7 @@
             <div class="form-group form-button">
                 <button type="submit" class="btn btn-danger" >Save Course</button>
             </div>
+            <h3 th:if="${success}" th:text="${success}"></h3>
         </div>
     </form>
 </div>

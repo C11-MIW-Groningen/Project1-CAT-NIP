@@ -30,12 +30,6 @@ public class StudentController {
 
     private final MIWUserRepository miwUserRepository;
 
-    private final TestAttemptRepository testAttemptRepository;
-
-    private final CourseRepository courseRepository;
-
-    private final ProgramRepository programRepository;
-
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {
         model.addAttribute("allStudents", studentRepository.findAll());
@@ -52,13 +46,15 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    private String saveStudent(@ModelAttribute("student") Student studentToAdd, BindingResult result) {
+    private String saveStudent(@ModelAttribute("student") Student studentToAdd, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            return "redirect:/student/all";
+            return "/student/studentAddForm";
         }
 
         studentRepository.save(studentToAdd);
+        String successMessage = "Student added successfully.";
+        model.addAttribute("success", successMessage);
         return "redirect:/student/add";
     }
 

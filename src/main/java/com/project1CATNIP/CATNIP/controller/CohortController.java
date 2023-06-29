@@ -47,12 +47,15 @@ public class CohortController {
         }
 
         @PostMapping("/add")
-        private String saveCohort(@ModelAttribute("cohort") Cohort cohortToAdd, BindingResult result) {
+        private String saveCohort(@ModelAttribute("cohort") Cohort cohortToAdd, BindingResult result, Model model) {
             if (result.hasErrors()) {
                 return "/cohort/cohortAddForm";
             }
 
             cohortRepository.save(cohortToAdd);
+            String successMessage = "Cohort added successfully.";
+            model.addAttribute("success", successMessage);
+
             return "redirect:/cohort/add";
         }
 

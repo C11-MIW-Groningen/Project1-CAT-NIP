@@ -95,12 +95,14 @@ public class TestAttemptController {
 
     @PostMapping("/grading/add")
     private String saveTestAttempt(@ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
-                                   BindingResult result) {
+                                   BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "redirect:/grading";
+            return "/testAttempt/testAttemptAddForm";
         }
 
         testAttemptRepository.save(testAttemptToSave);
+        String successMessage = "Test result added successfully.";
+        model.addAttribute("success", successMessage);
         return "redirect:/grading";
     }
 
@@ -146,5 +148,4 @@ public class TestAttemptController {
         Program program = cohort.getProgram();
         return courseRepository.findByProgram(program);
     }
-
 }

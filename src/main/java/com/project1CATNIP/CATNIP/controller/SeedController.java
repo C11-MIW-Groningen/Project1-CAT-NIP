@@ -13,12 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class SeedController {
+
+    private final int INDEX_ADMIN = 0;
 
     private final TeacherRepository teacherRepository;
 
@@ -45,10 +46,10 @@ public class SeedController {
     @GetMapping("/seed")
     private String seedDatabase() {
 
-        List<MIWUser> users = miwUserRepository.findAll();
-        users.remove(0);
+        List<MIWUser> usersToRemove = miwUserRepository.findAll();
+        usersToRemove.remove(INDEX_ADMIN);
 
-        for (MIWUser user : users) {
+        for (MIWUser user : usersToRemove) {
             miwUserRepository.delete(user);
         }
 

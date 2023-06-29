@@ -19,6 +19,7 @@
             <label for="firstNameStudent">First name</label>
             <input id="firstNameStudent" class="form-control" type="text"
                    placeholder="First name" minlength="2" th:field="*{firstName}" required>
+            <p th:if="${#fields.hasErrors('firstName')}" class="text-danger" th:errors="*{firstName}"></p>
         </div>
         <div class="form-group">
             <label for="infixNameStudent">Infix</label>
@@ -29,11 +30,13 @@
             <label for="lastNameStudent">Last name</label>
             <input id="lastNameStudent" class="form-control" type="text"
                    placeholder="Last name" minlength="2" th:field="*{lastName}" required>
+            <p th:if="${#fields.hasErrors('lastName')}" class="text-danger" th:errors="*{lastName}"></p>
         </div>
         <div class="form-group">
             <label for="emailAddress">Email address</label>
             <input id="emailAddress" class="form-control" type="email"
                    placeholder="Email address" th:field="*{emailAddress}" required>
+            <p th:if="${#fields.hasErrors('emailAddress')}" class="text-danger" th:errors="*{emailAddress}"></p>
         </div>
         <div>
             <label for="cohort">Select cohort</label>
@@ -50,6 +53,7 @@
         <div class="form-group form-button">
             <button type="submit" class="btn btn-danger" >Save Student</button>
         </div>
+        <h3 class="mt-3" th:if="${success}" th:text="${success}"></h3>
     </form>
 </div>
 

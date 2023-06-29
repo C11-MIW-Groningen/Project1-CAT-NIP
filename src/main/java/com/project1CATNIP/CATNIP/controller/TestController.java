@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -32,13 +31,6 @@ public class TestController {
 
     private final TestItemRepository testItemRepository;
 
-    @GetMapping({"", "/", "/all"})
-    private String showAllTests(Model model) {
-        model.addAttribute("allTests", testRepository.findAll());
-
-        return "/archive/overview";
-    }
-
     @GetMapping("/add")
     private String addTestForm(Model model) {
         Test test = new Test();
@@ -49,11 +41,14 @@ public class TestController {
     }
 
     @PostMapping("/add")
-    private String saveTest(@ModelAttribute("test") Test testToAdd, BindingResult result) {
-        if (!result.hasErrors()) {
-            testRepository.save(testToAdd);
+    private String saveTest(@ModelAttribute("test") Test testToAdd, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "/test/addForm";
         }
 
+        testRepository.save(testToAdd);
+        String successMessage = "Test added successfully.";
+        model.addAttribute("success", successMessage);
         return "redirect:/test/add";
     }
 
@@ -104,12 +99,12 @@ public class TestController {
     @PostMapping("/addtestitem")
     private String saveTestItem(@ModelAttribute("testitem") TestItem testItem,
                                 BindingResult result) {
-            if (!result.hasErrors()) {
-                testItemRepository.save(testItem);
-                return "redirect:/test/" + testItem.getTest().getTestId() + "/addtestitems";
-            }
+        if (result.hasErrors()) {
+            return "/test/addTestItemsForm";
+        }
 
-        return "redirect:/course/all";
+        testItemRepository.save(testItem);
+        return "redirect:/test/" + testItem.getTest().getTestId() + "/addtestitems";
     }
 
     @GetMapping("/details/{testId}")

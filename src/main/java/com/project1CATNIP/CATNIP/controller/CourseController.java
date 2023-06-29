@@ -15,12 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("course")
+@RequestMapping("/course")
 public class CourseController {
 
     private final CourseRepository courseRepository;
@@ -50,10 +49,14 @@ public class CourseController {
     }
 
     @PostMapping("/add")
-    private String saveCourse(@ModelAttribute("course") Course course, BindingResult result) {
-        if(!result.hasErrors()) {
-            courseRepository.save(course);
+    private String saveCourse(@ModelAttribute("course") Course course, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            return "/course/courseAddForm";
         }
+
+        courseRepository.save(course);
+        String successMessage = "Course added successfully.";
+        model.addAttribute("success", successMessage);
 
         return "redirect:/course/add";
     }

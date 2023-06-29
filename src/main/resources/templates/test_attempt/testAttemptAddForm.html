@@ -29,14 +29,17 @@
     <div class="form-group">
       <label for="testDate">Select date</label>
       <input class="form-control" id="testDate" type="date" th:field="*{attemptDate}" required>
+      <p th:if="${#fields.hasErrors('attemptDate')}" class="text-danger" th:errors="*{attemptDate}"></p>
     </div>
     <div class="form-group">
       <label for="attemptResult">Attempt Result</label>
       <input class="form-control" id="attemptResult" type="number" min="1" max="10" step="0.1"
              th:field="*{attemptResult}" required>
+      <p th:if="${#fields.hasErrors('attemptResult')}" class="text-danger" th:errors="*{attemptResult}"></p>
     </div>
     <div class="form-group form-button">
       <button type="submit" class="btn btn-danger" >Create test result</button>
+      <h3 class="mt-3" th:if="${success}" th:text="${success}"></h3>
     </div>
     <script th:replace="fragments/scripts :: maxDateToday"></script>
   </form>
