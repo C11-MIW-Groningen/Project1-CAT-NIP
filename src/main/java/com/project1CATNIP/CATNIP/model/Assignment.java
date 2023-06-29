@@ -33,7 +33,7 @@ public class Assignment {
 
     public void setAssignmentName(String assignmentName) {
         if (assignmentName == null || assignmentName.trim().length() < 2) {
-            throw new IllegalArgumentException("Program name must be more than one character");
+            throw new IllegalArgumentException("Assignment name must be more than one character");
         }
         this.assignmentName = assignmentName;
     }

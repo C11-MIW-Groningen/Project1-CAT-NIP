@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CohortTest {
     @ParameterizedTest (name = "{0}")
     @DisplayName("Set valid cohort number")
-    @ValueSource(ints = {1, 10, 50, 99})
+    @ValueSource(ints = {1, 10, 50, 100})
     void setValidCohortNumber(int validNumbers) {
         Cohort cohort = new Cohort();
 
