@@ -55,5 +55,4 @@ public class Test {
         return course.getCourseName() + ": " + nameTest;
     }
 
-
 }

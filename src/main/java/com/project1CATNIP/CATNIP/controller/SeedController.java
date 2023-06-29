@@ -111,6 +111,13 @@ public class SeedController {
         ds1.setEndDate(LocalDate.of(2024, 7, 2));
         cohortRepository.save(ds1);
 
+        Cohort se7 = new Cohort();
+        se7.setNumber(7);
+        se7.setProgram(softwareEngineering);
+        se7.setStartDate(LocalDate.of(2022, 2, 3));
+        se7.setEndDate(LocalDate.of(2022, 7, 2));
+        cohortRepository.save(se7);
+
         Course programming = new Course();
         programming.setCourseName("Programming");
         programming.setProgram(softwareEngineering);

@@ -1,6 +1,5 @@
 package com.project1CATNIP.CATNIP.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
