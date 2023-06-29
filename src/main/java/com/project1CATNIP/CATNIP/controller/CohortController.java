@@ -95,12 +95,15 @@ public class CohortController {
             Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
 
             if (optionalCohort.isPresent()) {
-                model.addAttribute("cohort", optionalCohort.get());
+                Cohort thisCohort = optionalCohort.get();
                 List<Student> studentsWithoutCohort = studentRepository.findAll();
-                studentsWithoutCohort.removeAll(optionalCohort.get().getStudents());
+                studentsWithoutCohort.removeAll(thisCohort.getStudents());
+
+                model.addAttribute("cohort", thisCohort);
                 model.addAttribute("allStudents", studentsWithoutCohort);
                 model.addAttribute("enrollment",
-                        CohortEnrollmentDTO.builder().cohort(optionalCohort.get()).build());
+                        CohortEnrollmentDTO.builder().cohort(thisCohort).build());
+
                 return "/cohort/cohortDetails";
             }
 

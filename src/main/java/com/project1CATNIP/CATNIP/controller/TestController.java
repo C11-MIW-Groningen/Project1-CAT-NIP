@@ -33,8 +33,7 @@ public class TestController {
 
     @GetMapping("/add")
     private String addTestForm(Model model) {
-        Test test = new Test();
-        model.addAttribute("test", test);
+        model.addAttribute("test", new Test());
         model.addAttribute("allCourses", courseRepository.findAll());
 
         return "/test/addForm";
@@ -86,10 +85,12 @@ public class TestController {
         Optional<Test> optionalTest = testRepository.findById(testId);
 
         if (optionalTest.isPresent()) {
+            List<TestItem> allTestItemsFromTest = optionalTest.get().getTestItems();
+
+            model.addAttribute("allTestItemsFromTest", allTestItemsFromTest);
             model.addAttribute("test", optionalTest.get());
             model.addAttribute("testitem", new TestItem());
-            List<TestItem> allTestItemsFromTest = optionalTest.get().getTestItems();
-            model.addAttribute("allTestItemsFromTest", allTestItemsFromTest);
+
             return "/test/addTestItemsForm";
         }
 
@@ -115,6 +116,7 @@ public class TestController {
             Test test = optionalTest.get();
             List<TestItem> testItemsFromTest = test.getTestItems();
             Collections.sort(testItemsFromTest);
+
             model.addAttribute("test", test);
             model.addAttribute("testItemsForTest", testItemsFromTest);
             return "/test/testDetails";

@@ -66,16 +66,7 @@ public class CourseController {
         Optional<Course> optionalCourse = courseRepository.findById(courseId);
 
         if (optionalCourse.isPresent()) {
-            for (Test test : testRepository.findByCourse(optionalCourse.get())) {
-                test.setCourse(null);
-                testRepository.save(test);
-            }
-
-            for (Assignment assignment : assignmentRepository.findByCourse(optionalCourse.get())) {
-                assignment.setCourse(null);
-                assignmentRepository.save(assignment);
-            }
-
+            setTestsAndAssignmentsToNull(optionalCourse.get());
             courseRepository.delete(optionalCourse.get());
         }
 
@@ -110,4 +101,17 @@ public class CourseController {
 
         return "redirect:/course/all";
     }
+
+    private void setTestsAndAssignmentsToNull(Course course) {
+        for (Test test : testRepository.findByCourse(course)) {
+            test.setCourse(null);
+            testRepository.save(test);
+        }
+
+        for (Assignment assignment : assignmentRepository.findByCourse(course)) {
+            assignment.setCourse(null);
+            assignmentRepository.save(assignment);
+        }
+    }
+
 }

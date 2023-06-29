@@ -317,69 +317,53 @@ public class SeedController {
         studentHenk.setUsername("henk");
         studentHenk.setStudent(henk);
         studentHenk.setPassword(passwordEncoder.encode("studentpw"));
-        if (miwUserRepository.findByUsername("henk").isEmpty()) {
-            miwUserRepository.save(studentHenk);
-        }
+        miwUserRepository.save(studentHenk);
 
         MIWUser studentAngela = new MIWUser();
         studentAngela.setUsername("angela");
         studentAngela.setStudent(angela);
         studentAngela.setPassword(passwordEncoder.encode("studentpw"));
-        if (miwUserRepository.findByUsername("angela").isEmpty()) {
-            miwUserRepository.save(studentAngela);
-        }
+        miwUserRepository.save(studentAngela);
 
         MIWUser studentAnton = new MIWUser();
         studentAnton.setUsername("anton");
         studentAnton.setStudent(anton);
         studentAnton.setPassword(passwordEncoder.encode("studentpw"));
-        if (miwUserRepository.findByUsername("anton").isEmpty()) {
-            miwUserRepository.save(studentAnton);
-        }
+        miwUserRepository.save(studentAnton);
 
         MIWUser studentLeonie = new MIWUser();
         studentLeonie.setUsername("leonie");
         studentLeonie.setStudent(leonie);
         studentLeonie.setPassword(passwordEncoder.encode("studentpw"));
-        if (miwUserRepository.findByUsername("leonie").isEmpty()) {
-            miwUserRepository.save(studentLeonie);
-        }
+        miwUserRepository.save(studentLeonie);
 
         MIWUser teacherJanna = new MIWUser();
         teacherJanna.setUsername("janna");
         teacherJanna.setTeacher(janna);
         teacherJanna.setIsTeacher(true);
         teacherJanna.setPassword(passwordEncoder.encode("teacherpw"));
-        if (miwUserRepository.findByUsername("janna").isEmpty()) {
-            miwUserRepository.save(teacherJanna);
-        }
+        miwUserRepository.save(teacherJanna);
 
         MIWUser teacherMark = new MIWUser();
         teacherMark.setUsername("mark");
         teacherMark.setTeacher(mark);
         teacherMark.setIsTeacher(true);
         teacherMark.setPassword(passwordEncoder.encode("teacherpw"));
-        if (miwUserRepository.findByUsername("mark").isEmpty()) {
-            miwUserRepository.save(teacherMark);
-        }
+        miwUserRepository.save(teacherMark);
 
         MIWUser teacherHendrik = new MIWUser();
         teacherHendrik.setUsername("hendrik");
         teacherHendrik.setTeacher(hendrik);
         teacherHendrik.setIsTeacher(true);
         teacherHendrik.setPassword(passwordEncoder.encode("teacherpw"));
-        if (miwUserRepository.findByUsername("hendrik").isEmpty()) {
-            miwUserRepository.save(teacherHendrik);
-        }
+        miwUserRepository.save(teacherHendrik);
 
         MIWUser teacherSterre = new MIWUser();
         teacherSterre.setUsername("sterre");
         teacherSterre.setTeacher(sterre);
         teacherSterre.setIsTeacher(true);
         teacherSterre.setPassword(passwordEncoder.encode("teacherpw"));
-        if (miwUserRepository.findByUsername("sterre").isEmpty()) {
-            miwUserRepository.save(teacherSterre);
-        }
+        miwUserRepository.save(teacherSterre);
 
         return "redirect:/program";
     }
