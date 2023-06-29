@@ -22,7 +22,7 @@ public class Program {
     @GeneratedValue
     private Long programId;
 
-    @Column (nullable = false)
+    @Column (nullable = false, unique = true)
     private String nameProgram;
 
     @OneToMany (mappedBy = "program", cascade = {CascadeType.PERSIST})
