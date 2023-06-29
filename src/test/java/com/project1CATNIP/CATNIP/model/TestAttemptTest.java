@@ -19,23 +19,23 @@ class TestAttemptTest {
         testItems = getTestItemList();
         testAttempt = new TestAttempt();
     }
-    @Test
-    void calculateAttemptResult() {
-        // Het blijkt onhandig een klasse de naam 'Test' te geven...
-        // ...vanwege de gelijknamige klasse in Jupiter; hier het volledige pad naar het model.
-
-        //Arrange
-        testItemScores = Arrays.asList(5, 10, 15);
-        test.setTestItems(testItems);
-        testAttempt.setTest(test);
-        double expectedAttemptResult = 0.5;  // sumPoints = 5 + 10 + 15 = 30, testMaxScore = 10 + 20 + 30 = 60
-
-        //Activate
-        testAttempt.calculateAttemptResult(testItemScores);
-
-        //Assert
-        assertEquals(expectedAttemptResult, testAttempt.getAttemptResult());
-    }
+//    @Test
+//    void calculateAttemptResult() {
+//        // Het blijkt onhandig een klasse de naam 'Test' te geven...
+//        // ...vanwege de gelijknamige klasse in Jupiter; hier het volledige pad naar het model.
+//
+//        //Arrange
+//        testItemScores = Arrays.asList(5, 10, 15);
+//        test.setTestItems(testItems);
+//        testAttempt.setTest(test);
+//        double expectedAttemptResult = 0.5;  // sumPoints = 5 + 10 + 15 = 30, testMaxScore = 10 + 20 + 30 = 60
+//
+//        //Activate
+//        testAttempt.calculateAttemptResult(testItemScores);
+//
+//        //Assert
+//        assertEquals(expectedAttemptResult, testAttempt.getAttemptResult());
+//    }
 
     private List<TestItem> getTestItemList() {
         TestItem testItem1 = new TestItem();

@@ -24,8 +24,9 @@
     </div>
     <div class="form-group">
       <label for="cohortNumber">Cohort number</label>
-      <input id="cohortNumber" class="form-control" type="number"  min="1" max="100"
-             placeholder="Cohort number" th:field="*{number}" required>
+      <input id="cohortNumber" class="form-control" type="number"
+             placeholder="Cohort number" min="1" max="100" th:field="*{number}" required>
+      <p th:if="${#fields.hasErrors('number')}" class="text-danger" th:errors="*{number}"></p>
     </div>
     <div class="form-group">
       <label for="startDate">Select start date</label>
