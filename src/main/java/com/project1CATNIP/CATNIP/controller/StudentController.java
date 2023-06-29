@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.AccessDeniedException;
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,6 +22,8 @@ import java.util.Optional;
 @RequestMapping("/student")
 public class StudentController {
 
+    private final String ROLE_STUDENT = "ROLE_STUDENT";
+
     private final StudentRepository studentRepository;
 
     private final CohortRepository cohortRepository;
@@ -30,6 +31,10 @@ public class StudentController {
     private final MIWUserRepository miwUserRepository;
 
     private final TestAttemptRepository testAttemptRepository;
+
+    private final CourseRepository courseRepository;
+
+    private final ProgramRepository programRepository;
 
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {
@@ -87,19 +92,38 @@ public class StudentController {
         if (optionalUser.isEmpty()) {
             return "redirect:/";
         }
+
         MIWUser user = optionalUser.get();
 
-        boolean isStudent = user.getAuthorities().stream()
-                .anyMatch(authority -> authority.getAuthority().equals("ROLE_STUDENT"));
-
-        if (isStudent) {
-            List<TestAttempt> grades = testAttemptRepository.findTestAttemptByStudent(user.getStudent());
-            model.addAttribute("grades", grades);
+        if (userIsRole(ROLE_STUDENT, user)) {
+            model.addAttribute("grades", user.getStudent().getAllTestAttempts());
             model.addAttribute("student", user.getStudent());
-            return "student/mygrades";
+            return "student/myGrades";
         } else {
             throw new AccessDeniedException("Access to grades denied.");
         }
+    }
 
+    @GetMapping("/mycourses")
+    private String showCourses(Model model, Principal principal) throws AccessDeniedException {
+        Optional<MIWUser> optionalUser = miwUserRepository.findByUsername(principal.getName());
+        if (optionalUser.isEmpty()) {
+            return "redirect:/";
+        }
+
+        MIWUser user = optionalUser.get();
+
+        if (userIsRole(ROLE_STUDENT, user)) {
+            model.addAttribute("courses", user.getStudent().getAllCourses());
+            model.addAttribute("student", user.getStudent());
+            return "student/myCourses";
+        } else {
+            throw new AccessDeniedException("Access to grades denied.");
+        }
+    }
+
+    private boolean userIsRole(String role, MIWUser user) {
+        return user.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(role));
     }
 }

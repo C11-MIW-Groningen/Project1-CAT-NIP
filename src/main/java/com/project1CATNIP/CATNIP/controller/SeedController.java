@@ -330,7 +330,7 @@ public class SeedController {
 
         MIWUser studentAnton = new MIWUser();
         studentAnton.setUsername("anton");
-        studentAnton.setStudent(angela);
+        studentAnton.setStudent(anton);
         studentAnton.setPassword(passwordEncoder.encode("studentpw"));
         if (miwUserRepository.findByUsername("anton").isEmpty()) {
             miwUserRepository.save(studentAnton);
@@ -338,7 +338,7 @@ public class SeedController {
 
         MIWUser studentLeonie = new MIWUser();
         studentLeonie.setUsername("leonie");
-        studentLeonie.setStudent(angela);
+        studentLeonie.setStudent(leonie);
         studentLeonie.setPassword(passwordEncoder.encode("studentpw"));
         if (miwUserRepository.findByUsername("leonie").isEmpty()) {
             miwUserRepository.save(studentLeonie);

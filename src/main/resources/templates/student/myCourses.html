@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Put a title here</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+  <h1>
+    Courses for
+    <span th:text="${student.getDisplayName()}"></span>
+    as part of
+    <span th:text="${student.getCohort().getDisplayCohort()}"></span>
+  </h1>
+
+
+  <table class="table">
+    <tr>
+      <th>Course name</th>
+      <th>Teacher</th>
+      <th>Result (highest)</th>
+    </tr>
+    <tr th:each="course : ${courses}">
+      <td th:text="${course.getCourseName()}"></td>
+      <td th:text="${course.getTeacher().getDisplayName()}"></td>
+      <td th:if="${student.getHighestTestAttemptByCourse(course).getAttemptResult()} != 0.0"
+          th:text="${student.getHighestTestAttemptByCourse(course).getAttemptResult()}"></td>
+      <td th:unless="${student.getHighestTestAttemptByCourse(course).getAttemptResult()} != 0.0">N/A</td>
+    </tr>
+  </table>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>

@@ -52,4 +52,12 @@ public class Student extends Person {
 
         return highestTestAttempt;
     }
+
+    public List<Course> getAllCourses() {
+        return cohort.getProgram().getCourses();
+    }
+
+    public List<TestAttempt> getAllTestAttempts() {
+        return testAttempt;
+    }
 }
