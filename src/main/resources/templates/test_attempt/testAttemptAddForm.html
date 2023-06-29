@@ -35,8 +35,8 @@
       <input class="form-control" id="attemptResult" type="number" min="1" max="10" step="0.1"
              th:field="*{attemptResult}" required>
     </div>
-    <div class="form-group">
-      <input type="submit" value="Create test result">
+    <div class="form-group form-button">
+      <button type="submit" class="btn btn-danger" >Create test result</button>
     </div>
     <script th:replace="fragments/scripts :: maxDateToday"></script>
   </form>

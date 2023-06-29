@@ -29,7 +29,7 @@ public class MIWSecurityConfiguration {
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((authorize) -> authorize
                         .antMatchers("/layout/**", "/webjars/**", "/images/**").permitAll()
-                        .antMatchers("/", "/program/","/program/all").permitAll()
+                        .antMatchers("/", "/program/","/program/all", "/program/details/**").permitAll()
                         .antMatchers("/program/add", "/program/edit/**").hasAnyRole("ADMIN", "TEACHER")
                         .antMatchers("/program/delete/**").hasRole("ADMIN")
                         .antMatchers("/cohort/**").hasAnyRole("ADMIN", "TEACHER")
