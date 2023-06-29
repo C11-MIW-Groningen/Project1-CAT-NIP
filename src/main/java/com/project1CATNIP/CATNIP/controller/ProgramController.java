@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -61,17 +60,9 @@ public class ProgramController {
         Optional<Program> programToDelete = programRepository.findById(programId);
 
         if (programToDelete.isPresent()) {
-            for (Cohort cohort : cohortRepository.findByProgram(programToDelete.get())) {
-                cohort.setProgram(null);
-                cohortRepository.save(cohort);
-            }
-
-            for (Course course : courseRepository.findByProgram(programToDelete.get())) {
-                course.setProgram(null);
-                courseRepository.save(course);
-            }
-
-            programRepository.delete(programToDelete.get());
+            Program program = programToDelete.get();
+            setCohortAndCourseToNull(program);
+            programRepository.delete(program);
         }
 
         return "redirect:/program/all";
@@ -101,5 +92,17 @@ public class ProgramController {
         }
 
         return "redirect:/program/all";
+    }
+
+    private void setCohortAndCourseToNull(Program program) {
+        for (Cohort cohort : cohortRepository.findByProgram(program)) {
+            cohort.setProgram(null);
+            cohortRepository.save(cohort);
+        }
+
+        for (Course course : courseRepository.findByProgram(program)) {
+            course.setProgram(null);
+            courseRepository.save(course);
+        }
     }
 }

@@ -35,7 +35,7 @@ public class TestAttemptController {
     private String showCohorts(Model model) {
         model.addAttribute("allCohorts", cohortRepository.findAll());
 
-        return "/test_attempt/overviewCohorts";
+        return "/testAttempt/overviewCohorts";
     }
 
     @GetMapping("/grading/{cohortId}")
@@ -46,13 +46,13 @@ public class TestAttemptController {
             return "redirect:/grading/";
         }
 
-        Cohort cohort = optionalCohort.get();
-        List<Course> listCourses = courseRepository.findByProgram(cohort.getProgram());
+        Cohort thisCohort = optionalCohort.get();
+        List<Course> listCourses = courseRepository.findByProgram(thisCohort.getProgram());
 
-        model.addAttribute("thisCohort", cohort);
+        model.addAttribute("cohort", thisCohort);
         model.addAttribute("allCourses", listCourses);
 
-        return "/test_attempt/overviewCourses";
+        return "/testAttempt/overviewCourses";
     }
 
     @GetMapping("/grading/{cohortId}/{courseId}")
@@ -65,15 +65,14 @@ public class TestAttemptController {
             return "redirect:/grading/";
         }
 
-        Cohort cohort = optionalCohort.get();
-        Course course = optionalCourse.get();
+        Cohort thisCohort = optionalCohort.get();
 
-        List<Student> listStudents = studentRepository.findStudentsByCohort(cohort);
-        model.addAttribute("allStudentsForCohort", listStudents);
-        model.addAttribute("thisCourse", course);
-        model.addAttribute("thisCohort", cohort);
+        List<Student> listStudents = studentRepository.findStudentsByCohort(thisCohort);
+        model.addAttribute("allStudents", listStudents);
+        model.addAttribute("course", optionalCourse.get());
+        model.addAttribute("cohort", thisCohort);
 
-        return "/test_attempt/overviewTestAttemptsPerCourse";
+        return "/testAttempt/overviewTestAttemptsPerCourse";
     }
 
     @GetMapping("/grading/add/{cohortId}")
@@ -90,7 +89,7 @@ public class TestAttemptController {
         model.addAttribute("allTests", testRepository.findAll());
         model.addAttribute("newTestAttempt", new TestAttempt());
 
-        return "/test_attempt/testAttemptAddForm";
+        return "/testAttempt/testAttemptAddForm";
     }
 
     @PostMapping("/grading/add")
@@ -116,7 +115,7 @@ public class TestAttemptController {
 
         model.addAttribute("student", student);
         model.addAttribute("courses", studentCourses);
-        return "/test_attempt/overviewStudent";
+        return "/testAttempt/overviewStudent";
     }
 
     @GetMapping("/grading/student/{studentId}/{courseId}")
@@ -130,15 +129,13 @@ public class TestAttemptController {
         }
 
         Student student = optionalStudent.get();
-        Course course = optionalCourse.get();
         List<TestAttempt> testAttempts = testAttemptRepository.
-                findTestAttemptsByStudentAndTestIn(student, course.getTests());
+                findTestAttemptsByStudentAndTestIn(student, optionalCourse.get().getTests());
 
         model.addAttribute("student", student);
-        model.addAttribute("course", student);
         model.addAttribute("allTestAttempts", testAttempts);
 
-        return "test_attempt/overviewStudentCourse";
+        return "testAttempt/overviewStudentCourse";
     }
 
     private List<Course> getCoursesForStudent(Student student) {

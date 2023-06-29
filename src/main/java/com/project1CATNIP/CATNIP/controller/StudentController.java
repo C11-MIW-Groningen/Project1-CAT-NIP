@@ -30,11 +30,6 @@ public class StudentController {
 
     private final MIWUserRepository miwUserRepository;
 
-    private final TestAttemptRepository testAttemptRepository;
-
-    private final CourseRepository courseRepository;
-
-    private final ProgramRepository programRepository;
 
     @GetMapping({"", "/", "/all"})
     private String showAllStudents(Model model) {

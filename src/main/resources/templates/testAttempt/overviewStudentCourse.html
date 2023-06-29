@@ -8,24 +8,20 @@
 <div th:replace="fragments/general :: navbar"></div>
 
 <div class="container">
+  <h1>Overview of all test results for <span th:text="${student.getDisplayName()}"></span></h1>
 
   <table class="table">
     <tr>
-      <th>Course</th>
-      <th>Part of program</th>
-      <th>Teacher</th>
+      <th>Test</th>
+      <th>Date</th>
+      <th>Result</th>
     </tr>
-    <tr th:each="course : ${allCourses}">
-      <td>
-        <a th:href="@{/grading/{cohortId}/{courseId}(cohortId=${thisCohort.cohortId}, courseId=${course.getCourseId()})}">
-          <span th:text="${course.getCourseName()}"></span>
-        </a>
-      </td>
-      <td th:text="${course.getProgram().getNameProgram()}"></td>
-      <td th:text="${course.teacher.getDisplayName()}"></td>
+    <tr th:each="attempt : ${allTestAttempts}">
+      <td th:text="${attempt.getTest().getDisplayName()}"></td>
+      <td th:text="${attempt.getAttemptDate()}"></td>
+      <td th:text="${attempt.getAttemptResult()}"></td>
     </tr>
   </table>
-
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

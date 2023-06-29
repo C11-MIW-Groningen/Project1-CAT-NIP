@@ -4,7 +4,6 @@ import com.project1CATNIP.CATNIP.model.Assignment;
 import com.project1CATNIP.CATNIP.repository.AssignmentRepository;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,13 +24,6 @@ public class AssignmentController {
     private final AssignmentRepository assignmentRepository;
 
     private final CourseRepository courseRepository;
-
-    @GetMapping({"", "/", "/all"})
-    private String showAllAssignments(Model model) {
-        model.addAttribute("allAssignments", assignmentRepository.findAll());
-
-        return "/archive/assignmentOverview";
-    }
 
     @GetMapping("/add")
     private String addAssignmentForm(Model model) {
