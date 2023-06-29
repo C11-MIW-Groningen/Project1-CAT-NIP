@@ -347,6 +347,7 @@ public class SeedController {
         MIWUser teacherJanna = new MIWUser();
         teacherJanna.setUsername("janna");
         teacherJanna.setTeacher(janna);
+        teacherJanna.setIsTeacher(true);
         teacherJanna.setPassword(passwordEncoder.encode("teacherpw"));
         if (miwUserRepository.findByUsername("janna").isEmpty()) {
             miwUserRepository.save(teacherJanna);
@@ -355,6 +356,7 @@ public class SeedController {
         MIWUser teacherMark = new MIWUser();
         teacherMark.setUsername("mark");
         teacherMark.setTeacher(mark);
+        teacherMark.setIsTeacher(true);
         teacherMark.setPassword(passwordEncoder.encode("teacherpw"));
         if (miwUserRepository.findByUsername("mark").isEmpty()) {
             miwUserRepository.save(teacherMark);
@@ -363,6 +365,7 @@ public class SeedController {
         MIWUser teacherHendrik = new MIWUser();
         teacherHendrik.setUsername("hendrik");
         teacherHendrik.setTeacher(hendrik);
+        teacherHendrik.setIsTeacher(true);
         teacherHendrik.setPassword(passwordEncoder.encode("teacherpw"));
         if (miwUserRepository.findByUsername("hendrik").isEmpty()) {
             miwUserRepository.save(teacherHendrik);
@@ -371,6 +374,7 @@ public class SeedController {
         MIWUser teacherSterre = new MIWUser();
         teacherSterre.setUsername("sterre");
         teacherSterre.setTeacher(sterre);
+        teacherSterre.setIsTeacher(true);
         teacherSterre.setPassword(passwordEncoder.encode("teacherpw"));
         if (miwUserRepository.findByUsername("sterre").isEmpty()) {
             miwUserRepository.save(teacherSterre);
