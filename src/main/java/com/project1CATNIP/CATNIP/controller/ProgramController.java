@@ -50,7 +50,6 @@ public class ProgramController {
             return "/program/programAddForm";
         }
 
-        programToAdd.setNameProgram(programToAdd.getNameProgram());
         programRepository.save(programToAdd);
         String successMessage = "Program added successfully.";
         model.addAttribute("success", successMessage);

@@ -48,10 +48,11 @@ public class CohortController {
 
         @PostMapping("/add")
         private String saveCohort(@ModelAttribute("cohort") Cohort cohortToAdd, BindingResult result) {
-            if (!result.hasErrors()) {
-                cohortRepository.save(cohortToAdd);
+            if (result.hasErrors()) {
+                return "/cohort/cohortAddForm";
             }
 
+            cohortRepository.save(cohortToAdd);
             return "redirect:/cohort/add";
         }
 

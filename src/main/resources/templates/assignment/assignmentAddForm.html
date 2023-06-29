@@ -19,6 +19,7 @@
       <label for="assignmentName">Assignment name</label>
       <input id="assignmentName" class="form-control" type="text" minlength="2"
              placeholder="Assignment name" th:field="*{assignmentName}" required>
+      <p th:if="${#fields.hasErrors('assignmentName')}" class="text-danger" th:errors="*{assignmentName}"></p>
     </div>
     <div class="form-group">
       <label for="dayPart">Day-part</label>
@@ -44,7 +45,6 @@
       <button type="submit" class="btn btn-danger" >Save Test</button>
     </div>
     <h3 th:if="${success}" th:text="${success}"></h3>
-    <h3 th:unless="${success}" class="error-message" th:text="${errorMessage}"></h3>
   </form>
 </div>
 

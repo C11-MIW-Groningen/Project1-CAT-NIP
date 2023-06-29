@@ -1,13 +1,12 @@
 package com.project1CATNIP.CATNIP.model;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.parameters.P;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Author: Saskia Tadema <s.tadema@st.hanze.nl>
- * Doel van je programma.
+ * Testing for Program methods.
  */
 class ProgramTest {
 

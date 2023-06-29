@@ -44,20 +44,15 @@ public class AssignmentController {
     @PostMapping("/add")
     private String saveAssignment(@ModelAttribute("assignment") Assignment assignmentToAdd, BindingResult result,
                                   Model model) {
-        try {
-            if (!result.hasErrors()) {
-                assignmentRepository.save(assignmentToAdd);
-                String successMessage = "Assignment added successfully.";
-                model.addAttribute("success", successMessage);
-                return "/assignment/assignmentAddForm";
-            }
-        } catch (ConstraintViolationException e) {
-            String errorMessage = e.getMessage() + "This assignment already exists. Try again.";
-            model.addAttribute("errorMessage", errorMessage);
+        if (result.hasErrors()) {
             return "/assignment/assignmentAddForm";
         }
 
-        return "/assignment/assignmentAddForm";
+        assignmentRepository.save(assignmentToAdd);
+        String successMessage = "Assignment added successfully.";
+        model.addAttribute("success", successMessage);
+
+        return "redirect:/assignment/add";
     }
 
     @GetMapping("/delete/{assignmentId}")
