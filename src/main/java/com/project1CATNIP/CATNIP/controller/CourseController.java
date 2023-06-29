@@ -58,7 +58,7 @@ public class CourseController {
         String successMessage = "Course added successfully.";
         model.addAttribute("success", successMessage);
 
-        return "redirect:/course/add";
+        return "/course/courseAddForm";
     }
 
     @GetMapping("/delete/{courseId}")

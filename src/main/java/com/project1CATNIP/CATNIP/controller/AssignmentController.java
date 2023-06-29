@@ -44,7 +44,7 @@ public class AssignmentController {
         String successMessage = "Assignment added successfully.";
         model.addAttribute("success", successMessage);
 
-        return "redirect:/assignment/add";
+        return "/assignment/assignmentAddForm";
     }
 
     @GetMapping("/delete/{assignmentId}")

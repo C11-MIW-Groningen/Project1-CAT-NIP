@@ -45,7 +45,7 @@ public class TeacherController {
         String successMessage = "Teacher added successfully.";
         model.addAttribute("success", successMessage);
         teacherRepository.save(teacherToAdd);
-        return "redirect:/teacher/add";
+        return "/teacher/teacherAddForm";
     }
 
     @GetMapping("/delete/{teacherId}")

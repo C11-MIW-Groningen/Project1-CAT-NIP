@@ -102,7 +102,7 @@ public class TestAttemptController {
         testAttemptRepository.save(testAttemptToSave);
         String successMessage = "Test result added successfully.";
         model.addAttribute("success", successMessage);
-        return "redirect:/grading";
+        return "/testAttempt/testAttemptAddForm";
     }
 
     @GetMapping("/grading/student/{studentId}")

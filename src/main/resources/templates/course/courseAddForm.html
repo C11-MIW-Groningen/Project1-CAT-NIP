@@ -39,6 +39,12 @@
                     </option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" class="form-control" placeholder="Course name"
+                          th:field="*{description}">
+                </textarea>
+            </div>
             <div class="form-group form-button">
                 <button type="submit" class="btn btn-danger" >Save Course</button>
             </div>

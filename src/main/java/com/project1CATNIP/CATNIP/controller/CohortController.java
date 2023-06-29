@@ -56,7 +56,7 @@ public class CohortController {
             String successMessage = "Cohort added successfully.";
             model.addAttribute("success", successMessage);
 
-            return "redirect:/cohort/add";
+            return "/cohort/cohortAddForm";
         }
 
         @GetMapping("/delete/{cohortId}")

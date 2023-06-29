@@ -48,7 +48,7 @@ public class TestController {
         testRepository.save(testToAdd);
         String successMessage = "Test added successfully.";
         model.addAttribute("success", successMessage);
-        return "redirect:/test/add";
+        return "/test/addForm";
     }
 
     @GetMapping("/delete/{testId}")
@@ -105,7 +105,7 @@ public class TestController {
         }
 
         testItemRepository.save(testItem);
-        return "redirect:/test/" + testItem.getTest().getTestId() + "/addtestitems";
+        return "/test/addTestItemsForm";
     }
 
     @GetMapping("/details/{testId}")
