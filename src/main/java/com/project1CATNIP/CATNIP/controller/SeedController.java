@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,11 +45,19 @@ public class SeedController {
     @GetMapping("/seed")
     private String seedDatabase() {
 
+        List<MIWUser> users = miwUserRepository.findAll();
+        users.remove(0);
+
+        for (MIWUser user : users) {
+            miwUserRepository.delete(user);
+        }
+
         testItemRepository.deleteAll();
         testAttemptRepository.deleteAll();
         assignmentRepository.deleteAll();
         testRepository.deleteAll();
         courseRepository.deleteAll();
+        studentRepository.deleteAll();
         cohortRepository.deleteAll();
         teacherRepository.deleteAll();
         programRepository.deleteAll();
@@ -118,9 +128,7 @@ public class SeedController {
         henk.setLastName("Vries");
         henk.setEmailAddress("h.d.vries@st.hanze.nl");
         henk.setCohort(se11);
-        if (!studentRepository.findAll().contains(henk)) {
-            studentRepository.save(henk);
-        }
+        studentRepository.save(henk);
 
         Student angela = new Student();
         angela.setFirstName("Angela");
@@ -128,9 +136,6 @@ public class SeedController {
         angela.setEmailAddress("a.jongsma@st.hanze.nl");
         angela.setCohort(se11);
         studentRepository.save(angela);
-        if (!studentRepository.findAll().contains(angela)) {
-            studentRepository.save(angela);
-        }
 
         Student anton = new Student();
         anton.setFirstName("Anton");
@@ -138,9 +143,7 @@ public class SeedController {
         anton.setLastName("Berg");
         anton.setEmailAddress("a.vd.berg@st.hanze.nl");
         anton.setCohort(se11);
-        if (!studentRepository.findAll().contains(anton)) {
-            studentRepository.save(anton);
-        }
+        studentRepository.save(anton);
 
         Student leonie = new Student();
         leonie.setFirstName("Leonie");
@@ -148,9 +151,6 @@ public class SeedController {
         leonie.setEmailAddress("l.hendriksen@st.hanze.nl");
         leonie.setCohort(se11);
         studentRepository.save(leonie);
-        if (!studentRepository.findAll().contains(leonie)) {
-            studentRepository.save(leonie);
-        }
 
         Test test1 = new Test();
         test1.setNameTest("Exam BMI application");
