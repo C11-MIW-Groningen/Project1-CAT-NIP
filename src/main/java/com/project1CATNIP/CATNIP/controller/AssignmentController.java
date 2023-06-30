@@ -22,6 +22,8 @@ import java.util.Optional;
 @RequestMapping("/assignment")
 public class AssignmentController {
 
+    private final String ASSIGNMENT_ADD_FORM = "/assignment/assignmentAddForm";
+
     private final AssignmentRepository assignmentRepository;
 
     private final CourseRepository courseRepository;
@@ -32,7 +34,7 @@ public class AssignmentController {
         model.addAttribute("allCourses", courseRepository.findAll());
         model.addAttribute("purpose", "Add an assignment");
 
-        return "/assignment/assignmentAddForm";
+        return ASSIGNMENT_ADD_FORM;
     }
 
     @PostMapping("/add")
@@ -48,7 +50,6 @@ public class AssignmentController {
 
             return "/assignment/assignmentAddForm";
         } catch (DataIntegrityViolationException exception) {
-            System.err.println(exception.getMessage());
             model.addAttribute("failure", "This assignment already exists. Try again");
             return "/assignment/assignmentAddForm";
         }

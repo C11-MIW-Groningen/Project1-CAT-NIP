@@ -89,14 +89,14 @@ public class TestAttemptController {
         model.addAttribute("cohort", cohort);
         model.addAttribute("allStudents", studentRepository.findStudentsByCohort(cohort));
         model.addAttribute("allTests", testRepository.findAll());
-        model.addAttribute("newTestAttempt", new TestAttempt());
+        model.addAttribute("testAttempt", new TestAttempt());
         model.addAttribute("purpose", purpose);
 
         return "/testAttempt/testAttemptAddForm";
     }
 
     @PostMapping("/grading/add")
-    private String saveTestAttempt(@ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
+    private String saveTestAttempt(@ModelAttribute("testAttempt") TestAttempt testAttemptToSave,
                                    BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/testAttempt/testAttemptAddForm";
@@ -113,27 +113,14 @@ public class TestAttemptController {
         Optional<TestAttempt> optionalTestAttempt = testAttemptRepository.findById(testAttemptId);
 
         if (optionalTestAttempt.isPresent()) {
-            model.addAttribute("editTestAttempt", optionalTestAttempt.get());
+            model.addAttribute("testAttempt", optionalTestAttempt.get());
             model.addAttribute("purpose", "Edit a test result");
-            model.addAttribute("student", optionalTestAttempt.get().getStudent());
-            model.addAttribute("test", optionalTestAttempt.get().getTest());
-            return "/testAttempt/testAttemptEditForm";
+            model.addAttribute("allStudents", optionalTestAttempt.get().getStudent());
+            model.addAttribute("allTests", optionalTestAttempt.get().getTest());
+            return "/testAttempt/testAttemptAddForm";
         }
 
         return "redirect:/grading/all";
-    }
-
-    @PostMapping("/grading/edit")
-    private String updateTestAttempt(@ModelAttribute("editTestAttempt") TestAttempt testAttemptToSave,
-                                   BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "/testAttempt/testAttemptEditForm";
-        }
-
-        testAttemptRepository.save(testAttemptToSave);
-        String successMessage = "Test result successfully saved.";
-        model.addAttribute("success", successMessage);
-        return "/testAttempt/testAttemptEditForm";
     }
 
     @GetMapping("/grading/delete/{testAttemptId}")
