@@ -103,9 +103,49 @@ public class TestAttemptController {
         }
 
         testAttemptRepository.save(testAttemptToSave);
-        String successMessage = "Test result added successfully.";
+        String successMessage = "Test result successfully saved.";
         model.addAttribute("success", successMessage);
         return "/testAttempt/testAttemptAddForm";
+    }
+
+    @GetMapping("/grading/edit/{testAttemptId}")
+    private String showEditTestAttemptForm(@PathVariable("testAttemptId") Long testAttemptId, Model model) {
+        Optional<TestAttempt> optionalTestAttempt = testAttemptRepository.findById(testAttemptId);
+
+        if (optionalTestAttempt.isPresent()) {
+            model.addAttribute("editTestAttempt", optionalTestAttempt.get());
+            model.addAttribute("purpose", "Edit a test result");
+            model.addAttribute("student", optionalTestAttempt.get().getStudent());
+            model.addAttribute("test", optionalTestAttempt.get().getTest());
+            return "/testAttempt/testAttemptEditForm";
+        }
+
+        return "redirect:/grading/all";
+    }
+
+    @PostMapping("/grading/edit")
+    private String updateTestAttempt(@ModelAttribute("editTestAttempt") TestAttempt testAttemptToSave,
+                                   BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "/testAttempt/testAttemptEditForm";
+        }
+
+        testAttemptRepository.save(testAttemptToSave);
+        String successMessage = "Test result successfully saved.";
+        model.addAttribute("success", successMessage);
+        return "/testAttempt/testAttemptEditForm";
+    }
+
+    @GetMapping("/grading/delete/{testAttemptId}")
+    private String deleteTestAttempt(@PathVariable("testAttemptId") Long testAttemptId) {
+        Optional<TestAttempt> optionalTestAttempt = testAttemptRepository.findById(testAttemptId);
+
+        if (optionalTestAttempt.isPresent()) {
+            testAttemptRepository.delete(optionalTestAttempt.get());
+            return "redirect:/grading/student/" + optionalTestAttempt.get().getStudent().getStudentId();
+        }
+
+        return "redirect:/grading/";
     }
 
     @GetMapping("/grading/student/{studentId}")

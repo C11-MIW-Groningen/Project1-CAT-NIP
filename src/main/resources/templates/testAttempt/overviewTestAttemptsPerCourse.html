@@ -20,7 +20,7 @@
     <tr th:each="student : ${allStudents}">
       <td>
         <a th:href="@{/grading/student/{studentId}/{courseId}(courseId=${course.getCourseId()}, studentId=${student.getStudentId()})}">
-        <span  th:text="${student.getDisplayName()}"></span>
+        <span th:text="${student.getDisplayName()}"></span>
         </a>
       </td>
       <td>
