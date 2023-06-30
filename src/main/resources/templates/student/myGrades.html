@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-  <title>Put a title here</title>
+  <title>My Grades</title>
 </head>
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
 
 <div class="container">
-<h1 th:text="${student.getDisplayName()}"></h1>
 
+<h1>Grades for <span th:text="${student.getDisplayName()}"></span></h1>
 
   <table class="table">
     <tr>
