@@ -11,8 +11,6 @@
 <div class="container w-25">
   <h1>Add a Teacher</h1>
 
-  <a th:href="@{/teacher/}">Back to Teacher Overview</a>
-
   <form th:action="@{/teacher/add}" method="post" th:object="${teacher}">
     <input type="hidden" th:field="*{teacherId}" />
     <div th:fragment="teacherForm">
@@ -39,9 +37,12 @@
         <p th:if="${#fields.hasErrors('emailAddress')}" class="text-danger" th:errors="*{emailAddress}"></p>
       </div>
       <div class="form-group form-button">
-        <button type="submit" class="btn btn-danger" >Save Teacher</button>
-        <h3 class="mt-3" th:if="${success}" th:text="${success}"></h3>
+        <button type="button" class="btn btn-danger" >
+          <a class="cancelLink" th:href="@{/teacher/}">Cancel</a>
+        </button>
+        <button type="submit" class="btn btn-primary" >Save Teacher</button>
       </div>
+      <h3 class="mt-3" th:if="${success}" th:text="${success}"></h3>
     </div>
   </form>
 </div>

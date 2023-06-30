@@ -10,8 +10,6 @@
 <div class="container w-25">
   <h1>Add a Cohort</h1>
 
-  <a th:href="@{/cohort/}">Back to Cohort Overview</a>
-
   <form th:action="@{/cohort/add}" method="post" th:object="${cohort}">
 
     <input type="hidden" th:field="*{cohortId}" />
@@ -37,7 +35,10 @@
       <input class="form-control" id="endDate" type="date" th:field="*{endDate}" required>
     </div>
     <div class="form-group form-button">
-      <button type="submit" class="btn btn-danger" >Save Cohort</button>
+      <button type="button" class="btn btn-danger" >
+        <a class="cancelLink" th:href="@{/cohort/}">Cancel</a>
+      </button>
+      <button type="submit" class="btn btn-primary" >Save Cohort</button>
     </div>
     <h3 th:if="${success}" th:text="${success}"></h3>
     <script th:replace="fragments/scripts :: dateCheck"></script>

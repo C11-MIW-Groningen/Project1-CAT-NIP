@@ -31,7 +31,16 @@ html, body {
     margin-top: 12px;
 }
 
+.form-group {
+    margin-bottom: 10px;
+}
+
 .deleteLink {
+    color: white;
+    text-decoration: none;
+}
+
+.cancelLink, .cancelLink:hover {
     color: white;
     text-decoration: none;
 }
