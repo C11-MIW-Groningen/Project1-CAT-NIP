@@ -118,6 +118,13 @@ public class SeedController {
         se7.setEndDate(LocalDate.of(2022, 7, 2));
         cohortRepository.save(se7);
 
+        Cohort se1 = new Cohort();
+        se1.setNumber(1);
+        se1.setProgram(softwareEngineering);
+        se1.setStartDate(LocalDate.of(2019, 4, 5));
+        se1.setEndDate(LocalDate.of(2019, 8, 10));
+        cohortRepository.save(se1);
+
         Course programming = new Course();
         programming.setCourseName("Programming");
         programming.setProgram(softwareEngineering);
@@ -340,11 +347,24 @@ public class SeedController {
         assignment2.setCourse(databases);
         assignmentRepository.save(assignment2);
 
+        Assignment assignment3 = new Assignment();
+        assignment3.setAssignmentName("Bibliotheek");
+        assignment3.setDayPart(1);
+        assignment3.setAssignmentNumber(1);
+        assignment3.setCourse(dataAnalyse1);
+        assignmentRepository.save(assignment3);
+
         MIWUser studentHenk = new MIWUser();
         studentHenk.setUsername("henk");
         studentHenk.setStudent(henk);
         studentHenk.setPassword(passwordEncoder.encode("studentpw"));
         miwUserRepository.save(studentHenk);
+
+        MIWUser studentJeanine = new MIWUser();
+        studentJeanine.setUsername("jeanine");
+        studentJeanine.setStudent(jeanine);
+        studentJeanine.setPassword(passwordEncoder.encode("studentpw"));
+        miwUserRepository.save(studentJeanine);
 
         MIWUser studentAngela = new MIWUser();
         studentAngela.setUsername("angela");
