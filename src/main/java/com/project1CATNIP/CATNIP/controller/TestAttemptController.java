@@ -84,13 +84,7 @@ public class TestAttemptController {
         }
 
         Cohort cohort = optionalCohort.get();
-        String purpose = "Add a test result for:\n" + cohort.getDisplayCohort();
-
-        model.addAttribute("cohort", cohort);
-        model.addAttribute("allStudents", studentRepository.findStudentsByCohort(cohort));
-        model.addAttribute("allTests", testRepository.findAll());
-        model.addAttribute("newTestAttempt", new TestAttempt());
-        model.addAttribute("purpose", purpose);
+        model.addAllAttributes(getPostAttributes(cohort));
 
         return "/testAttempt/testAttemptAddForm";
     }
@@ -102,10 +96,14 @@ public class TestAttemptController {
             return "/testAttempt/testAttemptAddForm";
         }
 
+        if (testAttemptToSave.getTestAttemptId() != null) {
+            testAttemptRepository.save(testAttemptToSave);
+            return "redirect:/grading";
+        }
+
         testAttemptRepository.save(testAttemptToSave);
-        String successMessage = "Test result added successfully.";
-        model.addAttribute("success", successMessage);
-        return "/testAttempt/testAttemptAddForm";
+
+        return "redirect:/grading/add/" + testAttemptToSave.getStudent().getCohort().getCohortId();
     }
 
     @GetMapping("/grading/student/{studentId}")
@@ -147,5 +145,17 @@ public class TestAttemptController {
         Cohort cohort = student.getCohort();
         Program program = cohort.getProgram();
         return courseRepository.findByProgram(program);
+    }
+
+    private Map<String, Object> getPostAttributes(Cohort cohort) {
+        Map<String, Object> attributeMap = new HashMap<>();
+
+        attributeMap.put("allStudents", studentRepository.findStudentsByCohort(cohort));
+        attributeMap.put("cohort", cohort);
+        attributeMap.put("allTests", testRepository.findAll());
+        attributeMap.put("purpose", "Add a test result for: " + cohort.getDisplayCohort());
+        attributeMap.put("newTestAttempt", new TestAttempt());
+
+        return attributeMap;
     }
 }

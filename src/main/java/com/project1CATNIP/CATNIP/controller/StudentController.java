@@ -53,9 +53,15 @@ public class StudentController {
             return "/student/studentAddForm";
         }
 
+        if (studentToAdd.getStudentId() != null) {
+            studentRepository.save(studentToAdd);
+            return "redirect:/student/all";
+        }
+
         studentRepository.save(studentToAdd);
-        String successMessage = "Student added successfully.";
-        model.addAttribute("success", successMessage);
+        model.addAttribute("success", "Student added successfully.");
+        model.addAttribute("purpose", "Add a student");
+
         return "/student/studentAddForm";
     }
 

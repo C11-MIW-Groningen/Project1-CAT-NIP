@@ -56,10 +56,28 @@ public class CohortController {
                     return "/cohort/cohortAddForm";
                 }
                 cohortRepository.save(cohortToAdd);
-                String successMessage = "Cohort added successfully.";
-                model.addAttribute("success", successMessage);
+                model.addAttribute("success", "Cohort added successfully.");
+                model.addAttribute("purpose", "Add a cohort");
 
                 return "/cohort/cohortAddForm";
+
+            } catch (Exception exception) {
+                System.err.println(exception.getMessage());
+                String failure = "This cohort already exists. Select a different number.";
+                model.addAttribute("failure", failure);
+                return "/cohort/cohortAddForm";
+            }
+        }
+
+        @PostMapping("/edit")
+        private String saveEditedCohort(@ModelAttribute("cohort") Cohort cohortToEdit, BindingResult result, Model model) {
+            try {
+                if (result.hasErrors()) {
+                    return "/cohort/cohortAddForm";
+                }
+                cohortRepository.save(cohortToEdit);
+                return "redirect:/cohort/all";
+
             } catch (Exception exception) {
                 System.err.println(exception.getMessage());
                 String failure = "This cohort already exists. Select a different number.";

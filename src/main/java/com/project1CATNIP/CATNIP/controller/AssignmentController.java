@@ -41,10 +41,14 @@ public class AssignmentController {
             return "/assignment/assignmentAddForm";
         }
 
-        assignmentRepository.save(assignmentToAdd);
-        String successMessage = "Assignment added successfully.";
-        model.addAttribute("success", successMessage);
-
+        if (assignmentToAdd.getAssignmentId() != null) {
+            assignmentRepository.save(assignmentToAdd);
+            return "redirect:/assignment/all";
+        } else {
+            assignmentRepository.save(assignmentToAdd);
+            String successMessage = "Assignment added successfully.";
+            model.addAttribute("success", successMessage);
+        }
         return "/assignment/assignmentAddForm";
     }
 

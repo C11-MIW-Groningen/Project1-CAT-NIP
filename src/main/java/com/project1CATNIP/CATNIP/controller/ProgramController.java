@@ -50,9 +50,15 @@ public class ProgramController {
             return "/program/programAddForm";
         }
 
+        if (programToAdd.getProgramId() != null) {
+            programRepository.save(programToAdd);
+            return "redirect:/program/all";
+        }
+
         programRepository.save(programToAdd);
         String successMessage = "Program saved successfully.";
         model.addAttribute("success", successMessage);
+        model.addAttribute("purpose", "Add a program");
         return "/program/programAddForm";
     }
 
