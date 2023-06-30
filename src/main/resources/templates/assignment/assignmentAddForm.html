@@ -47,6 +47,7 @@
       <button type="submit" class="btn btn-primary" >Save Assignment</button>
     </div>
     <h3 th:if="${success}" th:text="${success}"></h3>
+    <h3 class="text-danger" th:if="${failure}" th:text="${failure}"></h3>
   </form>
 </div>
 
