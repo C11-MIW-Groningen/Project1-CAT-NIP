@@ -10,8 +10,6 @@
 <div class="container w-25">
     <h1 th:text="${purpose}"></h1>
 
-    <a th:href="@{/course/}">Back to Course Overview</a>
-
     <form th:action="@{/course/add}" method="post" th:object="${course}">
         <input type="hidden" th:field="*{courseId}" />
         <div th:fragment="courseForm">
@@ -46,7 +44,10 @@
                 </textarea>
             </div>
             <div class="form-group form-button">
-                <button type="submit" class="btn btn-danger" >Save Course</button>
+                <button type="button" class="btn btn-danger" >
+                    <a class="cancelLink" th:href="@{/course/}">Cancel</a>
+                </button>
+                <button type="submit" class="btn btn-primary" >Save Course</button>
             </div>
             <h3 th:if="${success}" th:text="${success}"></h3>
         </div>

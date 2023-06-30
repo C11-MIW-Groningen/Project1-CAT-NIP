@@ -106,6 +106,49 @@ public class TestAttemptController {
         return "redirect:/grading/add/" + testAttemptToSave.getStudent().getCohort().getCohortId();
     }
 
+    @GetMapping("/grading/edit/{testAttemptId}")
+    private String showEditTestAttemptForm(@PathVariable("testAttemptId") Long testAttemptId, Model model) {
+        Optional<TestAttempt> optionalTestAttempt = testAttemptRepository.findById(testAttemptId);
+
+        if (optionalTestAttempt.isPresent()) {
+            model.addAttribute("editTestAttempt", optionalTestAttempt.get());
+            model.addAttribute("purpose", "Edit a test result");
+            model.addAttribute("student", optionalTestAttempt.get().getStudent());
+            model.addAttribute("test", optionalTestAttempt.get().getTest());
+            return "/testAttempt/testAttemptEditForm";
+        }
+
+        return "redirect:/grading/all";
+    }
+
+    @PostMapping("/grading/edit")
+    private String updateTestAttempt(@ModelAttribute("editTestAttempt") TestAttempt testAttemptToSave,
+                                   BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "redirect:/grading";
+        }
+
+        Long courseId = testAttemptToSave.getTest().getCourse().getCourseId();
+        Long student = testAttemptToSave.getStudent().getStudentId();
+
+        testAttemptRepository.save(testAttemptToSave);
+
+        return "redirect:/grading/student/" + courseId + "/" + student;
+    }
+
+    @GetMapping("/grading/delete/{testAttemptId}")
+    private String deleteTestAttempt(@PathVariable("testAttemptId") Long testAttemptId) {
+        Optional<TestAttempt> optionalTestAttempt = testAttemptRepository.findById(testAttemptId);
+
+        if (optionalTestAttempt.isPresent()) {
+            testAttemptRepository.delete(optionalTestAttempt.get());
+            return "redirect:/grading/student/" + optionalTestAttempt.get().getStudent().getStudentId();
+        }
+
+        return "redirect:/grading/";
+    }
+
     @GetMapping("/grading/student/{studentId}")
     private String showGradesForStudent(@PathVariable("studentId") Long studentId, Model model) {
         Optional<Student> optionalStudent = studentRepository.findById(studentId);

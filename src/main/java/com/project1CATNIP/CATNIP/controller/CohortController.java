@@ -56,10 +56,8 @@ public class CohortController {
                     return "/cohort/cohortAddForm";
                 }
                 cohortRepository.save(cohortToAdd);
-                model.addAttribute("success", "Cohort added successfully.");
-                model.addAttribute("purpose", "Add a cohort");
 
-                return "/cohort/cohortAddForm";
+                return "redirect:/cohort/all";
 
             } catch (Exception exception) {
                 System.err.println(exception.getMessage());

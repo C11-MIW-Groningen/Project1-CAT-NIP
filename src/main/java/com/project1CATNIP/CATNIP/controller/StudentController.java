@@ -47,22 +47,15 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    private String saveStudent(@ModelAttribute("student") Student studentToAdd, BindingResult result, Model model) {
+    private String saveStudent(@ModelAttribute("student") Student studentToAdd, BindingResult result) {
 
         if (result.hasErrors()) {
             return "/student/studentAddForm";
         }
 
-        if (studentToAdd.getStudentId() != null) {
-            studentRepository.save(studentToAdd);
-            return "redirect:/student/all";
-        }
-
         studentRepository.save(studentToAdd);
-        model.addAttribute("success", "Student added successfully.");
-        model.addAttribute("purpose", "Add a student");
 
-        return "/student/studentAddForm";
+        return "redirect:/student/all";
     }
 
     @GetMapping("/delete/{studentId}")

@@ -7,6 +7,8 @@ import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,20 +48,20 @@ public class ProgramController {
 
     @PostMapping("/program/add")
     private String saveProgram(@ModelAttribute("program") Program programToAdd, BindingResult result, Model model) {
-        if (result.hasErrors()) {
+        try {
+            if (result.hasErrors()) {
+                return "/program/programAddForm";
+            }
+
+            programRepository.save(programToAdd);
+
+            return "redirect:/program/all";
+
+        } catch (DataIntegrityViolationException exception) {
+            System.err.println(exception.getMessage());
+            model.addAttribute("failure", "This program name already exists. Try again");
             return "/program/programAddForm";
         }
-
-        if (programToAdd.getProgramId() != null) {
-            programRepository.save(programToAdd);
-            return "redirect:/program/all";
-        }
-
-        programRepository.save(programToAdd);
-        String successMessage = "Program saved successfully.";
-        model.addAttribute("success", successMessage);
-        model.addAttribute("purpose", "Add a program");
-        return "/program/programAddForm";
     }
 
     @GetMapping("/program/delete/{programId}")

@@ -4,6 +4,7 @@ import com.project1CATNIP.CATNIP.model.Assignment;
 import com.project1CATNIP.CATNIP.repository.AssignmentRepository;
 import com.project1CATNIP.CATNIP.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,19 +38,18 @@ public class AssignmentController {
     @PostMapping("/add")
     private String saveAssignment(@ModelAttribute("assignment") Assignment assignmentToAdd, BindingResult result,
                                   Model model) {
-        if (result.hasErrors()) {
+        try {
+            if (result.hasErrors()) {
+                return "/assignment/assignmentAddForm";
+            }
+
+            assignmentRepository.save(assignmentToAdd);
+            return "redirect:/assignment/add";
+
+        } catch (DataIntegrityViolationException exception) {
+            model.addAttribute("failure", "This assignment already exists. Try again");
             return "/assignment/assignmentAddForm";
         }
-
-        if (assignmentToAdd.getAssignmentId() != null) {
-            assignmentRepository.save(assignmentToAdd);
-            return "redirect:/assignment/all";
-        } else {
-            assignmentRepository.save(assignmentToAdd);
-            String successMessage = "Assignment added successfully.";
-            model.addAttribute("success", successMessage);
-        }
-        return "/assignment/assignmentAddForm";
     }
 
     @GetMapping("/delete/{assignmentId}")

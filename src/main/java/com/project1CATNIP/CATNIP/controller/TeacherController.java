@@ -37,23 +37,14 @@ public class TeacherController {
     }
 
     @PostMapping("/add")
-    private String saveTeacher(@ModelAttribute("teacher") Teacher teacherToAdd, BindingResult result, Model model) {
+    private String saveTeacher(@ModelAttribute("teacher") Teacher teacherToAdd, BindingResult result) {
 
         if (result.hasErrors()) {
             return "/teacher/teacherAddForm";
         }
 
-        if (teacherToAdd.getTeacherId() != null) {
-            teacherRepository.save(teacherToAdd);
-            return "redirect:/teacher/all";
-        }
-
-        String successMessage = "Teacher added successfully.";
-        model.addAttribute("success", successMessage);
-        model.addAttribute("purpose", "Add a teacher");
         teacherRepository.save(teacherToAdd);
-
-        return "/teacher/teacherAddForm";
+        return "redirect:/teacher/all";
 
     }
 

@@ -50,22 +50,14 @@ public class CourseController {
     }
 
     @PostMapping("/add")
-    private String saveCourse(@ModelAttribute("course") Course courseToAdd, BindingResult result, Model model) {
+    private String saveCourse(@ModelAttribute("course") Course courseToAdd, BindingResult result) {
         if(result.hasErrors()) {
             return "/course/courseAddForm";
         }
 
-        if (courseToAdd.getCourseId() != null) {
-            courseRepository.save(courseToAdd);
-            return "redirect:/course/all";
-        }
-
         courseRepository.save(courseToAdd);
-        String successMessage = "Course added successfully.";
-        model.addAttribute("success", successMessage);
-        model.addAttribute("purpose", "Add a course");
 
-        return "/course/courseAddForm";
+        return "redirect:/course/all";
     }
 
     @GetMapping("/delete/{courseId}")

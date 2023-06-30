@@ -15,11 +15,21 @@
       <th>Test</th>
       <th>Date</th>
       <th>Result</th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
     <tr th:each="attempt : ${allTestAttempts}">
-      <td th:text="${attempt.getTest().getDisplayName()}"></td>
-      <td th:text="${attempt.getAttemptDate()}"></td>
-      <td th:text="${attempt.getAttemptResult()}"></td>
+      <td class="align-middle" th:text="${attempt.getTest().getDisplayName()}"></td>
+      <td class="align-middle" th:text="${attempt.getAttemptDate()}"></td>
+      <td class="align-middle" th:text="${attempt.getAttemptResult()}"></td>
+      <td class="align-middle">
+        <a th:href="@{/grading/edit/{testAttemptId}(testAttemptId=${attempt.testAttemptId})}">
+          <img src="/images/file-pen-solid.svg" alt="edit" style="height: 18px">
+        </a>
+      </td>
+      <td class="align-middle">
+        <div th:replace="fragments/buttons :: deleteTestAttempt"></div>
+      </td>
     </tr>
   </table>
 </div>
