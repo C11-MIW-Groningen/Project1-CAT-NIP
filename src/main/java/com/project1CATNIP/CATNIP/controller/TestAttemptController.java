@@ -84,7 +84,7 @@ public class TestAttemptController {
         }
 
         Cohort cohort = optionalCohort.get();
-        model.addAllAttributes(getPostAttributes(cohort));
+        model.addAllAttributes(getAttributes(cohort));
 
         return "/testAttempt/testAttemptAddForm";
     }
@@ -96,18 +96,15 @@ public class TestAttemptController {
             return "/testAttempt/testAttemptAddForm";
         }
 
-        String studentId = testAttemptToSave.getStudent().getStudentId().toString();
-        String courseId = testAttemptToSave.getTest().getCourse().getCourseId().toString();
-        String cohortId = testAttemptToSave.getStudent().getCohort().getCohortId().toString();
-
         if (testAttemptToSave.getTestAttemptId() != null) {
             testAttemptRepository.save(testAttemptToSave);
+            String studentId = testAttemptToSave.getStudent().getStudentId().toString();
+            String courseId = testAttemptToSave.getTest().getCourse().getCourseId().toString();
             return String.format("redirect:/grading/student/%s/%s", studentId, courseId);
         }
 
         testAttemptRepository.save(testAttemptToSave);
-
-        return "redirect:/grading/add/" + cohortId;
+        return "redirect:/grading/add/" + testAttemptToSave.getStudent().getCohort().getCohortId().toString();
     }
 
     @GetMapping("/grading/edit/{testAttemptId}")
@@ -147,10 +144,9 @@ public class TestAttemptController {
             return "redirect:/student/all";
         }
         Student student = optionalStudent.get();
-        List<Course> studentCourses = getCoursesForStudent(student);
 
         model.addAttribute("student", student);
-        model.addAttribute("courses", studentCourses);
+        model.addAttribute("courses", student.getCohort().getProgram().getCourses());
         return "/testAttempt/overviewStudent";
     }
 
@@ -174,16 +170,10 @@ public class TestAttemptController {
         return "testAttempt/overviewStudentCourse";
     }
 
-    private List<Course> getCoursesForStudent(Student student) {
-        Cohort cohort = student.getCohort();
-        Program program = cohort.getProgram();
-        return courseRepository.findByProgram(program);
-    }
-
-    private Map<String, Object> getPostAttributes(Cohort cohort) {
+    private Map<String, Object> getAttributes(Cohort cohort) {
         Map<String, Object> attributeMap = new HashMap<>();
 
-        attributeMap.put("allStudents", studentRepository.findStudentsByCohort(cohort));
+        attributeMap.put("allStudents", cohort.getStudents());
         attributeMap.put("cohort", cohort);
         attributeMap.put("allTests", testRepository.findAll());
         attributeMap.put("purpose", "Add a test result for: " + cohort.getDisplayCohort());

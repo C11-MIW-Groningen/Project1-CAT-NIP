@@ -38,9 +38,7 @@ public class Student extends Person {
         return testAttempts;
     }
 
-    public TestAttempt getHighestTestAttemptByCourse(Course course) {
-        List<TestAttempt> testAttemptsForCourse = allTestAttemptsForCourse(course);
-
+    private TestAttempt getHighestTestAttempt(List<TestAttempt> testAttemptsForCourse) {
         TestAttempt highestTestAttempt = new TestAttempt();
         double highScore = 0;
 
@@ -55,6 +53,18 @@ public class Student extends Person {
 
         return highestTestAttempt;
     }
+
+    public TestAttempt getHighestTestAttemptByCourse(Course course) {
+        List<TestAttempt> testAttemptsForCourse = allTestAttemptsForCourse(course);
+
+        if (testAttemptsForCourse.isEmpty()) {
+            return null;
+        }
+
+        return getHighestTestAttempt(testAttemptsForCourse);
+    }
+
+
 
     public List<Course> getAllCourses() {
         return cohort.getProgram().getCourses();

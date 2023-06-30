@@ -12,14 +12,14 @@ import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import com.project1CATNIP.CATNIP.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -42,9 +42,7 @@ public class CohortController {
 
         @GetMapping("/add")
         private String addCohortForm(Model model) {
-            model.addAttribute("cohort", new Cohort());
-            model.addAttribute("allPrograms", programRepository.findAll());
-            model.addAttribute("purpose", "Add a cohort");
+            model.addAllAttributes(getAddNewCohortAttributes());
 
             return "/cohort/cohortAddForm";
         }
@@ -62,25 +60,10 @@ public class CohortController {
             } catch (Exception exception) {
                 System.err.println(exception.getMessage());
                 String failure = "This cohort already exists. Select a different number.";
+                model.addAllAttributes(getAddNewCohortAttributes());
                 model.addAttribute("failure", failure);
-                return "/cohort/cohortAddForm";
-            }
-        }
 
-        @PostMapping("/edit")
-        private String saveEditedCohort(@ModelAttribute("cohort") Cohort cohortToEdit, BindingResult result, Model model) {
-            try {
-                if (result.hasErrors()) {
-                    return "/cohort/cohortAddForm";
-                }
-                cohortRepository.save(cohortToEdit);
-                return "redirect:/cohort/all";
-
-            } catch (Exception exception) {
-                System.err.println(exception.getMessage());
-                String failure = "This cohort already exists. Select a different number.";
-                model.addAttribute("failure", failure);
-                return "/cohort/cohortAddForm";
+                return "cohort/cohortAddForm";
             }
         }
 
@@ -170,4 +153,14 @@ public class CohortController {
 
             return "redirect:/cohort/details/" + cohortId;
         }
+
+    private Map<String, Object> getAddNewCohortAttributes() {
+        Map<String, Object> attributeMap = new HashMap<>();
+
+        attributeMap.put("cohort", new Cohort());
+        attributeMap.put("allPrograms", programRepository.findAll());
+        attributeMap.put("purpose", "Add a cohort");
+
+        return attributeMap;
+    }
 }

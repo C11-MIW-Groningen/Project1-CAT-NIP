@@ -2,7 +2,7 @@ package com.project1CATNIP.CATNIP.model;
 
 /**
  * Authors: Saskia Tadema <s.tadema@st.hanze.nl>, Marcel Tubben <mhg.tubben@st.hanze.nl>
- * Each test has one or more test attempts, taken by a student, and yield(s) a test result
+ * Each test has one or more test attempts, taken by a student, and yield(s) (a) test result(s)
  */
 
 import lombok.Getter;

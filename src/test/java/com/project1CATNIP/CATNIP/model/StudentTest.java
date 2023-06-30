@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- *@Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
+ * @Author: Marcel Tubben <mhg.tubben@st.hanze.nl>
  *
- *The Purpose
+ * Test for returning highest test attempt for student for a given course
  */
 
 class StudentTest {
@@ -34,7 +34,7 @@ class StudentTest {
 
     List<TestAttempt> testAttempts = new ArrayList<>();
 
-    private void setTestAttempts(double[] numbers) {
+    public void setTestAttempts(double[] numbers) {
 
         se11.setProgram(softwareEngineering);
         programmming.setProgram(softwareEngineering);
@@ -72,7 +72,6 @@ class StudentTest {
         testAttempts.add(testAttempt6);
 
         student.setTestAttempt(testAttempts);
-
     }
 
     @Test
@@ -107,6 +106,24 @@ class StudentTest {
 
         //Assert
         assertEquals(expectedValue, highestTestAttempt);
+    }
+
+    @Test
+    void doNotGetHighestTestAttemptForProgramming() {
+        //Arrange
+        //Six grades: 1-4 for course Programming, the last 5-6 for course Databases
+        double[] grades = {5.5, 10.0, 1.0, 9.2, 5.5, 9.0};
+        setTestAttempts(grades);
+
+        //Highest grade for course Programming: 10.0, testAttempt1 only has 5.5
+        //We expect that testAttempt1 is not equal to the highestTestAttempt
+        TestAttempt expectedValue = testAttempt1;
+
+        //Act
+        TestAttempt highestTestAttempt = student.getHighestTestAttemptByCourse(programmming);
+
+        //Assert
+        assertNotEquals(expectedValue, highestTestAttempt);
     }
 
     @Test
@@ -151,14 +168,30 @@ class StudentTest {
         double[] grades = {10.0, 10.0, 1.0, 9.2, 5.5, 9.0};
         setTestAttempts(grades);
 
-        //Non-existent test attempt returns an empty test attempt for a student, which has attemptResult 0.0
-        double expectedResult = 0.0;
+        //Non-existent test attempt returns null
+        TestAttempt expectedResult = null;
 
         //Act
         TestAttempt highestTestAttempt = student.getHighestTestAttemptByCourse(oop);
-        double highestAttempt = highestTestAttempt.getAttemptResult();
 
         //Assert
-        assertEquals(expectedResult, highestAttempt);
+        assertEquals(expectedResult, highestTestAttempt);
+    }
+
+    @Test
+    void getExistentTestAttemptForCourse() {
+        //Arrange
+        //Six grades: 1-4 for course Programming, the last 5-6 for course Databases
+        double[] grades = {10.0, 10.0, 1.0, 9.2, 5.5, 9.0};
+        setTestAttempts(grades);
+
+        //Non-existent test attempt returns null
+        TestAttempt expectedResult = null;
+
+        //Act
+        TestAttempt highestTestAttempt = student.getHighestTestAttemptByCourse(programmming);
+
+        //Assert
+        assertNotEquals(expectedResult, highestTestAttempt);
     }
 }
