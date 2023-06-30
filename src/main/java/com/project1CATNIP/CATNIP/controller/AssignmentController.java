@@ -29,6 +29,7 @@ public class AssignmentController {
     private String addAssignmentForm(Model model) {
         model.addAttribute("assignment", new Assignment());
         model.addAttribute("allCourses", courseRepository.findAll());
+        model.addAttribute("purpose", "Add an assignment");
 
         return "/assignment/assignmentAddForm";
     }
@@ -66,6 +67,7 @@ public class AssignmentController {
         if (optionalAssignment.isPresent()) {
             model.addAttribute("assignment", optionalAssignment.get());
             model.addAttribute("allCourses", courseRepository.findAll());
+            model.addAttribute("purpose", "Edit an assignment");
             return "/assignment/assignmentAddForm";
         }
 

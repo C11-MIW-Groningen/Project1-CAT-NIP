@@ -39,6 +39,7 @@ public class ProgramController {
     @GetMapping("/program/add")
     private String addProgramForm(Model model) {
         model.addAttribute("program", new Program());
+        model.addAttribute("purpose", "Add a program");
 
         return "/program/programAddForm";
     }
@@ -50,7 +51,7 @@ public class ProgramController {
         }
 
         programRepository.save(programToAdd);
-        String successMessage = "Program added successfully.";
+        String successMessage = "Program saved successfully.";
         model.addAttribute("success", successMessage);
         return "/program/programAddForm";
     }
@@ -74,6 +75,7 @@ public class ProgramController {
 
         if (optionalProgram.isPresent()) {
             model.addAttribute("program", optionalProgram.get());
+            model.addAttribute("purpose", "Edit a program");
             return "/program/programAddForm";
         }
 

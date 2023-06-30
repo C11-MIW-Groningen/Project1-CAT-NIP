@@ -8,7 +8,7 @@
 <div th:replace="fragments/general :: navbar"></div>
 
 <div class="container w-25">
-  <h1>Add a Cohort</h1>
+  <h1 th:text="${purpose}"></h1>
 
   <a th:href="@{/cohort/}">Back to Cohort Overview</a>
 
@@ -39,7 +39,10 @@
     <div class="form-group form-button">
       <button type="submit" class="btn btn-danger" >Save Cohort</button>
     </div>
+
     <h3 th:if="${success}" th:text="${success}"></h3>
+    <h3 class="text-danger" th:if="${failure}" th:text="${failure}"></h3>
+
     <script th:replace="fragments/scripts :: dateCheck"></script>
   </form>
 </div>

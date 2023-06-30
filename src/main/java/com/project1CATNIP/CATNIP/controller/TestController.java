@@ -48,6 +48,7 @@ public class TestController {
         testRepository.save(testToAdd);
         String successMessage = "Test added successfully.";
         model.addAttribute("success", successMessage);
+        model.addAttribute("purpose", "Add a test");
         return "/test/addForm";
     }
 
@@ -74,6 +75,7 @@ public class TestController {
         if (optionalTest.isPresent()) {
             model.addAttribute("test", optionalTest.get());
             model.addAttribute("allCourses", courseRepository.findAll());
+            model.addAttribute("purpose", "Edit a test");
             return "/test/addForm";
         }
 

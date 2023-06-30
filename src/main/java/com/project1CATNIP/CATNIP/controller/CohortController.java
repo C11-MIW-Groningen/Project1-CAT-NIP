@@ -12,6 +12,8 @@ import com.project1CATNIP.CATNIP.repository.CohortRepository;
 import com.project1CATNIP.CATNIP.repository.ProgramRepository;
 import com.project1CATNIP.CATNIP.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,21 +44,28 @@ public class CohortController {
         private String addCohortForm(Model model) {
             model.addAttribute("cohort", new Cohort());
             model.addAttribute("allPrograms", programRepository.findAll());
+            model.addAttribute("purpose", "Add a cohort");
 
             return "/cohort/cohortAddForm";
         }
 
         @PostMapping("/add")
         private String saveCohort(@ModelAttribute("cohort") Cohort cohortToAdd, BindingResult result, Model model) {
-            if (result.hasErrors()) {
+            try {
+                if (result.hasErrors()) {
+                    return "/cohort/cohortAddForm";
+                }
+                cohortRepository.save(cohortToAdd);
+                String successMessage = "Cohort added successfully.";
+                model.addAttribute("success", successMessage);
+
+                return "/cohort/cohortAddForm";
+            } catch (Exception exception) {
+                System.err.println(exception.getMessage());
+                String failure = "This cohort already exists. Select a different number.";
+                model.addAttribute("failure", failure);
                 return "/cohort/cohortAddForm";
             }
-
-            cohortRepository.save(cohortToAdd);
-            String successMessage = "Cohort added successfully.";
-            model.addAttribute("success", successMessage);
-
-            return "/cohort/cohortAddForm";
         }
 
         @GetMapping("/delete/{cohortId}")
@@ -84,6 +93,7 @@ public class CohortController {
             if (optionalCohort.isPresent()) {
                 model.addAttribute("cohort", optionalCohort.get());
                 model.addAttribute("allPrograms", programRepository.findAll());
+                model.addAttribute("purpose", "Edit a cohort");
                 return "/cohort/cohortAddForm";
             }
 
