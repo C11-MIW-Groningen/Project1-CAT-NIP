@@ -91,19 +91,23 @@ public class TestAttemptController {
 
     @PostMapping("/grading/add")
     private String saveTestAttempt(@ModelAttribute("testAttempt") TestAttempt testAttemptToSave,
-                                   BindingResult result, Model model) {
+                                   BindingResult result) {
         if (result.hasErrors()) {
             return "/testAttempt/testAttemptAddForm";
         }
 
+        String studentId = testAttemptToSave.getStudent().getStudentId().toString();
+        String courseId = testAttemptToSave.getTest().getCourse().getCourseId().toString();
+        String cohortId = testAttemptToSave.getStudent().getCohort().getCohortId().toString();
+
         if (testAttemptToSave.getTestAttemptId() != null) {
             testAttemptRepository.save(testAttemptToSave);
-            return "redirect:/grading";
+            return String.format("redirect:/grading/student/%s/%s", studentId, courseId);
         }
 
         testAttemptRepository.save(testAttemptToSave);
 
-        return "redirect:/grading/add/" + testAttemptToSave.getStudent().getCohort().getCohortId();
+        return "redirect:/grading/add/" + cohortId;
     }
 
     @GetMapping("/grading/edit/{testAttemptId}")
@@ -111,10 +115,12 @@ public class TestAttemptController {
         Optional<TestAttempt> optionalTestAttempt = testAttemptRepository.findById(testAttemptId);
 
         if (optionalTestAttempt.isPresent()) {
+            TestAttempt testAttempt = optionalTestAttempt.get();
             model.addAttribute("testAttempt", optionalTestAttempt.get());
             model.addAttribute("purpose", "Edit a test result");
             model.addAttribute("allStudents", optionalTestAttempt.get().getStudent());
             model.addAttribute("allTests", optionalTestAttempt.get().getTest());
+
             return "/testAttempt/testAttemptAddForm";
         }
 

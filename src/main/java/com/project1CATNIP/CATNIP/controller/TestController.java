@@ -40,16 +40,15 @@ public class TestController {
     }
 
     @PostMapping("/add")
-    private String saveTest(@ModelAttribute("test") Test testToAdd, BindingResult result, Model model) {
+    private String saveTest(@ModelAttribute("test") Test testToAdd, BindingResult result) {
         if (result.hasErrors()) {
             return "/test/addForm";
         }
 
         testRepository.save(testToAdd);
-        String successMessage = "Test added successfully.";
-        model.addAttribute("success", successMessage);
-        model.addAttribute("purpose", "Add a test");
-        return "/test/addForm";
+
+        String course = testToAdd.getCourse().getCourseId().toString();
+        return "redirect:/course/details/" + course;
     }
 
     @GetMapping("/delete/{testId}")

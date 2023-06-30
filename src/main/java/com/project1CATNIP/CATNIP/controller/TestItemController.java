@@ -27,8 +27,9 @@ public class TestItemController {
 
         if (itemToDelete.isPresent()) {
             testItemRepository.delete(itemToDelete.get());
+            return "redirect:/test/" + itemToDelete.get().getTest().getTestId() + "/addtestitems";
         }
 
-        return "redirect:/test/" + itemToDelete.get().getTest().getTestId() + "/addtestitems";
+        return "redirect:/course/all";
     }
 }
