@@ -172,6 +172,14 @@ public class SeedController {
         leonie.setCohort(ds1);
         studentRepository.save(leonie);
 
+        Student jeanine = new Student();
+        jeanine.setFirstName("Jeanine");
+        jeanine.setInfixName("van");
+        jeanine.setLastName("Loon");
+        jeanine.setEmailAddress("j.vanloon@st.hanze.nl");
+        jeanine.setCohort(ds1);
+        studentRepository.save(jeanine);
+
         Test test1 = new Test();
         test1.setNameTest("Exam BMI application");
         test1.setCourse(programming);

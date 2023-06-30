@@ -90,7 +90,7 @@ public class TestAttemptController {
     }
 
     @PostMapping("/grading/add")
-    private String saveTestAttempt(@ModelAttribute("newTestAttempt") TestAttempt testAttemptToSave,
+    private String saveTestAttempt(@ModelAttribute("testAttempt") TestAttempt testAttemptToSave,
                                    BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "/testAttempt/testAttemptAddForm";
@@ -111,30 +111,14 @@ public class TestAttemptController {
         Optional<TestAttempt> optionalTestAttempt = testAttemptRepository.findById(testAttemptId);
 
         if (optionalTestAttempt.isPresent()) {
-            model.addAttribute("editTestAttempt", optionalTestAttempt.get());
+            model.addAttribute("testAttempt", optionalTestAttempt.get());
             model.addAttribute("purpose", "Edit a test result");
-            model.addAttribute("student", optionalTestAttempt.get().getStudent());
-            model.addAttribute("test", optionalTestAttempt.get().getTest());
-            return "/testAttempt/testAttemptEditForm";
+            model.addAttribute("allStudents", optionalTestAttempt.get().getStudent());
+            model.addAttribute("allTests", optionalTestAttempt.get().getTest());
+            return "/testAttempt/testAttemptAddForm";
         }
 
         return "redirect:/grading/all";
-    }
-
-    @PostMapping("/grading/edit")
-    private String updateTestAttempt(@ModelAttribute("editTestAttempt") TestAttempt testAttemptToSave,
-                                   BindingResult result) {
-
-        if (result.hasErrors()) {
-            return "redirect:/grading";
-        }
-
-        Long courseId = testAttemptToSave.getTest().getCourse().getCourseId();
-        Long student = testAttemptToSave.getStudent().getStudentId();
-
-        testAttemptRepository.save(testAttemptToSave);
-
-        return "redirect:/grading/student/" + courseId + "/" + student;
     }
 
     @GetMapping("/grading/delete/{testAttemptId}")
@@ -197,7 +181,7 @@ public class TestAttemptController {
         attributeMap.put("cohort", cohort);
         attributeMap.put("allTests", testRepository.findAll());
         attributeMap.put("purpose", "Add a test result for: " + cohort.getDisplayCohort());
-        attributeMap.put("newTestAttempt", new TestAttempt());
+        attributeMap.put("testAttempt", new TestAttempt());
 
         return attributeMap;
     }
