@@ -31,6 +31,7 @@ public class TeacherController {
     @GetMapping("/add")
     private String addTeacherForm(Model model) {
         model.addAttribute("teacher", new Teacher());
+        model.addAttribute("purpose", "Add a teacher");
 
         return "/teacher/teacherAddForm";
     }
@@ -65,6 +66,7 @@ public class TeacherController {
 
         if (optionalTeacher.isPresent()) {
             model.addAttribute("teacher", optionalTeacher.get());
+            model.addAttribute("purpose", "Edit a teacher");
             return "/teacher/teacherAddForm";
         }
 

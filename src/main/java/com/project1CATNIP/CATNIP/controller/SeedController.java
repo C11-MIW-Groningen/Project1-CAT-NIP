@@ -130,6 +130,18 @@ public class SeedController {
         databases.setTeacher(janna);
         courseRepository.save(databases);
 
+        Course dataAnalyse1 = new Course();
+        dataAnalyse1.setCourseName("Data-Analyse 1");
+        dataAnalyse1.setProgram(dataScience);
+        dataAnalyse1.setTeacher(sterre);
+        courseRepository.save(dataAnalyse1);
+
+        Course bigData = new Course();
+        bigData.setCourseName("Big Data");
+        bigData.setProgram(dataScience);
+        bigData.setTeacher(hendrik);
+        courseRepository.save(bigData);
+
         Student henk = new Student();
         henk.setFirstName("Henk");
         henk.setInfixName("de");
@@ -157,7 +169,7 @@ public class SeedController {
         leonie.setFirstName("Leonie");
         leonie.setLastName("Hendriksen");
         leonie.setEmailAddress("l.hendriksen@st.hanze.nl");
-        leonie.setCohort(se11);
+        leonie.setCohort(ds1);
         studentRepository.save(leonie);
 
         Test test1 = new Test();

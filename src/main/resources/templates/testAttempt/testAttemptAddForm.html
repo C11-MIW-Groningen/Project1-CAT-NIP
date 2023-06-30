@@ -8,7 +8,7 @@
 <div th:replace="fragments/general :: navbar"></div>
 
 <div class="container w-25">
-<h1>Add test result for cohort: <span th:text="${cohort.getNumber()}"></span></h1>
+<h1 th:text="${purpose}"></h1>
 
   <form th:action="@{/grading/add}" method="post" th:object="${newTestAttempt}">
     <input type="hidden" th:field="*{testAttemptId}">

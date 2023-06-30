@@ -44,6 +44,7 @@ public class CourseController {
         model.addAttribute("course", new Course());
         model.addAttribute("allPrograms", programRepository.findAll());
         model.addAttribute("allTeachers", teacherRepository.findAll());
+        model.addAttribute("purpose", "Add a course");
 
         return "/course/courseAddForm";
     }
@@ -81,6 +82,7 @@ public class CourseController {
             model.addAttribute("course", optionalCourse.get());
             model.addAttribute("allPrograms", programRepository.findAll());
             model.addAttribute("allTeachers", teacherRepository.findAll());
+            model.addAttribute("purpose", "Edit a course");
             return "/course/courseAddForm";
         }
 

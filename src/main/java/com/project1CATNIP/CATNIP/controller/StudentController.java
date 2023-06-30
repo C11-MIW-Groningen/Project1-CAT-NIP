@@ -41,6 +41,7 @@ public class StudentController {
     private String addStudentForm(Model model) {
         model.addAttribute("student", new Student());
         model.addAttribute("allCohorts", cohortRepository.findAll());
+        model.addAttribute("purpose", "Add a student");
 
         return "/student/studentAddForm";
     }
@@ -76,6 +77,7 @@ public class StudentController {
         if (optionalStudent.isPresent()) {
             model.addAttribute("student", optionalStudent.get());
             model.addAttribute("allCohorts", cohortRepository.findAll());
+            model.addAttribute("purpose", "Edit a student");
             return "/student/studentAddForm";
         }
 

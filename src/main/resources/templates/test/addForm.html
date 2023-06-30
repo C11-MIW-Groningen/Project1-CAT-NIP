@@ -9,7 +9,7 @@
 
 
 <div class="container w-25">
-  <h1>Add a Test</h1>
+  <h1 th:text="${purpose}"></h1>
 
   <form th:action="@{/test/add}" method="post" th:object="${test}">
     <input type="hidden" th:field="*{testId}" />

@@ -82,12 +82,15 @@ public class TestAttemptController {
         if (optionalCohort.isEmpty()) {
             return "redirect:/grading";
         }
+
         Cohort cohort = optionalCohort.get();
+        String purpose = "Add a test result for:\n" + cohort.getDisplayCohort();
 
         model.addAttribute("cohort", cohort);
         model.addAttribute("allStudents", studentRepository.findStudentsByCohort(cohort));
         model.addAttribute("allTests", testRepository.findAll());
         model.addAttribute("newTestAttempt", new TestAttempt());
+        model.addAttribute("purpose", purpose);
 
         return "/testAttempt/testAttemptAddForm";
     }
